@@ -1,0 +1,397 @@
+<%@page import="com.bit.bonusPointsExchange.bean.ShowBindInfo"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<%
+	String bindRes = (String)request.getAttribute("bindRes"); 
+	if(bindRes == "Y") {
+%>
+	<script type="text/javascript" language="javascript">
+		alert("成功绑定商家！");                                    // 弹出错误信息
+	</script>		
+<% } else if(bindRes == "N") {%>
+	<script type="text/javascript" language="javascript">
+		alert("绑定商家失败，您可能未在该商家注册或您已绑定过该商家！");                                    // 弹出错误信息
+	</script>		
+<% }%>
+
+
+<%
+	String userChangeResult = (String)request.getAttribute("userChangeResult");  //获取修改商家信息是否成功
+	if(userChangeResult == "Y") {
+%>
+	<script type="text/javascript" language="javascript">
+		alert("修改信息成功！");                                    // 弹出错误信息
+	</script>	
+<% } else if(userChangeResult == "N") {%>
+	<script type="text/javascript" language="javascript">
+		alert("修改信息失败！");                                    
+	</script>	
+<% }%>
+
+<%
+	String pointTranRes = (String)request.getAttribute("pointTranRes"); 
+	if(pointTranRes == "Y") {
+%>
+	<script type="text/javascript" language="javascript">
+		alert("成功将积分从商家转移到平台！您在平台拥有"+<%=request.getAttribute("userPoints")%>+"积分，在商家拥有"+<%=request.getAttribute("shopPoints")%>+"积分" );                                    // 弹出错误信息
+	</script>	
+<% } else if(pointTranRes == "N") {%>
+	<script type="text/javascript" language="javascript">
+		alert("转移失败！");                                    
+	</script>	
+<% }%>
+
+
+<%
+	String pointToPshopRes = (String)request.getAttribute("pointToPshopRes"); 
+	if(pointToPshopRes == "Y") {
+%>
+	<script type="text/javascript" language="javascript">
+		alert("成功将积分从平台转移到商家！您在平台拥有"+<%=request.getAttribute("userPoints")%>+"积分，在商家拥有"+<%=request.getAttribute("shopPoints")%>+"积分" );                                    // 弹出错误信息
+	</script>	
+<% } else if(pointToPshopRes == "N") {%>
+	<script type="text/javascript" language="javascript">
+		alert("转移失败！");                                    
+	</script>	
+<% }%>
+
+<!-- 显示查询到的绑定信息 -->
+<% List<ShowBindInfo> list = (List<ShowBindInfo>)request.getAttribute("bindInfo"); %>
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人中心</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link href="css/footer.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/personal.css">
+<link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
+<link href="jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
+<link href="jQueryAssets/jquery.ui.accordion.min.css" rel="stylesheet" type="text/css">
+<link href="jQueryAssets/jquery.ui.button.min.css" rel="stylesheet" type="text/css">
+<script src="jQueryAssets/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="jQueryAssets/jquery-ui-1.9.2.accordion.custom.min.js" type="text/javascript"></script>
+<script src="jQueryAssets/jquery-ui-1.9.2.button.custom.min.js" type="text/javascript"></script>
+</head>
+<body>
+<!--这是top-->
+<div class="header">
+  <div class="span1">
+    <div class="logo"> <img src="images/logo.png" alt="积分兑换平台"/> </div>
+  </div>
+  <div class="span2">
+    <div class="mainNav">
+      <ul>
+        <li><a href=#> 主页</a></li>
+        <li><a href=#> 参考价</a></li>
+        <li><a href=#>最新交易</a></li>
+        <li><a href=#>发起交易</a></li>
+        <li><a href=#><%=session.getAttribute("userName") %></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!--这是main_page-->
+<div class="personal">
+  <div class="span7">
+    <div id="Accordion1" class="nav">
+      <h3><a href="#">个人信息</a></h3>
+      <div class="index">
+        <p><a href="javascript:showDiv(1)">修改信息</a></p>
+        <p><a href="javascript:showDiv(2)">修改密码</a></p>
+      </div>
+      <h3><a href="#">积分转移</a></h3>
+      <div class="index">
+        <p><a href="javascript:showDiv(3)">积分转移到平台</a></p>
+        <p><a href="javascript:showDiv(4)">积分转移到商家</a></p>
+      </div>
+      <h3><a href="#">绑定商家</a></h3>
+      <div class="index">
+        <p><a href="javascript:showDiv(5)">绑定新商家</a></p>
+        <p><a href="javascript:showDiv(6)">显示已绑定商家</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="span8">
+    <div id="div1">
+      <p class="title">个人资料 <span class="title1">USER INFOMATION</span></p>
+      <form action="/bonusPointsExchange/actionServlet" method="post">
+        <table>
+        <!--  <tr>
+            <td>账&nbsp;号：</td>
+            <td><input name="userName" type="text" id="userName" maxlength="40"></td>
+          </tr>  -->
+          <tr>
+            <td>邮&nbsp;箱：</td>
+            <td><input name="email" type="text" id="email" maxlength="40" value=<%=request.getAttribute("email") %>></td>
+          </tr>
+          <tr>
+            <td>姓&nbsp;名：</td>
+            <td><input name="fullName" type="text" id="name" maxlength="40" value=<%=request.getAttribute("fullName") %>></td>
+          </tr>
+          <tr>
+            <td>电&nbsp;话：</td>
+            <td><input name="phone" type="text" id="phone" maxlength="40" value=<%=request.getAttribute("phone") %>></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="mid"><input name="submit" type="submit" class="submit" id="submit" value="提交"></td>
+              </td>
+          </tr>
+        </table>
+        <input type="hidden" name="actionCode" value="user" >
+  		<input type="hidden" name="methodCode" value="alter_user_info">
+      </form>
+    </div>
+    <div id="div2">
+      <p class="title">修改密码 <span class="title1">USER　PASSWORD</span></p>
+      <form action="/bonusPointsExchange/actionServlet">
+        <table>
+          <tr>
+            <td>旧密码：</td>
+            <td><input name="oldPassword" type="password" id="oldPassword" maxlength="20"></td>
+          </tr>
+          <tr>
+            <td>新密码：</td>
+            <td><input name="newPassword" type="password" id="newPassword" maxlength="20"></td>
+          </tr>
+          <tr>
+            <td>再次输入新密码：</td>
+            <td><input name="reNewPassword" type="password" id="reNewPassword" maxlength="20"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="mid"><input name="submit" type="submit" class="submit" id="submit" value="提交"></td>
+              </td>
+          </tr>
+        </table>
+        <input type="hidden" name="actionCode" value="user">
+        <input type="hidden" name="methodCode" value="alter_user_passwd">
+      </form>
+    </div>
+    <div id="div3">
+      <p class="title">积分转移到平台 <span class="title1">POINTS TRANSFER TO PLATFORM</span></p>
+      <form action="/bonusPointsExchange/UserPointToplatformServlet"  method="post">
+        <table>
+          <tr>
+            <td>选择商家：</td>
+            <td><select  class="normal-font" onchange="queryUserPoints()" name="shop" id="shop">
+             <% if(null != list) {
+        		for(int i = 0; i < list.size(); i++) {
+        		ShowBindInfo bindInfo = (ShowBindInfo)list.get(i);
+      		 %>
+      			<option selected="selected"></option>
+             	<option><%=bindInfo.getShopName() %></option>
+               <%}
+        	 }%>
+              </select></td>
+          </tr>
+          <tr>
+            <td>商家积分：</td>
+            <td><input name="points" type="text" value="" readonly id="points"> 
+            </td>
+          </tr>
+          <tr>
+            <td>转移积分：</td>
+            <td><input name="transfer_points"  type="number" value="0" id="transfer_points">
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="mid"><input name="submit" type="submit" class="submit" id="submit" value="提交"></td>
+              </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <div id="div4">
+      <p class="title">积分转移到商家 <span class="title1">POINTS TRANSFER TO SHOP</span></p>
+      <form action="/bonusPointsExchange/PlatformToUserServlet"  method="post">
+        <table>
+          <tr>
+            <td>选择商家：</td>
+            <td><select  class="normal-font" onchange="queryPointsAtPlatform()" name="shop2" id="shop2">
+              <% if(null != list) {
+        			for(int i = 0; i < list.size(); i++) {
+        				ShowBindInfo bindInfo = (ShowBindInfo)list.get(i);
+      		 %>
+      			<option selected="selected"></option>
+             	<option><%=bindInfo.getShopName() %></option>
+               <%}
+        	 }%>
+              </select></td>
+          </tr>
+          <tr>
+            <td>平台积分：</td>
+            <td><input name="platformPoints" type="text" value="" readonly id="platformPoints"></td>
+          </tr>
+          <tr>
+            <td>转移积分：</td>
+            <td><input name="transfer_points" type="number" value="0" id="transfer_points"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="mid"><input name="submit" type="submit" class="submit" id="submit" value="提交"></td>
+              </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <div id="div5">
+      <p class="title">商家绑定 <span class="title1">SHOP BIND</span></p>
+      <form action="/bonusPointsExchange/BindShopQueryInfoServlet" method="post">
+      <div>
+      	<input name="search"  type="text" id="search">
+      &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+      	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="搜索">
+      </div>
+      <!------------table 中为查询结果--------每一行是一个商家---------------->
+      <table>
+      		<tr><span id="hint" style="color:#FF0000"></span></tr>
+          <tr class="normal-font">
+            <td><img src="${imgURL}" alt="商家商标"/><p>${shopName}</p></td><td>${shopDec}</td>
+            <td><a href="bindShop.jsp?shopName=${shopName}"><input name="bind" type="button" id="bind" class="buttonStyle1" value="绑定"></a></td>
+          </tr>
+       </table>
+      </form>
+    </div>
+    
+    <div id="div6">
+      <p class="title">查看商家 <span class="title1">BOUND　SHOP</span></p>
+      <form>
+        <table>
+        <% 	if(null != list) {
+        	for(int i = 0; i < list.size(); i++) {
+        		ShowBindInfo bindInfo = (ShowBindInfo)list.get(i);
+        %>
+          <tr>
+            <td><img src="<%=bindInfo.getImgURL() %>" alt="商家商标"/></td><td><%=bindInfo.getShopName() %></td>
+            <td><input name="points" type="text" class="inputNum" id="points" value="<%=bindInfo.getPlatformPoints() %>" maxlength="20" readonly></td>
+          </tr>
+         <%}
+          }%>
+         
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+<!--这是bottom-->
+<div class="footer">
+  <div class="footer-content">
+    <p>Copyright (C) 2015-2016  积分兑换平台</p>
+  </div>
+</div>
+
+<!-- 根据返回的index显示div -->
+<script type="text/javascript" language="javascript">
+	var index = ${index};
+	//alert(index);
+	var show=parseInt(index);
+	//alert(show);
+	for(i=1;i<=6;i++){
+		document.getElementById('div'+i).style.display = "none";
+	}
+	document.getElementById('div'+index).style.display = "block";
+	if(show == 3) {
+		queryUserPoints();
+	}
+	if(show == 4) {
+		queryPointsAtPlatform();
+	}	
+</script>
+
+
+<script type="text/javascript">
+$(function() {
+	$( "#Accordion1" ).accordion(); 
+});
+var xmlHttp;
+// 对象的创建
+function createXMLHttp() {
+	//alert("sasdad");//调试代码
+	if (window.XMLHttpRequest) { // firefox
+		xmlHttp = new XMLHttpRequest();
+	} else { // ie
+		xmlHttp = new ActiveXObject("microsoft.XMLHTTP");
+	}
+}
+//=================================================//
+//查询用户在商家那里有多少积分
+function queryUserPoints() {
+	//alert("sasdad");//调试代码
+	var shopName = document.getElementById("shop").value;//此处应该是用户所属商家，后面可能要改代码
+	var url = "/bonusPointsExchange/QueryUserPoints?shop="+encodeURI(encodeURI(shopName));
+	createXMLHttp();
+	xmlHttp.onreadystatechange = queryUserPointsBack;
+	xmlHttp.open("get", url, true);
+	xmlHttp.send(null);
+}
+// 回调函数,处理服务器返回结果
+function queryUserPointsBack() {
+	// alert(xmlHttp.readyState);
+	// 响应已完成
+	if (xmlHttp.readyState == 4) {
+		// 服务器正常的响应
+		// alert(xmlHttp.status);
+		if (xmlHttp.status == 200) {
+			var returnMsg = xmlHttp.responseText; // 收取服务器端的响应信息(String)
+			//alert(returnMsg);
+			document.getElementById("points").value = returnMsg;
+		}
+	}
+}
+
+//=================================================//
+//查询用户在品台数据库有多少积分
+function queryPointsAtPlatform() {
+	var shopName = document.getElementById("shop2").value;
+	//alert(shopName);//调试代码
+	var url = "/bonusPointsExchange/QueryPointsAtPlatform?shop="+encodeURI(encodeURI(shopName));
+	createXMLHttp();
+	xmlHttp.onreadystatechange = queryPointsAtPlatformBack;
+	xmlHttp.open("get", url, true);
+	xmlHttp.send(null);
+}
+// 回调函数,处理服务器返回结果
+function queryPointsAtPlatformBack() {
+	//alert("aaaaaa");
+	// 响应已完成
+	if (xmlHttp.readyState == 4) {
+		// 服务器正常的响应
+		// alert(xmlHttp.status);
+		if (xmlHttp.status == 200) {
+			var returnMsg = xmlHttp.responseText; // 收取服务器端的响应信息(String)
+			//alert(returnMsg);
+			document.getElementById("platformPoints").value = returnMsg;
+		}
+	}
+}
+
+function showDiv(index) {   
+var show=parseInt(index);
+for(i=1;i<=6;i++){
+		document.getElementById('div'+i).style.display = "none";
+	}
+	document.getElementById('div'+index).style.display = "block";
+	if(show == 3) {
+		//查询用户绑定的商家的相关信息，显示在select中
+		location.href = "/bonusPointsExchange/QueryBindedShopNameServlet?index="+3;
+	}
+	if(show == 4) {
+		//查询用户绑定的商家的相关信息，显示在select中
+		location.href = "/bonusPointsExchange/QueryBindedShopNameServlet?index="+4;
+	}
+	if(show == 5) {
+		//location.href = "/bonusPointsExchange/QueryBindInfo";
+	}
+	if(show == 6) {
+		location.href = "/bonusPointsExchange/QueryBindInfo";
+	}
+}
+
+</script>
+</body>
+</html>
