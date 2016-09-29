@@ -22,7 +22,8 @@ public class ActionServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String actionCode=request.getParameter("actionCode");	
-		System.out.println(actionCode);		
+		System.out.println(actionCode);
+		
 		Action action = null;
 		if(actionCode.equals("login")){
 			action = new LoginAction();

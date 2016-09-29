@@ -72,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="ad"> <img src="images/ad3.jpg" alt="广告"/> </div>
     </div>
     <div class="span4">
-      <form name="form_login" class="login-form" action="/bonusPointsExchange/actionServlet" method="post">
+      <form naem="form_login" class="login-form" action="/bonusPointsExchange/actionServlet" method="post">
         <table cellspacing="2">
           <tr>
             <td colspan="2">用户名：
