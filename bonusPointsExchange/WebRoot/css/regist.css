@@ -75,9 +75,15 @@ table td {
 	font-color:red;
 	}
 /********* 忘记密码*********/
+.repsw-form{
+	width:1000px;
+	min-height:500px;
+	margin:auto;
+}
 .retrieve{
-	width:750px;
-	margin:10px auto;	
+	width:700px;
+	margin-left:270px;
+	margin-top:40px;	
 	}
 
 #step1{

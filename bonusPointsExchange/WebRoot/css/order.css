@@ -8,6 +8,7 @@
 	height: 100%;
 	}
 #orderContent{
+	margin-left:90px;
 	width:700px;
 	height:100%;
 	}
@@ -45,7 +46,7 @@ line-height:42px;
 }
 .releaseOrder #submit,.releaseOrder #reset,.exchangeOrder #exchange{   
 /***  提交按钮样式 ******/
-	width:80px;
+	width:120px;
 	text-align:center;
 	font-size: 18px;
 	color: #000000;
@@ -67,6 +68,9 @@ line-height:42px;
 	}
  
  /*** exchange order list***/
+#order-list{
+     margin-top:30px;	
+	}
 #order-list ul {
 	list-style-type: none;
 }
@@ -113,8 +117,12 @@ line-height:42px;
 	overflow: hidden;
 }
 /**** reference order*****/
+.referenceOrder{
+	width:800px;
+}
 .referenceInfo{
 	border:1px solid black;
+	margin-top:20px;
 	}
 .referenceInfo table{
 	width:800px;
@@ -135,7 +143,7 @@ line-height:42px;
 	overflow:hidden;
 	}
 /*****订单中心*******/
-#orderNavInfo{
+#orderNav{
 	width:180px;
 	margin-top:20px;	
 	border:1px black solid;
@@ -144,9 +152,18 @@ line-height:42px;
     border-radius:10px; 
 	 	}
 #orderNav p{
-	line-height:36px;
-	font-size:20px;
+	text-indent:2em;
+	line-height:28px;
+	font-family:Microsoft YaHei;
 	}
+#orderNav h3{
+	margin:10px 0 7px;
+	font-size:24px;
+	font-weight:thick;
+	background-color:#EDEDED;
+	text-indent:1em;
+	
+}
 .myOrder{
 	height:80px;
 	margin-top:10px;

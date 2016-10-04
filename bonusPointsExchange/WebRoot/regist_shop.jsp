@@ -33,16 +33,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <!--header -->
 <div class="regist-frame">
-  <p class="title">商家注册&nbsp;&nbsp;
-    <span class="title1">USER REGISTER</span>
-    <a href="regist_shop.html" style="text-align: right">用户注册</a>
-  </p>
+<p class="title">&nbsp;&nbsp;商家注册&nbsp;&nbsp;<span class="title1">USER REGISTER</span><span class="title1 right"><a href="regist.jsp">前往用户注册&nbsp;&nbsp;&nbsp;&nbsp;</a></span></p>
   <div>
     <div class="span5">
       <form onsubmit="return checkForm();" method="post" action="/bonusPointsExchange/RegistShopServlet">
         <table>
           <tr>
-            <td>商家名称&nbsp;：</td>
+            <td>商家名称：</td>
             <td><input name="shopName" type="text" id="shopName" maxlength="20"  onblur="checkShopName();"><span id="hint"
 							style="color:#FF0000"></span></td>
           </tr>
@@ -73,10 +70,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="span6">
       <div class="tips">
         <p class="tips-font1">注册即享受</p>
-        积分自由兑换
+        查看商家积分交易
         <br/><br/>
         <p class="tips-font1">已经拥有账号了？</p>
-        立即登录即可体验积分交易！ <a href="login_shop.jsp"> 立即登录 </a></div>
+        立即登录即可体验积分交易！ <a href="login_shop.jsp"> 立即登录商家 </a></div>
     </div>
   </div>
 </div>
@@ -133,7 +130,7 @@ function checkForm() {
 	}
 
 	if (password != repassword) {
-		alert("两次密码必须一样！");
+		alert("两次密码不一致！");
 		return false;
 	}
 	
