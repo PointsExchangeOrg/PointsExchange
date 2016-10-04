@@ -71,13 +71,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="css/footer.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="css/personal.css">
+<!--   jquery 下拉框样式
 <link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
 <link href="jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
 <link href="jQueryAssets/jquery.ui.accordion.min.css" rel="stylesheet" type="text/css">
 <link href="jQueryAssets/jquery.ui.button.min.css" rel="stylesheet" type="text/css">
 <script src="jQueryAssets/jquery-1.8.3.min.js" type="text/javascript"></script>
 <script src="jQueryAssets/jquery-ui-1.9.2.accordion.custom.min.js" type="text/javascript"></script>
-<script src="jQueryAssets/jquery-ui-1.9.2.button.custom.min.js" type="text/javascript"></script>
+<script src="jQuer	yAssets/jquery-ui-1.9.2.button.custom.min.js" type="text/javascript"></script>
+-->
 </head>
 <body>
 <!--这是top-->
@@ -99,19 +101,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <!--这是main_page-->
 <div class="personal">
-  <div class="span7">
-    <div id="Accordion1" class="nav">
-      <h3><a href="#">个人信息</a></h3>
+  <div class="span7" id="Accordion1">
+    <div  class="nav">
+      <h3>个人信息</h3>
       <div class="index">
         <p><a href="javascript:showDiv(1)">修改信息</a></p>
         <p><a href="javascript:showDiv(2)">修改密码</a></p>
       </div>
-      <h3><a href="#">积分转移</a></h3>
+      <h3>积分转移</h3>
       <div class="index">
         <p><a href="javascript:showDiv(3)">积分转移到平台</a></p>
         <p><a href="javascript:showDiv(4)">积分转移到商家</a></p>
       </div>
-      <h3><a href="#">绑定商家</a></h3>
+      <h3>绑定商家</h3>
       <div class="index">
         <p><a href="javascript:showDiv(5)">绑定新商家</a></p>
         <p><a href="javascript:showDiv(6)">显示已绑定商家</a></p>
@@ -140,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td><input name="phone" type="text" id="phone" maxlength="40" value=<%=request.getAttribute("phone") %>></td>
           </tr>
           <tr>
-            <td colspan="2" class="mid"><input name="submit" type="submit" class="submit" id="submit" value="提交"></td>
+            <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
               </td>
           </tr>
         </table>
@@ -165,7 +167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td><input name="reNewPassword" type="password" id="reNewPassword" maxlength="20"></td>
           </tr>
           <tr>
-            <td colspan="2" class="mid"><input name="submit" type="submit" class="submit" id="submit" value="提交"></td>
+            <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
               </td>
           </tr>
         </table>
@@ -180,11 +182,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <tr>
             <td>选择商家：</td>
             <td><select  class="normal-font" onchange="queryUserPoints()" name="shop" id="shop">
+            <option selected="selected"></option>
              <% if(null != list) {
         		for(int i = 0; i < list.size(); i++) {
         		ShowBindInfo bindInfo = (ShowBindInfo)list.get(i);
       		 %>
-      			<option selected="selected"></option>
              	<option><%=bindInfo.getShopName() %></option>
                <%}
         	 }%>
@@ -201,7 +203,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </td>
           </tr>
           <tr>
-            <td colspan="2" class="mid"><input name="submit" type="submit" class="submit" id="submit" value="提交"></td>
+            <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
               </td>
           </tr>
         </table>
@@ -214,11 +216,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <tr>
             <td>选择商家：</td>
             <td><select  class="normal-font" onchange="queryPointsAtPlatform()" name="shop2" id="shop2">
+            <option selected="selected"></option>
               <% if(null != list) {
         			for(int i = 0; i < list.size(); i++) {
         				ShowBindInfo bindInfo = (ShowBindInfo)list.get(i);
-      		 %>
-      			<option selected="selected"></option>
+      		 %>     			
              	<option><%=bindInfo.getShopName() %></option>
                <%}
         	 }%>
@@ -233,7 +235,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td><input name="transfer_points" type="number" value="0" id="transfer_points"></td>
           </tr>
           <tr>
-            <td colspan="2" class="mid"><input name="submit" type="submit" class="submit" id="submit" value="提交"></td>
+            <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
               </td>
           </tr>
         </table>
@@ -242,9 +244,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="div5">
       <p class="title">商家绑定 <span class="title1">SHOP BIND</span></p>
       <form action="/bonusPointsExchange/BindShopQueryInfoServlet" method="post">
-      <div>
-      	<input name="search"  type="text" id="search">
-      &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+      <br/>
+      <div> &nbsp;<span class="normal-font">商家名称：</span>
+      	<input name="search"  type="text" id="search" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
       	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="搜索">
       </div>
       <!------------table 中为查询结果--------每一行是一个商家---------------->
@@ -252,7 +254,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       		<tr><span id="hint" style="color:#FF0000"></span></tr>
           <tr class="normal-font">
             <td><img src="${imgURL}" alt="商家商标"/><p>${shopName}</p></td><td>${shopDec}</td>
-            <td><a href="bindShop.jsp?shopName=${shopName}"><input name="bind" type="button" id="bind" class="buttonStyle1" value="绑定"></a></td>
+            <td class="bindBtn"><a href="bindShop.jsp?shopName=${shopName}"><input name="bind" type="button" id="bind" class="buttonStyle1" value="绑定"></a></td>
           </tr>
        </table>
       </form>
@@ -305,9 +307,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <script type="text/javascript">
+/****
 $(function() {
 	$( "#Accordion1" ).accordion(); 
 });
+****/
 var xmlHttp;
 // 对象的创建
 function createXMLHttp() {

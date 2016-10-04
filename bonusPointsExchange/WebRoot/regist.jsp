@@ -12,6 +12,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="css/footer.css" rel="stylesheet" type="text/css">
 <link href="css/regist.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+//表单验证
+function checkForm() {
+	// alert("ada");
+	var userName = document.getElementById("userName").value;
+	if (userName == "") {
+		alert("用户名不能为空！");
+		return false;
+	}
+	
+	var password = document.getElementById("password").value;
+	if (password == "") {
+		alert("密码不能为空！");
+		return false;
+	}
+	
+	var repassword = document.getElementById("repassword").value;
+	if (repassword == "") {
+		alert("确认密码不能为空！");
+		return false;
+	}
+	if(password !=repassword){
+	    alert("两次密码输入不一致");
+	    return false;
+	}
+	
+	var email = document.getElementById("email").value;
+	if (email == "") {
+		alert("邮箱不能为空！");
+		return false;
+	}
+	
+	var fullName = document.getElementById("fullName").value;
+	if (fullName == "") {
+		alert("姓名不能为空！");
+		return false;
+	}
+	
+	var phone = document.getElementById("phone").value;
+	if (phone == "") {
+		alert("电话不能为空！");
+		return false;
+	}
+	
+}
+</script>
 </head>
 
 <body>
@@ -33,10 +79,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <!--header -->
 <div class="regist-frame">
-  <p class="title">用户注册&nbsp;&nbsp;<span class="title1">USER REGISTER</span></p>
+  <p class="title">&nbsp;&nbsp;用户注册&nbsp;&nbsp;<span class="title1">USER REGISTER</span><span class="title1 right"><a href="regist_shop.jsp">前往商家注册</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
   <div>
     <div class="span5">
-      <form name="form_regist" action="/bonusPointsExchange/actionServlet" method="post">
+      <form name="form_regist" action="/bonusPointsExchange/actionServlet" method="post" onsubmit="return checkForm();">
         <table>
           <tr>
             <td>账&nbsp;号：</td>
@@ -56,15 +102,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
           <tr>
             <td>姓&nbsp;名：</td>
-            <td><input name="fullName" type="text" id="name" maxlength="20"></td>
+            <td><input name="fullName" type="text" id="fullName" maxlength="20"></td>
           </tr>
           <tr>
             <td>电&nbsp;话：</td>
             <td><input name="phone" type="text" id="phone" maxlength="20"></td>
           </tr>
           <tr>
-            <td class="mid"><input name="submit" type="submit" class="submit" id="submit" value="提交"></td>
-            <td class="mid"><input name="reset" type="reset" id="reset" value="重置"></td>
+            <td class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
+            <td class="mid"><input name="reset" type="reset" class="submitBtn" id="reset" value="重置"></td>
           </tr>
         </table>
         <input type="hidden" name="actionCode" value="regist">

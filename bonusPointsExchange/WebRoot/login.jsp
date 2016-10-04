@@ -43,6 +43,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="css/footer.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="css/login.css">
+<script type="text/javascript">
+
+//表单验证
+function checkForm() {
+	// alert("ada");
+	var userName = document.getElementById("userName").value;
+	if (userName == "") {
+		alert("用户名不能为空！");
+		return false;
+	}
+	
+	var password = document.getElementById("password").value;
+	if (password == "") {
+		alert("密码不能为空！");
+		return false;
+	}
+}
+</script>
 </head>
 <body>
 <!--这是top-->
@@ -63,16 +81,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
 </div>
 <!--这是main_page-->
-<div class="main line-bottom">
   <div class="login-frame">
-    <div class="line-bottom">
-      <p class="title">用户登录&nbsp;&nbsp;<span class="title1">USER LOGIN</span>&nbsp;&nbsp;<span class="title1"><a href="login_shop.jsp">商家登录</a></span></p>
+    <div>
+      <p class="title">&nbsp;&nbsp;用户登录&nbsp;&nbsp;<span class="title1">USER LOGIN</span><span class="title1 right"><a href="login_shop.jsp">前往商家登录</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
     </div>
     <div class="span3">
       <div class="ad"> <img src="images/ad3.jpg" alt="广告"/> </div>
     </div>
     <div class="span4">
-      <form naem="form_login" class="login-form" action="/bonusPointsExchange/actionServlet" method="post">
+      <form name="form_login" class="login-form normal-font" action="/bonusPointsExchange/actionServlet" method="post" onsubmit="return checkForm();">
         <table cellspacing="2">
           <tr>
             <td colspan="2">用户名：
@@ -83,16 +100,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <input name="passwd" type="password" id="password" maxlength="20"></td>
           </tr>
           <tr>
-            <td class="mid"><input name="submit" type="submit" class="submit" id="submit" value="提交"></td>
-            <td class="mid"><input name="reset" type="reset" id="reset" value="重置"></td>
+            <td class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
+            <td class="mid"><input name="reset" type="reset" class="submitBtn" id="reset" value="重置"></td>
           </tr>
         </table>
-       <div class="mes"><a href="regist.jsp">免费注册&nbsp;&nbsp; </a><a href="/bonusPointsExchange/retrievePassword_1.jsp">忘记密码</a></div>
+       <div class="mes" ><a href="regist.jsp">免费注册&nbsp;&nbsp; </a><a href="/bonusPointsExchange/retrievePassword_1.jsp">忘记密码</a></div>
        <input type="hidden" name="actionCode" value="login"/>
       </form>
     </div>
   </div>
-</div>
 <!--这是bottom-->
 <div class="footer">
   <div class="footer-content">

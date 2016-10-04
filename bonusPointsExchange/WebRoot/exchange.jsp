@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </table>
         </li>
         <li class="operate">
-          <input name="exchange" type="button"  id="exchange" value="交易">
+          <input name="exchange" type="button" class="submitBtn"  id="exchange" value="交易">
         </li>
       </ul>
     </div>

@@ -1,5 +1,5 @@
 @charset "utf-8";
-body, h1, h2, h3, h4, h5, div, p, img, form, span, ul, li, table, tr, td {
+body, h1, h2, h3, h4, h5, div, p, img, form, span, ul, li, table, tr, td,input{
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -115,7 +115,7 @@ h2 {
 	font-weight: bold;
 }   *****/
 .submitBtn {
-	min-width:130px;
+	min-width:120px;
 	text-align: center;
 	font-size: 18px;
 	color: #000000;
@@ -138,3 +138,7 @@ h2 {
 .right{
 	float:right;
 	}
+input{
+	border:1px solid grey;
+	height:28px;		
+}

@@ -13,15 +13,24 @@
 	float: left;
 	overflow: hidden;
 	}
+/******* personal.jsp navigation css************/
 .span7{
 	width:25%;
 	}
 .span8{
+	margin-left:50px;
 	width:70%;
 	}
+#Accordion1{
+	width:180px;
+	border:1px solid grey;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
 .nav{
-	width:220px;
-	height:300px;
+	margin-top:10px;
+	height:260px;
 	list-style-type: none;
 	}
 .nav li{
@@ -32,6 +41,19 @@
 	border-bottom:white 3px soild;
 	background-color: #CCD7FF;
 	}
+.nav h3{
+	margin:10px 0 7px;
+	font-size:20px;
+	font-weight:normal;
+	background-color:#EDEDED;
+	text-indent:1em;
+	
+}
+.nav p{
+	text-indent:2em;
+	line-height:24px;
+	font-family:Microsoft YaHei;	
+}
 .index,.index p{
 	margin:0;
 	padding:0;
@@ -40,11 +62,12 @@
 	color:black;
 	}	
 .index p a:hover{
-	color:#116DFB;
+	color:red;
 	}
 .index p a:active{
 	color:green;
 	}
+/*********************/
 #div2,#div3,#div4,#div5,#div6{
 	display:none;
 	}
@@ -146,7 +169,13 @@ input{
 filter:alpha(opacity=30);
 opacity:.3;
 }
-
+/****  div5 ***********/
+#div5 table{
+	border:1px solid grey;
+}
+.bindBtn{
+	width:20%;
+}
 /************bindshop page**********/
 .bind-form table{
 	margin:10px auto;	

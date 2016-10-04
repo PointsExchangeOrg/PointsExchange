@@ -73,21 +73,23 @@ if(shopChangePwdResult == "N") {%>
 <!--这是main_page-->
 <div class="personal">
   <div class="span7">
-    <div id="Accordion1" class="nav">
+    <div id="Accordion1" class="nav" style="height:200px;">
       <h3><a href="#">商家信息</a></h3>
       <div class="index">
         <p><a href="javascript:showDiv(1)">修改信息</a></p>
         <p><a href="javascript:showDiv(2)">修改密码</a></p>
       </div>
+ <!--
       <h3><a href="#">商业化</a></h3>
       <div class="index">
         <p><a href="javascript:showDiv(3)">添加广告</a></p>
         <p><a href="javascript:showDiv(4)">积分商城</a></p>
       </div>
+-->
       <h3><a href="#">智能分析</a></h3>
       <div class="index">
-        <p><a href="javascript:showDiv(5)">用户量分析</a></p>
-        <p><a href="javascript:showDiv(6)">积分变化分析</a></p>
+        <p><a href="javascript:showDiv(3)">用户量分析</a></p>
+        <p><a href="javascript:showDiv(4)">积分变化分析</a></p>
       </div>
     </div>
   </div>
@@ -102,8 +104,9 @@ if(shopChangePwdResult == "N") {%>
 					</td>
           </tr>
            <tr>
-            <td>商家图标&nbsp;：</td>
+            <td>商家图标：</td>
             <td class="mid">
+            <img alt="头像" src="<%=request.getAttribute("imageURL")%>"/>
             <input type="button" value="上传" onclick="openwindow()" class="file" /> 
 			</td>
 			<!--<td> <img alt="头像" src="<%=request.getAttribute("imageURL")%>"/></td>-->
@@ -153,6 +156,7 @@ if(shopChangePwdResult == "N") {%>
         </table>
       </form>
     </div>
+<!--
     <div id="div3">
       <p class="title">添加广告<span class="title1">ADD ADVERTISEMENT</span></p>
       <form>
@@ -187,12 +191,13 @@ if(shopChangePwdResult == "N") {%>
         </table>
       </form>
     </div>
-    <div id="div5">
+-->
+    <div id="div3">
       <p class="title">用户量分析<span class="title1">USER AMOUNT ANALYSIS</span></p>
       <h3 style="text-align: center">一星期用户变化折线图</h3>
 
     </div>
-    <div id="div6">
+    <div id="div4">
       <p class="title">积分变化分析<span class="title1">POINTS ANALYSIS</span></p>
       <table>
           <td>今日入积分：</td>
@@ -218,12 +223,14 @@ if(shopChangePwdResult == "N") {%>
 
 
 <script type="text/javascript">
+/****
 $(function() {
 	$( "#Accordion1" ).accordion(); 
 });
+***/
 function showDiv(index){   
 var show=parseInt(index);
-for(i=1;i<=6;i++){
+for(i=1;i<=4;i++){
 	document.getElementById('div'+i).style.display = "none";}
 	document.getElementById('div'+index).style.display = "block";
 } 

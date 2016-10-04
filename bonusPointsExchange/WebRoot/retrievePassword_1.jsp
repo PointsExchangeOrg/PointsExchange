@@ -12,7 +12,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="css/footer.css" rel="stylesheet" type="text/css">
 <link href="css/regist.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
 
+//表单验证
+function checkForm() {
+	// alert("ada");
+	var userName = document.getElementById("userName").value;
+	if (userName == "" || userName == null) {
+		alert("用户名不能为空！");
+		return false;
+	}
+	
+	var email = document.getElementById("email").value;
+	if (email == "") {
+		alert("邮箱不能为空！");
+		return false;
+	}
+}
+</script>
 </head>
 
 <body>
@@ -34,12 +51,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <!--header -->
 <!--header -->
+<div class="repsw-form">
 <div class="retrieve">
-  <p class="title">找回密码&nbsp;&nbsp;<span class="title1">RETRIEVE　PASSWORD</span> <span class="title1 right"><a href="#">立即登录</a>&nbsp;&nbsp;&nbsp;</span></p>
+  <p class="title">找回密码&nbsp;&nbsp;&nbsp;&nbsp;<span class="title1">RETRIEVE　PASSWORD</span> <span class="title1 right"><a href="login.jsp">立即登录</a>&nbsp;&nbsp;&nbsp;</span></p>
   <div><span id="step-title1">STEP1:安全验证</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="step-title2">STEP2:重置密码</span></div>
     <div class="span5">
     <div id="step1">
-      <form action="/bonusPointsExchange/actionServlet" method="post">
+      <form action="/bonusPointsExchange/actionServlet" method="post"  onsubmit="return checkForm();">
         <table>
           <tr>
             <td>账&nbsp;号：</td>
@@ -68,6 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
       </div>
     </div>
+</div>
 </div>
 <!--footer -->
 <div class="footer clear">

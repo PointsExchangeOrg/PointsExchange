@@ -49,10 +49,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
 </div>
 <!--这是main_page-->
-<div class="main line-bottom">
   <div class="login-frame">
     <div>
-      <p class="title">商家登录&nbsp;&nbsp;<span class="title1">SHOP LOGIN</span>&nbsp;&nbsp;<span class="title1"><a href="login.jsp">用户登录</a></span></p>
+      <p class="title">&nbsp;&nbsp;商家登录&nbsp;&nbsp;<span class="title1">SHOP LOGIN</span><span class="title1 right"><a href="login.jsp">前往用户登录</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
     </div>
     <div class="span3">
       <div class="ad"> <img src="images/ad3.jpg" alt="广告"/> </div>
@@ -61,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <form class="login-form" action="/bonusPointsExchange/ShopLoginServlet" method="post" onsubmit="return checkForm();">
         <table cellspacing="2">
           <tr>
-            <td>用户名：</td>
+            <td>商家名：</td>
             <td><input name="userName" type="text" id="userName" maxlength="20"></td>
           </tr>
           <tr>
@@ -77,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </form>
     </div>
   </div>
-</div>
+
 <!--这是bottom-->
 <div class="footer">
   <div class="footer-content">

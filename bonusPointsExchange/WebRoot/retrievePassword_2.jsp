@@ -12,7 +12,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="css/footer.css" rel="stylesheet" type="text/css">
 <link href="css/regist.css" rel="stylesheet" type="text/css">
-
+<script type="text/javascript">
+//表单验证
+function checkForm() {
+	// alert("ada");
+	var userName = document.getElementById("userName").value;
+	if (userName == "" || userName == null) {
+		alert("用户名不能为空！");
+		return false;
+	}
+	
+	var password = document.getElementById("password").value;
+	if (password == "") {
+		alert("密码不能为空！");
+		return false;
+	}
+	
+	var repassword = document.getElementById("repassword").value;
+	if (repassword == "") {
+		alert("确认密码不能为空！");
+		return false;
+	}
+	if(password != repassword){
+	    alert("两次密码输入不一致！");
+	    return false;
+	}
+}
+</script>
 </head>
 
 <body>
@@ -34,19 +60,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <!--header -->
 <!--header -->
+<div class="repsw-form">
 <div class="retrieve">
-  <p class="title">找回密码&nbsp;&nbsp;<span class="title1">RETRIEVE　PASSWORD</span> <span class="title1 right"><a href="#">立即登录</a>&nbsp;&nbsp;&nbsp;</span></p>
-   <div><span id="step-title2">STEP2:重置密码</span></div>
-
+  <p class="title">找回密码&nbsp;&nbsp;&nbsp;&nbsp;<span class="title1">RETRIEVE PASSWORD</span> <span class="title1 right"><a href="login.jsp">立即登录</a>&nbsp;&nbsp;&nbsp;</span></p>
+   <div><span id="step-title1" style="color:grey;">STEP1:安全验证</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="step-title2" style="color:blue;">STEP2:重置密码</span></div>
       <div id="step2">
-      <form action="/bonusPointsExchange/actionServlet" method="post">
+      <form action="/bonusPointsExchange/actionServlet" method="post" onsubmit="return checkForm();">
       <table>
       	  <tr>
       	    <td>帐&nbsp;号：</td>
             <td><input name="userName" type="userName" id="userName" value="<%=request.getParameter("userName") %>" maxlength="20"></td>
           </tr>	
           <tr>
-            <td>密&nbsp;码：</td>
+            <td>新密码：</td>
             <td><input name="newPassword" type="password" id="password" maxlength="20"></td>
           </tr>
           <tr>
@@ -62,6 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </div>
 </div>
+</
 <!--footer -->
 <div class="footer clear">
   <div class="footer-content">
@@ -69,12 +96,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
 </div>
 </body>
-<script type="text/javascript">
-function nextStep(){
-	document.getElementById('step1').style.display="none";
-	document.getElementById('step-title1').style.color="grey";
-	document.getElementById('step2').style.display="block";
-	document.getElementById('step-title2').style.color="blue";
-	}
-</script>
 </html>
