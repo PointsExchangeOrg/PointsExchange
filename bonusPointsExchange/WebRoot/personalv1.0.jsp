@@ -61,7 +61,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <% }%>
 
 <!-- 显示查询到的绑定信息 -->
-<% List<ShowBindInfo> list = (List<ShowBindInfo>)request.getAttribute("bindInfo"); %>
+<% 
+	List<ShowBindInfo> list = (List<ShowBindInfo>)request.getAttribute("bindInfo");
+ %>
+ 
+
 
 <!doctype html>
 <html>
@@ -181,9 +185,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <table>
           <tr>
             <td>选择商家：</td>
-            <td><select  class="normal-font" onchange="queryUserPoints()" name="shop" id="shop">
+            <td><select  class="normal-font" name="shop" id="shop">
             <option selected="selected"></option>
              <% if(null != list) {
+             	System.out.println(list.size());
         		for(int i = 0; i < list.size(); i++) {
         		ShowBindInfo bindInfo = (ShowBindInfo)list.get(i);
       		 %>
@@ -191,6 +196,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <%}
         	 }%>
               </select></td>
+          </tr>
+           <tr>
+            <td>在商家注册的用户名：</td>
+            <td><input name="userName" onblur="queryUserPoints()" type="text" value="" id="userName">
+            </td>
           </tr>
           <tr>
             <td>商家积分：</td>
@@ -225,6 +235,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <%}
         	 }%>
               </select></td>
+          </tr>
+           <tr>
+            <td>在商家注册的用户名：</td>
+            <td><input name="userName" type="text" value="" id="userName">
+            </td>
           </tr>
           <tr>
             <td>平台积分：</td>
@@ -297,12 +312,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		document.getElementById('div'+i).style.display = "none";
 	}
 	document.getElementById('div'+index).style.display = "block";
-	if(show == 3) {
-		queryUserPoints();
-	}
-	if(show == 4) {
-		queryPointsAtPlatform();
-	}	
 </script>
 
 
@@ -327,7 +336,9 @@ function createXMLHttp() {
 function queryUserPoints() {
 	//alert("sasdad");//调试代码
 	var shopName = document.getElementById("shop").value;//此处应该是用户所属商家，后面可能要改代码
-	var url = "/bonusPointsExchange/QueryUserPoints?shop="+encodeURI(encodeURI(shopName));
+	var userName = document.getElementById("userName").value;//用户在商家注册的用户名
+	//alert(userName);
+	var url = "/bonusPointsExchange/QueryUserPoints?shop="+encodeURI(encodeURI(shopName))+"&userNameAtShop="+encodeURI(encodeURI(userName));
 	createXMLHttp();
 	xmlHttp.onreadystatechange = queryUserPointsBack;
 	xmlHttp.open("get", url, true);
@@ -395,7 +406,6 @@ for(i=1;i<=6;i++){
 		location.href = "/bonusPointsExchange/QueryBindInfo";
 	}
 }
-
 </script>
 </body>
 </html>
