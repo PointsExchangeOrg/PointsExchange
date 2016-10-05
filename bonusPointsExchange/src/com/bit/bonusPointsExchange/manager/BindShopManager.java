@@ -17,7 +17,7 @@ import com.bit.bonusPointsExchange.utils.DBUtils;
 import com.sun.org.apache.xpath.internal.operations.And;
 
 
-public class BindShopManger {
+public class BindShopManager {
 	public int isValid(String userName, String password,String shopName){
 		//该用户在该商家是否已经注册
 		Connection conn=DBUtils.getConnection();

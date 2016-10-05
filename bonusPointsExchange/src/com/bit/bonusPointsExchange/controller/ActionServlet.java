@@ -21,9 +21,11 @@ public class ActionServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String actionCode=request.getParameter("actionCode");	
-		System.out.println(actionCode);
+		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");	
 		
+		String actionCode=request.getParameter("actionCode");	
+
 		Action action = null;
 		if(actionCode.equals("login")){
 			action = new LoginAction();
@@ -35,7 +37,12 @@ public class ActionServlet extends HttpServlet {
 			action = new FindPasswdAction();
 		}else if(actionCode.equals("resetPasswd")){
 			action = new ResetPasswdAction();
+		}else if(actionCode.equals("bindShop")){
+			action = new BindShopAction();
+		}else if(actionCode.equals("order")){
+			action = new OrderAction();
 		}
+		
 		action.execute(request, response);
 
 	}

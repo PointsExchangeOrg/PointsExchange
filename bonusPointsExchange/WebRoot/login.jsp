@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%
-	String loginRes = (String)request.getAttribute("loginRes");  //获取商家注册是否成功
+	String loginRes = (String)request.getAttribute("loginRes");  //获取用户登陆是否成功
 	if(loginRes == "N") {
 %>
 	<script type="text/javascript" language="javascript">
@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <% } %>
 
 <%
-	String registRes = (String)request.getAttribute("registRes");  //获取商家注册是否成功
+	String registRes = (String)request.getAttribute("registRes");  //获取用户注册是否成功
 	if(registRes == "Y") {
 %>
 	<script type="text/javascript" language="javascript">

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bit.bonusPointsExchange.bean.ShowBindInfo;
-import com.bit.bonusPointsExchange.manager.BindShopManger;
+import com.bit.bonusPointsExchange.manager.BindShopManager;
 import com.bit.bonusPointsExchange.manager.UserPointToplatfromManger;
 //查询用户在商家处所拥有的积分
 public class QueryUserPoints extends HttpServlet {
