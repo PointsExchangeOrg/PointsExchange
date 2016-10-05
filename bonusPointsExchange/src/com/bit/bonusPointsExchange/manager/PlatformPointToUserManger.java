@@ -1,9 +1,11 @@
 package com.bit.bonusPointsExchange.manager;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.bit.bonusPointsExchange.bean.Transfer;
 import com.bit.bonusPointsExchange.utils.DBUtils;
 
 public class PlatformPointToUserManger {
@@ -48,4 +50,44 @@ public class PlatformPointToUserManger {
 		}
 		return false;
 	}
+	
+	//在transfer表中记录交易
+	public int insertTransfer(Transfer transfer){
+		Connection conn=DBUtils.getConnection();
+		Statement stmt=null;
+		int count =0;
+		conn=DBUtils.getConnection();
+		try {
+			stmt=conn.createStatement();
+			String sql="insert into transfer(pointID,status,point) values('"+transfer.getPointID()+"','"+transfer.getStatus()+"','"+transfer.getPoint()+"')";
+			count=stmt.executeUpdate(sql);//执行插入语句，并返回插入数据的个数	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;		
+	}
+	
+	//查询交易的pointID
+	//查询用户在平台数据库中的积分
+		public int queryPointID(String userName, String shopName){
+			Connection conn=DBUtils.getConnection();
+			Statement stmt=null;
+			int pointID = -1;
+			ResultSet rs = null;
+			try {
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery("select pointID from point where userName='"+userName+"'and shopName='"+shopName+"'");
+				if(rs.next()) {
+					//System.out.println(rs.getString("userPoint"));
+					pointID = rs.getInt("pointID");
+					rs.close();
+					return pointID;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return pointID;
+		}
 }
