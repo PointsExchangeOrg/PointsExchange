@@ -8,7 +8,7 @@ import java.util.Date;
  */
 
 public class Order {
-
+	
 	private int orderID;//订单号
 	private int point;//交易积分
 	private String userName;//积分所属商家名
@@ -84,3 +84,4 @@ public class Order {
 	
 	
 }
+
