@@ -9,12 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bit.bonusPointsExchange.bean.ShowBindInfo;
-<<<<<<< HEAD
-import com.bit.bonusPointsExchange.manager.BindShopManager;
-=======
 import com.bit.bonusPointsExchange.bean.Transfer;
-import com.bit.bonusPointsExchange.manager.BindShopManger;
->>>>>>> origin/develop
+import com.bit.bonusPointsExchange.manager.BindShopManager;
 import com.bit.bonusPointsExchange.manager.UserPointToplatfromManger;
 
 public class UserPointToplatformServlet extends HttpServlet {
@@ -81,7 +77,7 @@ public class UserPointToplatformServlet extends HttpServlet {
 		}
 		
 		//查询用户绑定的商家信息，显示在select中
-		BindShopManger bindShopManger = new BindShopManger();
+		BindShopManager bindShopManger = new BindShopManager();
 		List< ShowBindInfo> list = bindShopManger.bingShopInfo(userName);
 		request.setAttribute("bindInfo", list);
 		request.setAttribute("index", "3");
