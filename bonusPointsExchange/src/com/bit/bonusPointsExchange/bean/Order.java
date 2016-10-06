@@ -56,10 +56,10 @@ public class Order {
 	public void setExchangeUserName(String exchangeUserName) {
 		this.exchangeUserName = exchangeUserName;
 	}
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 	public int getOrderStatus() {
@@ -80,7 +80,4 @@ public class Order {
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
-	
-	
-	
 }
