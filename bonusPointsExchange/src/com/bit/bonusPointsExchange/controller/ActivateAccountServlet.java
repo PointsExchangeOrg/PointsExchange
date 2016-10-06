@@ -12,6 +12,11 @@ import com.bit.bonusPointsExchange.bean.User;
 import com.bit.bonusPointsExchange.manager.UserManager;
 import com.bit.bonusPointsExchange.utils.GenerateLinkUtils;
 
+/**
+ * ◊¢≤· ±º§ªÓ’À∫≈
+ * @author gmx
+ *
+ */
 public class ActivateAccountServlet extends HttpServlet {
 
 	/**

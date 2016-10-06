@@ -15,6 +15,10 @@ import javax.mail.internet.MimeMessage;
 
 import com.bit.bonusPointsExchange.bean.User;
 
+/**
+ * 发送到邮箱
+ * @author gmx
+ */
 public class EmailUtils {
 	
 	private static String propFileName="/com/bit/bonusPointsExchange/EmailUtils.properties";//指定资源文件保存的位置

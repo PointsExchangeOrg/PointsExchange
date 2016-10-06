@@ -8,6 +8,11 @@ import java.sql.Statement;
 import com.bit.bonusPointsExchange.bean.User;
 import com.bit.bonusPointsExchange.utils.DBUtils;
 
+/**
+ * 用户数据库操作
+ * @author gmx
+ *
+ */
 public class UserManager {
 	/*
 	 * 操作用户数据库

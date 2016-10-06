@@ -1,5 +1,8 @@
 package com.bit.bonusPointsExchange.bean;
 
+/**
+ * ил╪р
+ */
 public class Shop {
 	private String shopName;
 	private String password;

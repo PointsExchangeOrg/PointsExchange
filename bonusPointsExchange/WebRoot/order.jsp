@@ -21,8 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>	
 <% } else if(releaseOrderRes == "Y") {%>
 	<script type="text/javascript" language="javascript">
-		alert("发布订单 成功！"); 
-		                                  
+		alert("发布订单 成功！"); 		                                  
 	</script>	
 <% }%>
 <!doctype html>
@@ -45,11 +44,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="span2">
     <div class="mainNav">
       <ul>
-        <li><a href=#> 主页</a></li>
-        <li><a href=#> 参考价</a></li>
+        <li><a href="index.jsp"> 主页</a></li>
+        <li><a href="reference.jsp"> 参考价</a></li>
         <li><a href=#>最新交易</a></li>
         <li><a href=#>订单中心</a></li>
-        <li><a href=#><%=session.getAttribute("userName") %></a></li>
+        <li><a href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info"><%=session.getAttribute("userName") %></a></li>
       </ul>
     </div>
   </div>
@@ -65,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="orderContent">
     <div id="div1">
       <div class="releaseOrder">
-        <p class="title">发布新订单<span class="title1">&nbsp;&nbsp;REALEASE ORDER</span><span class="title1 right"><a href="reference.html">前往参考价</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+        <p class="title">发布新订单<span class="title1">&nbsp;&nbsp;REALEASE ORDER</span><span class="title1 right"><a href="reference.jsp">前往参考价</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
         <form action="/bonusPointsExchange/actionServlet" method="post" onsubmit="return checkShop()&&checkPoint()&&checkNull();">
           <table>
             <tr>
@@ -168,69 +167,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="div3">
       <p class="title">查看所有订单<span class="title1">&nbsp;&nbsp;ALL ORDER</span></p>
       <div id="search">
-      <form>
+      <form action="/bonusPointsExchange/actionServlet" method="post">
         <table>
           <tr>
             <td>商&nbsp;家：&nbsp;</td><td><input name="shop" type="text" id="shop"></td>
           </tr>
           <tr>
             <td>目标商家：</td><td><input name="targetShop" type="text" id="targetShop"></td>
-            <td colspan="2" ><input name="submit" type="button" class="submitBtn" id="submit" value="搜索"></td>
+            <td colspan="2" ><input name="submit" type="submit" class="submitBtn" id="submit" value="搜索"></td>
           </tr>
         </table>
-        </form>
-      </div>
-      <div id="search-result">
-      选择排序方式：
-      <select>
+        <input type="hidden" name="actionCode" value="order">
+        <input type="hidden" name="methodCode" value="findAllOrder">
+        
+              选择排序方式：
+      <select name="selectSort" id="selectSort">
         <option>积分优先</option>
         <option>比率优先</option>
         <option>时效优先</option>
       </select>
-      <table><tr>
-      <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
-      <td>100 <img src="images/2.png"/>120</td>
-      <td><img src="images/1.jpg"/> <p>厦门航空</p></td>
-      <td><p>涉及交易方：2</p>
-      <p>交易有效期：2016.12.30</p></td>
-      <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
-      </tr></table>
-      
-      <table><tr>
-      <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
-      <td>100 <img src="images/2.png"/>120</td>
-      <td><img src="images/1.jpg"/> <p>厦门航空</p></td>
-      <td><p>涉及交易方：2</p>
-      <p>交易有效期：2016.12.30</p></td>
-      <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
-      </tr></table>
-      
-      <table><tr>
-      <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
-      <td>100 <img src="images/2.png"/>120</td>
-      <td><img src="images/1.jpg"/> <p>厦门航空</p></td>
-      <td><p>涉及交易方：2</p>
-      <p>交易有效期：2016.12.30</p></td>
-      <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
-      </tr></table>
-      
-      <table><tr>
-      <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
-      <td>100 <img src="images/2.png"/>120</td>
-      <td><img src="images/1.jpg"/> <p>厦门航空</p></td>
-      <td><p>涉及交易方：2</p>
-      <p>交易有效期：2016.12.30</p></td>
-      <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
-      </tr></table>
-      
-      <table><tr>
-      <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
-      <td>100 <img src="images/2.png"/>120</td>
-      <td><img src="images/1.jpg"/> <p>厦门航空</p></td>
-      <td><p>涉及交易方：2</p>
-      <p>交易有效期：2016.12.30</p></td>
-      <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
-      </tr></table>
+        </form>
+      </div>
+      <div id="search-result">
+      <table>
+      <c:forEach items="${ordersPriorityPoint}" var="order">
+      <tr>
+  	      <td> <img src="images/1.jpg"/> <p>${order.wantedShop}</p></td>
+    	  <td>${order.wantedPoint} <img src="images/2.png"/>${order.point}</td>
+      	  <td><img src="images/1.jpg"/> <p>${order.shopName}</p></td>
+          <td><p>交易方：${order.userName}</p>
+          <p>交易有效期：${order.untilDate}</p></td>
+          <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
+        
+      </tr>
+       </c:forEach>
+      </table>
+         
       </div>
     </div>
     
@@ -385,17 +357,22 @@ function realSysTime(utilDate){//设置订单有效期
 	utilDate.innerHTML=time;
 	document.getElementById("utilDate2").value=time;
 }
-window.onload=function(){
+window.onload=function(){//页面载入时执行
 	window.setInterval("realSysTime(utilDate)");
+	
 }
 
 function checkNull(){
 	var shopName = document.getElementById("shopName").value;
+	var platPoint =document.getElementById("platPoint").value;
 	var points = document.getElementById("points").value;
 	var wantedShop= document.getElementById("wantedShop").value;
 	var wantedPoint = document.getElementById("wantedPoint").value;
 	if(shopName=="请选择-------"){
 		alert("商家不能为空");
+		return false;
+	}else if(Number(platPoint)==0){
+		alert("您选的商家积分为0，请先将积分转移到平台！");
 		return false;
 	}else if(Number(points)<=0){
 		alert("积分数量必须大于0");

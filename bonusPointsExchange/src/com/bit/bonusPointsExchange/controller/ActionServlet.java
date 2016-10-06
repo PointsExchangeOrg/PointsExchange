@@ -27,19 +27,19 @@ public class ActionServlet extends HttpServlet {
 		String actionCode=request.getParameter("actionCode");	
 
 		Action action = null;
-		if(actionCode.equals("login")){
+		if(actionCode.equals("login")){//登陆
 			action = new LoginAction();
-		}else if(actionCode.equals("regist")){
+		}else if(actionCode.equals("regist")){//注册
 			action = new RegistAction();
-		}else if(actionCode.equals("user")){
+		}else if(actionCode.equals("user")){//用户模块
 			action = new UserAction();
-		}else if(actionCode.equals("findPasswd")){
+		}else if(actionCode.equals("findPasswd")){//忘记密码
 			action = new FindPasswdAction();
-		}else if(actionCode.equals("resetPasswd")){
+		}else if(actionCode.equals("resetPasswd")){//重置密码
 			action = new ResetPasswdAction();
 		}else if(actionCode.equals("bindShop")){
 			action = new BindShopAction();
-		}else if(actionCode.equals("order")){
+		}else if(actionCode.equals("order")){//订单模块
 			action = new OrderAction();
 		}
 		

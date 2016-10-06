@@ -3,7 +3,13 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%	String LaunchTranscationRes = (String)request.getAttribute("LaunchTranscationRes"); 
+ 	 if(LaunchTranscationRes=="unBindShop"){
+ %>
+	<script type="text/javascript" language="javascript">
+		alert("您还未绑定商家，请先去绑定商家！");                            
+	</script>
+<%	} %>
 <!doctype html>
 <html>
 <head>
@@ -22,8 +28,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="span2">
     <div class="mainNav">
       <ul>
-        <li><a href=#>主页</a></li>
-        <li><a href=#>参考价</a></li>
+        <li><a href="index.jsp">主页</a></li>
+        <li><a href="reference.jsp">参考价</a></li>
         <li><a href=#>最新交易</a></li>
         <li><a href="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops">发起交易</a></li>
     <%

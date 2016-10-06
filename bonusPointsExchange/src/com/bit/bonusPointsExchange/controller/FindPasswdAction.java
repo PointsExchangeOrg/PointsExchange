@@ -17,6 +17,11 @@ import com.bit.bonusPointsExchange.bean.User;
 import com.bit.bonusPointsExchange.manager.UserManager;
 import com.bit.bonusPointsExchange.utils.EmailUtils;
 
+/**
+ * Íü¼ÇÃÜÂë
+ * @author gmx
+ *
+ */
 public class FindPasswdAction extends Action{
 
 	/*
