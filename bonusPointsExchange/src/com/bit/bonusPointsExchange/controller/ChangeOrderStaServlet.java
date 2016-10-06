@@ -29,10 +29,10 @@ public class ChangeOrderStaServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8"); 
 		String orderID1 = request.getParameter("orderID");
 		int orderID = Integer.parseInt(orderID1);
-		System.out.println(orderID);
+		//System.out.println(orderID);
 		QueryOrderManager manager = new QueryOrderManager();
 		//改变订单状态
-		manager.changeOrderStatus(orderID);//此处应该弹框给用户提示，不想写。。。。
+		manager.changeOrderStatus(orderID,2);//此处应该弹框给用户提示，不想写。。。。
 		//获取用户在平台登录名称
 		String userName =(String)request.getSession().getAttribute("userName");
 		//查询数据库表order

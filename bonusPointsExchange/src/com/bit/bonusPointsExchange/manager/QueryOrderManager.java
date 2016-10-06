@@ -50,12 +50,12 @@ public class QueryOrderManager {
 	}
 	
 	//2.改变订单的状态
-	public boolean changeOrderStatus(int orderID){
+	public boolean changeOrderStatus(int orderID, int orderStatus){
 		Connection conn=DBUtils.getConnection();
 		Statement stmt=null;
 		try {
 			stmt = conn.createStatement();
-			String sql="update bonusPointsExchange.order set orderStatus=2 where orderID='"+orderID+"'";
+			String sql="update bonusPointsExchange.order set orderStatus='"+orderStatus+"'where orderID='"+orderID+"'";
 			//System.out.println(sql);
 			int res = stmt.executeUpdate(sql);
 			if(res != 0) 
