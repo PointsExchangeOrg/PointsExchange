@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 显示查询到的绑定信息 -->
 <% 
 	List<ShowBindInfo> list = (List<ShowBindInfo>)request.getAttribute("bindInfo");
- %>
+%>
  
 
 
