@@ -32,6 +32,7 @@ public class BindShopAction extends Action{
 		String userName = (String) request.getSession().getAttribute("userName");
 		BindShopManager bindShopManager = new BindShopManager();
 		List<ShowBindInfo> shops = bindShopManager.bingShopInfo(userName);
+		System.out.println(shops.size());
 		if(shops.isEmpty()){
 			
 		}else{

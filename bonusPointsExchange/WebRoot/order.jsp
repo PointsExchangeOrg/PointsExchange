@@ -6,6 +6,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <%@page import="com.bit.bonusPointsExchange.bean.ShowBindInfo"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%List<ShowBindInfo> bindShops = (List<ShowBindInfo>)request.getAttribute("bindShops"); %>
 <!-- 显示查询到的订单信息 -->
 <% 
@@ -263,7 +264,9 @@ function showDiv(index){
 	for(i=1;i<=3;i++){
 	document.getElementById('div'+i).style.display = "none";}
 	document.getElementById('div'+index).style.display = "block";
-	
+	if(show == 1) {//查询绑定的商家
+		location.href ="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops";
+	}
 	if(show == 2) {
 		//查询用户相关的订单信息
 		location.href = "/bonusPointsExchange/QueryOrderInfo";
