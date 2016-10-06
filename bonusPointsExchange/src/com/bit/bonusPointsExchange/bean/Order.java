@@ -80,4 +80,8 @@ public class Order {
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
+	
+	
+	
 }
+
