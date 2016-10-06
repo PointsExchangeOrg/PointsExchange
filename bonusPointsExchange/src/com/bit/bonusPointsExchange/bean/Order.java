@@ -17,7 +17,7 @@ public class Order {
 	private int wantedPoint;//期望兑换积分
 	private String untilDate;//订单有效期
 	private String exchangeUserName;//积分兑换用户名
-	private Date orderDate;//订单完成时间
+	private String orderDate;//订单完成时间
 	private int orderStatus;//订单状态
 
 	public int getOrderID() {
