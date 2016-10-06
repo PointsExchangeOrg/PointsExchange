@@ -9,7 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bit.bonusPointsExchange.bean.ShowBindInfo;
+<<<<<<< HEAD
 import com.bit.bonusPointsExchange.manager.BindShopManager;
+=======
+import com.bit.bonusPointsExchange.bean.Transfer;
+import com.bit.bonusPointsExchange.manager.BindShopManger;
+>>>>>>> origin/develop
 import com.bit.bonusPointsExchange.manager.UserPointToplatfromManger;
 
 public class UserPointToplatformServlet extends HttpServlet {
@@ -34,10 +39,12 @@ public class UserPointToplatformServlet extends HttpServlet {
 		//获取用户积分数量
 		String points = (String)request.getParameter("points");
 		int point = Integer.parseInt(points);
+		//获取用户在商家注册的用户名
+		String userNameAtShop = (String)request.getParameter("userName");
+		//System.out.println(userNameAtShop);
 		//获取用户想要转移的积分数量,并且转换整数
 		String transfer_points = (String)request.getParameter("transfer_points");
 		int wantTransfer_points = Integer.parseInt(transfer_points);
-		
 		//获取用户选择的商家，用户选择的商家必须在我们平台进行过注册（待解决）
 		String shopName = request.getParameter("shop");
 		//更新数据库
@@ -50,22 +57,33 @@ public class UserPointToplatformServlet extends HttpServlet {
 			//执行相关操作
 			//1.平台数据库中增加积分
 			boolean res1 = dbManger.updatePointsPlatform(userName, shopName, wantTransfer_points);
+			//查询pointID
+			int pointID = dbManger.queryPointID(userName, shopName);
 			//2.商家数据库中减少积分
-			boolean res2 = dbManger.updatePointsShop(userName, shopName, wantTransfer_points);
-			if (res1 && res2) {//这里是逻辑有问题的，如果两个数据库更新失败一个，需要将数据库回滚到没有更新的状态，暂时不解决
+			boolean res2 = dbManger.updatePointsShop(userNameAtShop, shopName, wantTransfer_points);
+			//在transfer表中记录这笔交易
+			Transfer transfer = new Transfer(pointID, 0, wantTransfer_points);
+			int res3 = dbManger.insertTransfer(transfer);
+			
+			if (res1 && res2 && (0 != res3)) {//这里是逻辑有问题的，如果两个数据库更新失败一个，需要将数据库回滚到没有更新的状态，暂时不解决
 				int userPoints1 =  dbManger.ownPointsAtPlatform(userName, shopName);//用户在平台的积分
-				int shopPoints1 = dbManger.ownPoints(userName, shopName);//用户在商家的积分
+				int shopPoints1 = dbManger.ownPoints(userNameAtShop, shopName);//用户在商家的积分
 				String userPoints = String.valueOf(userPoints1);
 				String shopPoints = String.valueOf(shopPoints1);
 				request.setAttribute("userPoints", userPoints);//弹框提示
 				request.setAttribute("shopPoints", shopPoints);//弹框提示
-				request.setAttribute("pointTranRes", "Y");
+				request.setAttribute("pointTranRes", "Y"); 
 			}
 			else {
 				request.setAttribute("shopPoints", point);
 				request.setAttribute("pointTranRes", "N"); 
 			}
 		}
+		
+		//查询用户绑定的商家信息，显示在select中
+		BindShopManger bindShopManger = new BindShopManger();
+		List< ShowBindInfo> list = bindShopManger.bingShopInfo(userName);
+		request.setAttribute("bindInfo", list);
 		request.setAttribute("index", "3");
 		request.getRequestDispatcher("personalv1.0.jsp").forward(request, response);
 	}
