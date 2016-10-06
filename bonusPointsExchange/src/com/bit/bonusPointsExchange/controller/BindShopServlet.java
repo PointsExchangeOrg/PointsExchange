@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bit.bonusPointsExchange.manager.BindShopManger;
+import com.bit.bonusPointsExchange.manager.BindShopManager;
 import com.bit.bonusPointsExchange.utils.Encode;
 
 public class BindShopServlet extends HttpServlet {
@@ -37,7 +37,7 @@ public class BindShopServlet extends HttpServlet {
 		//2.用户必须在我们平台登录
 		//3.选定的商家该用户没有绑定
 		//4.用户在他所选的商家必须注册
-		BindShopManger bindShopManger = new BindShopManger();
+		BindShopManager bindShopManger = new BindShopManager();
 		int res = bindShopManger.isValid(userName, password,shopName);
 		if(res == 1) {//存在，更新point表，插入一项，表示用户的绑定信息，如绑定的商家的名称，自己的名称，绑定的商家自己转移到平台的积分
 			//在插入数据库之前应该判断是否已经绑定了该商家

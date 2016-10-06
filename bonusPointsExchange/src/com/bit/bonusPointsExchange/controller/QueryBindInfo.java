@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bit.bonusPointsExchange.bean.ShowBindInfo;
-import com.bit.bonusPointsExchange.manager.BindShopManger;
+import com.bit.bonusPointsExchange.manager.BindShopManager;
 //查询用户已经绑定的商家的相关信息，第6个div进行显示
 public class QueryBindInfo extends HttpServlet {
 
@@ -29,7 +29,7 @@ public class QueryBindInfo extends HttpServlet {
 		String userName =(String)request.getSession().getAttribute("userName");
 		//System.out.println(userName);
 		//查询数据库，多表联合查询
-		BindShopManger bindShopManger = new BindShopManger();
+		BindShopManager bindShopManger = new BindShopManager();
 		List< ShowBindInfo> list = bindShopManger.bingShopInfo(userName);
 		request.setAttribute("bindInfo", list);
 		request.setAttribute("index", "6");

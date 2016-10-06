@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bit.bonusPointsExchange.bean.ShowBindInfo;
+<<<<<<< HEAD
+import com.bit.bonusPointsExchange.manager.BindShopManager;
+=======
 import com.bit.bonusPointsExchange.bean.Transfer;
 import com.bit.bonusPointsExchange.manager.BindShopManger;
+>>>>>>> origin/develop
 import com.bit.bonusPointsExchange.manager.UserPointToplatfromManger;
 
 public class UserPointToplatformServlet extends HttpServlet {
