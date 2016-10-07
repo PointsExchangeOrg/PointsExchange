@@ -89,15 +89,17 @@ public class OrderAction extends Action{
 		
 	/*积分优先查询所有订单*/
 	public void findAllOrderPriorityPoint(HttpServletRequest request, HttpServletResponse response){//积分优先方式查找所有订单
+		String userName = (String)request.getSession().getAttribute("userName");
 		String shopName = request.getParameter("shop");
 		String wantedShop = request.getParameter("targetShop");
 		OrderManager om = new OrderManager();
 		Order order = new Order();
 		order.setShopName(shopName);
 		order.setWantedShop(wantedShop);
-		List<Order> orders = om.findAllOrderPriorityPoint(order);
-		request.setAttribute("ordersPriorityPoint", orders);
+		List<Order> orders = om.findAllOrderPriorityPoint(userName,order);
+		request.setAttribute("orders", orders);
 		request.setAttribute("index", "3");
+		request.setAttribute("findRes", "true");
 		try {
 			request.getRequestDispatcher("order.jsp").forward(request, response);
 		} catch (ServletException e) {

@@ -189,8 +189,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </form>
       </div>
       <div id="search-result">
+      <%	List<Order> orders = (List<Order>)request.getAttribute("orders");
+      		String findRes = (String)request.getAttribute("findRes");
+      		if(orders!=null&&orders.size()>0){ %>
       <table>
-      <c:forEach items="${ordersPriorityPoint}" var="order">
+      <c:forEach items="${orders}" var="order">
       <tr>
   	      <td> <img src="images/1.jpg"/> <p>${order.wantedShop}</p></td>
     	  <td>${order.wantedPoint} <img src="images/2.png"/>${order.point}</td>
@@ -202,7 +205,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </tr>
        </c:forEach>
       </table>
-         
+       <%	}else if(findRes=="true"){%> 
+     		<br/><br/><br/><p align="center">  搜索结果为0！</p>
+        <%	} %>
       </div>
     </div>
     

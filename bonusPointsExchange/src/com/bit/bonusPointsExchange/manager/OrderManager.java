@@ -41,12 +41,12 @@ public class OrderManager {
 		return result;
 	}
 	
-	public List<Order> findAllOrderPriorityPoint(Order order){//积分优先查询所有订单
+	public List<Order> findAllOrderPriorityPoint(String userName,Order order){//积分优先查询所有订单
 		List<Order> orders = new ArrayList<Order>();
 		conn = DBUtils.getConnection();
 		try {
 			stmt = conn.createStatement();
-			sql="select userName,shopName,wantedShop,point,wantedPoint,untilDate from bonusPointsExchange.order where orderStatus=0 and shopName='"+order.getWantedShop()+"' and wantedShop='"+order.getShopName()+"' order by point desc";
+			sql="select userName,shopName,wantedShop,point,wantedPoint,untilDate from bonusPointsExchange.order where userName!='"+userName+"' and orderStatus=0 and shopName='"+order.getWantedShop()+"' and wantedShop='"+order.getShopName()+"' order by point desc";
 			rs = stmt.executeQuery(sql);
 			while(rs.next()){
 				Order ordertmp = new Order();
