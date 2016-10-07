@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <%
-	String userChangeResult = (String)request.getAttribute("userChangeResult");  //获取修改商家信息是否成功
+	String userChangeResult = (String)request.getAttribute("userChangeResult");  //获取修改用户信息是否成功
 	if(userChangeResult == "Y") {
 %>
 	<script type="text/javascript" language="javascript">
@@ -60,6 +60,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>	
 <% }%>
 
+<%
+	String userChangePasswd = (String)request.getAttribute("userChangePasswd");  //获取修改用户密码是否成功
+	
+	if(userChangePasswd == "N") {%>
+	<script type="text/javascript" language="javascript">
+		alert("修改密码失败！您输入的旧密码不正确");                                    
+	</script>	
+<% }%>
 <!-- 显示查询到的绑定信息 -->
 <% 
 	List<ShowBindInfo> list = (List<ShowBindInfo>)request.getAttribute("bindInfo");
@@ -156,7 +164,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div id="div2">
       <p class="title">修改密码 <span class="title1">USER　PASSWORD</span></p>
-      <form action="/bonusPointsExchange/actionServlet">
+      <form action="/bonusPointsExchange/actionServlet" onsubmit="return checkInputPasswd();">
         <table>
           <tr>
             <td>旧密码：</td>
@@ -168,7 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
           <tr>
             <td>再次输入新密码：</td>
-            <td><input name="reNewPassword" type="password" id="reNewPassword" maxlength="20"></td>
+            <td><input name="reNewPassword" type="password" id="reNewPassword" maxlength="20" onblur="checkInputPasswd()"></td>
           </tr>
           <tr>
             <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
@@ -391,6 +399,10 @@ for(i=1;i<=6;i++){
 		document.getElementById('div'+i).style.display = "none";
 	}
 	document.getElementById('div'+index).style.display = "block";
+	if(show == 1){
+		//查询用户个人信息
+		location.href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info&index="+1;
+	}
 	if(show == 3) {
 		//查询用户绑定的商家的相关信息，显示在select中
 		location.href = "/bonusPointsExchange/QueryBindedShopNameServlet?index="+3;
@@ -405,6 +417,15 @@ for(i=1;i<=6;i++){
 	if(show == 6) {
 		location.href = "/bonusPointsExchange/QueryBindInfo";
 	}
+}
+function checkInputPasswd(){
+	var newPassword = document.getElementById("newPassword").value;
+	var reNewPassword = document.getElementById("reNewPassword").value;
+	if(newPassword!=reNewPassword){
+		alert("您输入的两次新密码不一致");
+		return false;
+	}else return true;
+	
 }
 </script>
 </body>

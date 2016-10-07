@@ -22,17 +22,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <% } %>
 
 <%
-	String userChangePasswd = (String)request.getAttribute("userChangePasswd");  //获取修改商家信息是否成功
+	String userChangePasswd = (String)request.getAttribute("userChangePasswd");  //获取修改用户密码是否成功
 	if(userChangePasswd == "Y") {
 %>
 	<script type="text/javascript" language="javascript">
 		alert("修改密码成功！请重新登录！");                                    
 	</script>	
-<% } else if(userChangePasswd == "N") {%>
-	<script type="text/javascript" language="javascript">
-		alert("修改密码失败！");                                    
-	</script>	
-<% }%>
+<% } %>
 
 
 <!doctype html>
