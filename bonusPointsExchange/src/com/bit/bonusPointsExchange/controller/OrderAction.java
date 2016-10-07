@@ -38,11 +38,19 @@ public class OrderAction extends Action{
 		if(methodCode.equals("release_order")){
 			this.releaseOrder(request,response);
 		}else if(methodCode.equals("findAllOrder")){
+<<<<<<< HEAD
+			if(sortMeans.equals("»ý·ÖÓÅÏÈ")){
+				this.findAllOrderPriorityPoint(request, response);
+			}else if(sortMeans.equals("±ÈÂÊÓÅÏÈ")){
+				this.findAllOrderByRate(request,response);
+			}else if(sortMeans.equals("Ê±Ð§ÓÅÏÈ")){
+=======
 			if(sortMeans.equals("ç§¯åˆ†ä¼˜å…ˆ")){
 				this.findAllOrderPriorityPoint(request, response);
 			}else if(sortMeans.equals("æ¯”çŽ‡ä¼˜å…ˆ")){
 				this.findAllOrderByRate(request,response);
 			}else if(sortMeans.equals("æ—¶æ•ˆä¼˜å…ˆ")){
+>>>>>>> develop
 				this.findAllOrderByUntilDate(request,response);
 			}
 		}
@@ -90,8 +98,13 @@ public class OrderAction extends Action{
 		
 	}
 	
+<<<<<<< HEAD
+	/*»ý·ÖÓÅÏÈ²éÑ¯ËùÓÐ¶©µ¥*/
+	public void findAllOrderPriorityPoint(HttpServletRequest request, HttpServletResponse response){//»ý·ÖÓÅÏÈ·½Ê½²éÕÒËùÓÐ¶©µ¥
+=======
 	/*ç§¯åˆ†ä¼˜å…ˆæŸ¥è¯¢æ‰€æœ‰è®¢å•*/
 	public void findAllOrderPriorityPoint(HttpServletRequest request, HttpServletResponse response){//ç§¯åˆ†ä¼˜å…ˆæ–¹å¼æŸ¥æ‰¾æ‰€æœ‰è®¢å•
+>>>>>>> develop
 		String userName = (String)request.getSession().getAttribute("userName");
 		String shopName = request.getParameter("shop");
 		String wantedShop = request.getParameter("targetShop");
@@ -115,25 +128,41 @@ public class OrderAction extends Action{
 		
 	}	
 
+<<<<<<< HEAD
+	//±ÈÂÊÓÅÏÈ
+=======
 	//æ¯”çŽ‡ä¼˜å…ˆ
+>>>>>>> develop
 	public void	 findAllOrderByRate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String shopName = request.getParameter("shop");
 		String wantedShop = request.getParameter("targetShop");
 		
 		//System.out.println(shopName);
 		//System.out.println(wantedShop);
+<<<<<<< HEAD
+		//²éÑ¯Êý¾Ý¿â£¬µ÷ÓÃ°´±ÈÂÊ²éÑ¯º¯Êý
+=======
 		//æŸ¥è¯¢æ•°æ®åº“ï¼Œè°ƒç”¨æŒ‰æ¯”çŽ‡æŸ¥è¯¢å‡½æ•°
+>>>>>>> develop
 		QueryOrderManager manager = new QueryOrderManager();
 		List<Order> list = manager.findAllOrderByRate(shopName, wantedShop);
 		request.setAttribute("AllOrderByRate", list);
 		request.setAttribute("index", "3");
+<<<<<<< HEAD
+		request.setAttribute("selectID", "2");//ÉèÖÃ½çÃæÉÏÏÔÊ¾µÚ¼¸¸öselect
+=======
 		request.setAttribute("selectID", "2");//è®¾ç½®ç•Œé¢ä¸Šæ˜¾ç¤ºç¬¬å‡ ä¸ªselect
+>>>>>>> develop
 		request.setAttribute("shop", shopName);
 		request.setAttribute("wantedShop", wantedShop);
 		request.getRequestDispatcher("order.jsp").forward(request, response);
 	}
 		
+<<<<<<< HEAD
+	//Ê±Ð§ÓÅÏÈ
+=======
 	//æ—¶æ•ˆä¼˜å…ˆ
+>>>>>>> develop
 	public void	 findAllOrderByUntilDate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String shopName = request.getParameter("shop");
 		String wantedShop = request.getParameter("targetShop");
@@ -141,12 +170,20 @@ public class OrderAction extends Action{
 		//System.out.println(shopName);
 		//System.out.println(wantedShop);
 		
+<<<<<<< HEAD
+		//²éÑ¯Êý¾Ý¿â£¬µ÷ÓÃ°´Ê±Ð§ÓÅÏÈ²éÑ¯º¯Êý
+=======
 		//æŸ¥è¯¢æ•°æ®åº“ï¼Œè°ƒç”¨æŒ‰æ—¶æ•ˆä¼˜å…ˆæŸ¥è¯¢å‡½æ•°
+>>>>>>> develop
 		QueryOrderManager manager = new QueryOrderManager();
 		List<Order> list = manager.findAllOrderByUntilDate(shopName, wantedShop);
 		request.setAttribute("AllOrderByUntilDate", list);
 		request.setAttribute("index", "3");
+<<<<<<< HEAD
+		request.setAttribute("selectID", "3");//ÉèÖÃ½çÃæÉÏÏÔÊ¾µÚ¼¸¸öselect
+=======
 		request.setAttribute("selectID", "3");//è®¾ç½®ç•Œé¢ä¸Šæ˜¾ç¤ºç¬¬å‡ ä¸ªselect
+>>>>>>> develop
 		request.setAttribute("shop", shopName);
 		request.setAttribute("wantedShop", wantedShop);
 		request.getRequestDispatcher("order.jsp").forward(request, response);
