@@ -10,19 +10,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%List<ShowBindInfo> bindShops = (List<ShowBindInfo>)request.getAttribute("bindShops"); %>
 <!-- 显示查询到的订单信息 -->
 <% 
-	List<Order> list = (List<Order>)request.getAttribute("orderInfo");
+  List<Order> list = (List<Order>)request.getAttribute("orderInfo");//个人订单信息
+   List<Order> orders = (List<Order>)request.getAttribute("orders");//按积分优先查询到的订单信息
+  List<Order> AllOrderByRateList = (List<Order>)request.getAttribute("AllOrderByRate");//按比率优先查询到的订单信息
+  List<Order> AllOrderByUntilDate = (List<Order>)request.getAttribute("AllOrderByUntilDate");//按时效优先查询到的订单信息
  %>
 <%
-	String releaseOrderRes = (String)request.getAttribute("releaseOrderResult");  //获取发布订单是否成功
-	if(releaseOrderRes == "N") {
+  String releaseOrderRes = (String)request.getAttribute("releaseOrderResult");  //获取发布订单是否成功
+  if(releaseOrderRes == "N") {
 %>
-	<script type="text/javascript" language="javascript">
-		alert("发布订单失败！");                            
-	</script>	
+  <script type="text/javascript" language="javascript">
+    alert("发布订单失败！");                            
+  </script> 
 <% } else if(releaseOrderRes == "Y") {%>
-	<script type="text/javascript" language="javascript">
-		alert("发布订单 成功！"); 		                                  
-	</script>	
+  <script type="text/javascript" language="javascript">
+    alert("发布订单 成功！");                                      
+  </script> 
 <% }%>
 <!doctype html>
 <html>
@@ -70,9 +73,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <tr>
               <td>选择商家：</td>
               <td><select  class="normal-font" name="shopName" id="shopName" onchange="queryPointsAtPlatform()" >
-              		<option selected="selected">请选择-------</option>
+                  <option selected="selected">请选择-------</option>
                   <c:forEach items="${bindShops}" var="bindShops">
-                  	<option>${bindShops.shopName}</option>               
+                    <option>${bindShops.shopName}</option>               
                   </c:forEach>
                 </select></td>
             </tr>
@@ -88,9 +91,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <tr>
               <td>选择目标商家：</td>
               <td><select name="wantedShop"  class="normal-font" id="wantedShop" >
-              		<option selected="selected">请选择-------</option>
+                  <option selected="selected">请选择-------</option>
                    <c:forEach items="${bindShops}" var="bindShops">
-                  	<option>${bindShops.shopName}</option>               
+                    <option>${bindShops.shopName}</option>               
                   </c:forEach>
                 </select></td>
             </tr>
@@ -123,17 +126,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="order-info clearfix">
           <ul >
           <% if(null != list) {
-             	System.out.println(list.size());
-        		for(int i = 0; i < list.size(); i++) {
-        			Order orderInfo = (Order)list.get(i);
-      		%>
+              System.out.println(list.size());
+            for(int i = 0; i < list.size(); i++) {
+              Order orderInfo = (Order)list.get(i);
+          %>
             <li class="shop-logo"><img src="images/1.jpg"/></li>
             <li class="info">
               <table>
-      			<tr>
+            <tr>
                   <td>商家：<%=orderInfo.getShopName() %></td>
                   <td>目标商家：<%=orderInfo.getWantedShop() %></td>
-             	</tr>
+              </tr>
                 <tr>
                   <td>积分数量：<%=orderInfo.getPoint() %></td>
                   <td>目标积分数量：<%=orderInfo.getWantedPoint() %></td>
@@ -170,48 +173,89 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <form action="/bonusPointsExchange/actionServlet" method="post">
         <table>
           <tr>
-            <td>商&nbsp;家：&nbsp;</td><td><input name="shop" type="text" id="shop"></td>
+            <td>商&nbsp;家：&nbsp;</td><td><input name="shop" type="text" value="${shop }" id="shop"></td>
           </tr>
           <tr>
-            <td>目标商家：</td><td><input name="targetShop" type="text" id="targetShop"></td>
+            <td>目标商家：</td><td><input name="targetShop" type="text" value="${wantedShop }" id="targetShop"></td>
             <td colspan="2" ><input name="submit" type="submit" class="submitBtn" id="submit" value="搜索"></td>
           </tr>
         </table>
-        <input type="hidden" name="actionCode" value="order">
-        <input type="hidden" name="methodCode" value="findAllOrder">
-        
-              选择排序方式：
-      <select name="selectSort" id="selectSort">
-        <option>积分优先</option>
+             选择排序方式：
+      <select name="selectSort"  id="selectSort">
+    <c:if test="${selectID==null}">  
+       <option selected="selected">积分优先</option>               
         <option>比率优先</option>
-        <option>时效优先</option>
+         <option>时效优先</option>
+     </c:if>
+      <c:if test="${selectID=='2'}">  
+       <option>积分优先</option>               
+        <option selected="selected">比率优先</option>
+         <option>时效优先</option>
+     </c:if>
+     <c:if test="${selectID=='3'}">    
+       <option>积分优先</option>              
+       <option>比率优先</option>
+         <option selected="selected">时效优先</option>
+     </c:if>
       </select>
+      <input type="hidden" name="actionCode" value="order"/>
+          <input type="hidden" name="methodCode" value="findAllOrder"/>
         </form>
       </div>
       <div id="search-result">
-      <%	List<Order> orders = (List<Order>)request.getAttribute("orders");
-      		String findRes = (String)request.getAttribute("findRes");
-      		if(orders!=null&&orders.size()>0){ %>
       <table>
+       <% if(null != AllOrderByRateList) {
+              System.out.println(AllOrderByRateList.size());
+            for(int i = 0; i < AllOrderByRateList.size(); i++) {
+              Order orderInfo = (Order)AllOrderByRateList.get(i);
+        %>
+      <tr>
+      <!--头像问题待解决，点击兑换之后的操作待解决-->
+      <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
+      <td><%=orderInfo.getPoint() %> <img src="images/2.png"/><%=orderInfo.getWantedPoint() %></td>
+      <td><img src="images/1.jpg"/> <p>厦门航空</p></td>
+      <td><p>涉及交易方：<%=orderInfo.getUserName() %></p>
+      <p>交易有效期：<%=orderInfo.getUntilDate() %></p></td>
+      <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
+      </tr>
+         <%} %>
+      <%} else if(null != AllOrderByUntilDate) {
+              System.out.println(AllOrderByUntilDate.size());
+            for(int i = 0; i < AllOrderByUntilDate.size(); i++) {
+              Order orderInfo = (Order)AllOrderByUntilDate.get(i);
+      %>
+      <tr>
+      <!--头像问题待解决，点击兑换之后的操作待解决-->
+      <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
+      <td><%=orderInfo.getPoint() %> <img src="images/2.png"/><%=orderInfo.getWantedPoint() %></td>
+      <td><img src="images/1.jpg"/> <p>厦门航空</p></td>
+      <td><p>涉及交易方：<%=orderInfo.getUserName() %></p>
+      <p>交易有效期：<%=orderInfo.getUntilDate() %></p></td>
+      <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
+      </tr>
+       <%}%>
+     <%} %>
+    <%
+    String findRes = (String)request.getAttribute("findRes");
+        if(orders!=null&&orders.size()>0){ %>
       <c:forEach items="${orders}" var="order">
       <tr>
-  	      <td> <img src="images/1.jpg"/> <p>${order.wantedShop}</p></td>
-    	  <td>${order.wantedPoint} <img src="images/2.png"/>${order.point}</td>
-      	  <td><img src="images/1.jpg"/> <p>${order.shopName}</p></td>
+          <td> <img src="images/1.jpg"/> <p>${order.wantedShop}</p></td>
+        <td>${order.wantedPoint} <img src="images/2.png"/>${order.point}</td>
+          <td><img src="images/1.jpg"/> <p>${order.shopName}</p></td>
           <td><p>交易方：${order.userName}</p>
           <p>交易有效期：${order.untilDate}</p></td>
           <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
-        
       </tr>
        </c:forEach>
-      </table>
-       <%	}else if(findRes=="true"){%> 
-     		<br/><br/><br/><p align="center">  搜索结果为0！</p>
-        <%	} %>
+       <%}else if(findRes=="true"){%> 
+        <br/><br/><br/><p align="center">  搜索结果为0！</p>
+        <%} %>
+    
+      </table>     
+        </form>
       </div>
     </div>
-    
-    <!--------------> 
   </div>
 </div>
 <!--这是bottom-->
@@ -223,172 +267,172 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- 根据返回的index显示div -->
 <script type="text/javascript" language="javascript">
-	var index = ${index};
-	//alert(index);
-	var show=parseInt(index);
-	//alert(show);
-	for(i=1;i<=3;i++){
-		document.getElementById('div'+i).style.display = "none";
-	}
-	document.getElementById('div'+index).style.display = "block";
+  var index = ${index};
+  //alert(index);
+  var show=parseInt(index);
+  //alert(show);
+  for(i=1;i<=3;i++){
+    document.getElementById('div'+i).style.display = "none";
+  }
+  document.getElementById('div'+index).style.display = "block";
 </script>
 
 
 <script type="text/javascript">
 function showDiv(index){   
-	var show=parseInt(index);
+  var show=parseInt(index);
 
-	for(i=1;i<=3;i++){
-	document.getElementById('div'+i).style.display = "none";}
-	document.getElementById('div'+index).style.display = "block";
-	if(show == 1) {//查询绑定的商家
-		location.href ="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops";
-	}
-	if(show == 2) {
-		//查询用户相关的订单信息
-		location.href = "/bonusPointsExchange/QueryOrderInfo";
-	}
+  for(i=1;i<=3;i++){
+  document.getElementById('div'+i).style.display = "none";}
+  document.getElementById('div'+index).style.display = "block";
+  if(show == 1) {//查询绑定的商家
+    location.href ="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops";
+  }
+  if(show == 2) {
+    //查询用户相关的订单信息
+    location.href = "/bonusPointsExchange/QueryOrderInfo";
+  }
 }
 //改变订单状态
 function changOrderStatus(orderID) {
-	//alert(orderID);
-	location.href = "/bonusPointsExchange/ChangeOrderStaServlet?orderID="+orderID;
+  //alert(orderID);
+  location.href = "/bonusPointsExchange/ChangeOrderStaServlet?orderID="+orderID;
 }
 /*
 function setValue(){
-	var oTip = document.getElementById("tip1");	
-	var selected_val = document.getElementById("shopName").value;
-	var bindShops = ${bindShops};
-	var shops = [];
-	var array = new Array();
-	alert(bindShops.length);
- 	<c:forEach items="${bindShops}" var="shop"> 
-   		array.push(${shop}); //生成如 array.push(123)的字符串 这样前台拿到后就是js 
-	</c:forEach> 
+  var oTip = document.getElementById("tip1"); 
+  var selected_val = document.getElementById("shopName").value;
+  var bindShops = ${bindShops};
+  var shops = [];
+  var array = new Array();
+  alert(bindShops.length);
+  <c:forEach items="${bindShops}" var="shop"> 
+      array.push(${shop}); //生成如 array.push(123)的字符串 这样前台拿到后就是js 
+  </c:forEach> 
 
-	var point =0; 
-	 for(var i=0;i<bindShops.length;i++){
-			var shop ={};
-			shop.shopName = list[i].shopName;
-			shop.platfromPoint = list[i].platfromPoint;
-			shops.push(shop);
-	} 
-	alert("der");
- 	for(var i=0;i<shops.length;i++){
-		if(shops[i].shopName.equals(selected_val)){
-			point=shops[i].platfromPoint;
-		}
-		break;
-	} 
-	alert(point);
-	if(obj.value>point){
-		oTip.innerHTML="输入的积分数已超过您在平台的积分数";
-	}else{
-		oTip.innerHTML="";
-	} 
+  var point =0; 
+   for(var i=0;i<bindShops.length;i++){
+      var shop ={};
+      shop.shopName = list[i].shopName;
+      shop.platfromPoint = list[i].platfromPoint;
+      shops.push(shop);
+  } 
+  alert("der");
+  for(var i=0;i<shops.length;i++){
+    if(shops[i].shopName.equals(selected_val)){
+      point=shops[i].platfromPoint;
+    }
+    break;
+  } 
+  alert(point);
+  if(obj.value>point){
+    oTip.innerHTML="输入的积分数已超过您在平台的积分数";
+  }else{
+    oTip.innerHTML="";
+  } 
 }
 */
 var xmlHttp;
 // 对象的创建
 function createXMLHttp() {
-	//alert("sasdad");//调试代码
-	if (window.XMLHttpRequest) { // firefox
-		xmlHttp = new XMLHttpRequest();
-	} else { // ie
-		xmlHttp = new ActiveXObject("microsoft.XMLHTTP");
-	}
+  //alert("sasdad");//调试代码
+  if (window.XMLHttpRequest) { // firefox
+    xmlHttp = new XMLHttpRequest();
+  } else { // ie
+    xmlHttp = new ActiveXObject("microsoft.XMLHTTP");
+  }
 }
 //查询用户在平台数据库有多少积分
 function queryPointsAtPlatform() {
-	var shopName = document.getElementById("shopName").value;
-	//alert(shopName);//调试代码
-	var url = "/bonusPointsExchange/QueryPointsAtPlatform?shop="+encodeURI(encodeURI(shopName));
-	createXMLHttp();
-	xmlHttp.onreadystatechange = queryPointsAtPlatformBack;
-	xmlHttp.open("get", url, true);
-	xmlHttp.send(null);
+  var shopName = document.getElementById("shopName").value;
+  //alert(shopName);//调试代码
+  var url = "/bonusPointsExchange/QueryPointsAtPlatform?shop="+encodeURI(encodeURI(shopName));
+  createXMLHttp();
+  xmlHttp.onreadystatechange = queryPointsAtPlatformBack;
+  xmlHttp.open("get", url, true);
+  xmlHttp.send(null);
 }
 // 回调函数,处理服务器返回结果
 function queryPointsAtPlatformBack() {
-	//alert("aaaaaa");
-	// 响应已完成
-	if (xmlHttp.readyState == 4) {
-		// 服务器正常的响应
-		// alert(xmlHttp.status);
-		if (xmlHttp.status == 200) {
-			var returnMsg = xmlHttp.responseText; // 收取服务器端的响应信息(String)
-			//alert(returnMsg);
-			document.getElementById("platPoint").value = returnMsg;
-		}
-	}
+  //alert("aaaaaa");
+  // 响应已完成
+  if (xmlHttp.readyState == 4) {
+    // 服务器正常的响应
+    // alert(xmlHttp.status);
+    if (xmlHttp.status == 200) {
+      var returnMsg = xmlHttp.responseText; // 收取服务器端的响应信息(String)
+      //alert(returnMsg);
+      document.getElementById("platPoint").value = returnMsg;
+    }
+  }
 }
 
 function checkPoint(){//判断用户输入积分数是否超过用户在平台的积分数
-	var platPoint = document.getElementById("platPoint").value;
-	var points = document.getElementById("points").value;
-	
-	if(Number(points)>Number(platPoint)){
-		alert("您输入的积分数量已超出您在平台的积分数量！");
-		return false;
-	}else return true;
+  var platPoint = document.getElementById("platPoint").value;
+  var points = document.getElementById("points").value;
+  
+  if(Number(points)>Number(platPoint)){
+    alert("您输入的积分数量已超出您在平台的积分数量！");
+    return false;
+  }else return true;
 }
 function checkShop(){//判断积分所属商家与期望兑换商家是否相同
-	var shopName = document.getElementById("shopName").value;
-	var wantedShop = document.getElementById("wantedShop").value;
-	if(shopName==wantedShop){
-		alert("积分所属商家与期望兑换商家不能相同");
-		return false;
-	}
-	else return true;
+  var shopName = document.getElementById("shopName").value;
+  var wantedShop = document.getElementById("wantedShop").value;
+  if(shopName==wantedShop){
+    alert("积分所属商家与期望兑换商家不能相同");
+    return false;
+  }
+  else return true;
 }
 function realSysTime(utilDate){//设置订单有效期
-	var now = new Date();//创建Date对象
-	var year = now.getFullYear();//获取年份
-	var month = now.getMonth();//获取月份
-	var date = now.getDate();//获取日期
-	month=month+2;
-	if(month>12){
-		month=1;
-		year=year+1;
-	}
-	if(month<=9){
-		month="0"+month;
-			
-	}
-	if(date<=9){
-		date="0"+date;
-	}
-	var time = year+"-"+month+"-"+date;//显示时间
-	utilDate.innerHTML=time;
-	document.getElementById("utilDate2").value=time;
+  var now = new Date();//创建Date对象
+  var year = now.getFullYear();//获取年份
+  var month = now.getMonth();//获取月份
+  var date = now.getDate();//获取日期
+  month=month+2;
+  if(month>12){
+    month=1;
+    year=year+1;
+  }
+  if(month<=9){
+    month="0"+month;
+      
+  }
+  if(date<=9){
+    date="0"+date;
+  }
+  var time = year+"-"+month+"-"+date;//显示时间
+  utilDate.innerHTML=time;
+  document.getElementById("utilDate2").value=time;
 }
 window.onload=function(){//页面载入时执行
-	window.setInterval("realSysTime(utilDate)");
-	
+  window.setInterval("realSysTime(utilDate)");
+  
 }
 
 function checkNull(){
-	var shopName = document.getElementById("shopName").value;
-	var platPoint =document.getElementById("platPoint").value;
-	var points = document.getElementById("points").value;
-	var wantedShop= document.getElementById("wantedShop").value;
-	var wantedPoint = document.getElementById("wantedPoint").value;
-	if(shopName=="请选择-------"){
-		alert("商家不能为空");
-		return false;
-	}else if(Number(platPoint)==0){
-		alert("您选的商家积分为0，请先将积分转移到平台！");
-		return false;
-	}else if(Number(points)<=0){
-		alert("积分数量必须大于0");
-		return false;
-	}else if(wantedShop=="请选择-------"){
-		alert("目标商家不能为空");
-		return false;
-	}else if(Number(wantedPoint)<=0){
-		alert("目标积分数量必须大于0");
-		return false;
-	}else return true;
+  var shopName = document.getElementById("shopName").value;
+  var platPoint =document.getElementById("platPoint").value;
+  var points = document.getElementById("points").value;
+  var wantedShop= document.getElementById("wantedShop").value;
+  var wantedPoint = document.getElementById("wantedPoint").value;
+  if(shopName=="请选择-------"){
+    alert("商家不能为空");
+    return false;
+  }else if(Number(platPoint)==0){
+    alert("您选的商家积分为0，请先将积分转移到平台！");
+    return false;
+  }else if(Number(points)<=0){
+    alert("积分数量必须大于0");
+    return false;
+  }else if(wantedShop=="请选择-------"){
+    alert("目标商家不能为空");
+    return false;
+  }else if(Number(wantedPoint)<=0){
+    alert("目标积分数量必须大于0");
+    return false;
+  }else return true;
 }
 </script>
 
