@@ -29,7 +29,7 @@ public class QueryOrderInfo extends HttpServlet {
 		String userName =(String)request.getSession().getAttribute("userName");
 		//查询数据库表order
 		QueryOrderManager manager = new QueryOrderManager();
-		List<Order> list = manager.bingShopInfo(userName);
+		List<Order> list = manager.queryOrderInfo(userName);
 		request.setAttribute("orderInfo", list);
 		request.setAttribute("index", "2");
 		request.getRequestDispatcher("order.jsp").forward(request, response);
