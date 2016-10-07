@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	if(loginRes == "N") {
 %>
 	<script type="text/javascript" language="javascript">
-		alert("登录失败！请重新登录！您输入的账号或密码错误！");                            
+		alert("登录失败！请重新登录！");                            
 	</script>	
 <% } %>
 
