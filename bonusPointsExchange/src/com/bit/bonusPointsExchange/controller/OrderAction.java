@@ -15,6 +15,11 @@ import com.bit.bonusPointsExchange.bean.ShowBindInfo;
 import com.bit.bonusPointsExchange.manager.BindShopManager;
 import com.bit.bonusPointsExchange.manager.OrderManager;
 
+/**
+ * 订单模块
+ * @author gmx
+ *
+ */
 public class OrderAction extends Action{
 	
 	private int orderStatus_unfinished_valid = 0;//0代表未完成且未超过有效期（有效）
@@ -28,12 +33,19 @@ public class OrderAction extends Action{
 		// TODO Auto-generated method stub
 		
 		String methodCode = request.getParameter("methodCode");
-		if(methodCode.equals("release_order")){
+		String sortMeans = request.getParameter("selectSort");
+		if(methodCode.equals("release_order")){//发布订单
 			this.releaseOrder(request,response);
+		}else if(methodCode.equals("findAllOrder")){//查找所有订单
+			if(sortMeans.equals("积分优先")){//积分优先查找所有订单
+				this.findAllOrderPriorityPoint(request, response);
+			}			
+			
 		}
 		
 	}
 	
+	/*发布订单*/
 	public void releaseOrder(HttpServletRequest request, HttpServletResponse response){
 		String shopName = request.getParameter("shopName");
 		int point = Integer.parseInt(request.getParameter("points"));
@@ -41,11 +53,7 @@ public class OrderAction extends Action{
 		int wantedPoint = Integer.parseInt(request.getParameter("wantedPoint"));
 		String userName = (String) request.getSession().getAttribute("userName");
 		String untilDate = request.getParameter("utilDate2");
-		//SimpleDateFormat sdf = new SimpleDateFormat(date);  
-		//Date untilDate;
 		try {
-			
-			///untilDate = sdf.parse(date);
 			OrderManager om = new OrderManager();
 			Order order = new Order();
 			order.setShopName(shopName);
@@ -79,8 +87,30 @@ public class OrderAction extends Action{
 		
 	}
 		
-	
+	/*积分优先查询所有订单*/
+	public void findAllOrderPriorityPoint(HttpServletRequest request, HttpServletResponse response){//积分优先方式查找所有订单
+		String userName = (String)request.getSession().getAttribute("userName");
+		String shopName = request.getParameter("shop");
+		String wantedShop = request.getParameter("targetShop");
+		OrderManager om = new OrderManager();
+		Order order = new Order();
+		order.setShopName(shopName);
+		order.setWantedShop(wantedShop);
+		List<Order> orders = om.findAllOrderPriorityPoint(userName,order);
+		request.setAttribute("orders", orders);
+		request.setAttribute("index", "3");
+		request.setAttribute("findRes", "true");
+		try {
+			request.getRequestDispatcher("order.jsp").forward(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+	}
 		
 		
 		

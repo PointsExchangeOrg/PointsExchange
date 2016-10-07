@@ -1,0 +1,9 @@
+1.修改 bonusPointsExchange/src/com/bit/bonusPointsExchange/DBUtils.properties 文件，将 
+	#DB_USER=访问数据库的用户名
+	DB_USER=root
+   修改为DB_USER=[自己mysql账号]，将
+	#DB_PWD(用户密码) 
+	DB_PWD=admindgq
+   修改为DB_PWD=[自己mesql账号的密码]
+
+	

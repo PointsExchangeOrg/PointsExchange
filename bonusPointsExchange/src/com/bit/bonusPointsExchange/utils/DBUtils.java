@@ -8,8 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-/*
+/**
  * 数据库连接
+ * @author gmx
  */
 public class DBUtils {  
 	

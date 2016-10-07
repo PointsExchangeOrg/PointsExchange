@@ -18,7 +18,7 @@ public class GenerateLinkUtils {
 	     * 生成帐户激活链接 
 	     */  
 	    public static String generateActivateLink(User user) {  
-	        return "http://localhost/bonusPointsExchange/activateAccountServlet?userName="   
+	        return "http://localhost:8080/bonusPointsExchange/activateAccountServlet?userName="   
 	                + user.getUserName() + "&" + CHECK_CODE + "=" + generateCheckcode(user);  
 	    }  
 	       	        
@@ -26,7 +26,7 @@ public class GenerateLinkUtils {
 	     * 生成重设密码的链接 
 	     */  
 	    public static String generateResetPwdLink(User user) {  
-	        return "http://localhost/bonusPointsExchange/retrievePassword_2.jsp?userName="   
+	        return "http://localhost:8080/bonusPointsExchange/retrievePassword_2.jsp?userName="   
 	                + user.getUserName() + "&" + CHECK_CODE + "=" + generateCheckcode(user);  
 	    }  
 	      

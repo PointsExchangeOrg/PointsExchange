@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.bit.bonusPointsExchange.bean.User;
 import com.bit.bonusPointsExchange.manager.UserManager;
 
+/**
+ * 用户模块
+ * @author gmx
+ *
+ */
 public class UserAction extends Action{
-	/*
-	 * 用户信息操作
-	 */	
 
 	UserManager um = new UserManager();
 	User user = new User();

@@ -3,7 +3,9 @@ package com.bit.bonusPointsExchange.utils;
 import java.text.SimpleDateFormat; 
 import java.util.Date;  
 import java.util.Random;
-//根据IP、时间和三位随机数生成文件前缀，防止文件名重复
+/**
+ * 根据IP、时间和三位随机数生成文件前缀，防止文件名重复
+ */
 public class IpTimeStamp {
 	private SimpleDateFormat sdf = null;//格式化时间操作类  
     private String ip = null;//定义一个ip地址  

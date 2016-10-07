@@ -12,7 +12,7 @@ import com.bit.bonusPointsExchange.bean.ShowBindInfo;
 import com.bit.bonusPointsExchange.manager.BindShopManager;
 
 /**
- * 绑定商家
+ * 用户绑定的商家
  */
 public class BindShopAction extends Action{
 
@@ -27,13 +27,23 @@ public class BindShopAction extends Action{
 		}
 	}
 	
-	/*查询用户的所有已绑定商家名*/
+	/*查询用户的所有已绑定商家*/
 	public void findBindedShops(HttpServletRequest request, HttpServletResponse response){
 		String userName = (String) request.getSession().getAttribute("userName");
 		BindShopManager bindShopManager = new BindShopManager();
 		List<ShowBindInfo> shops = bindShopManager.bingShopInfo(userName);
 		System.out.println(shops.size());
 		if(shops.isEmpty()){
+			request.setAttribute("LaunchTranscationRes","unBindShop");
+			try {
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}else{
 			request.setAttribute("bindShops", shops);

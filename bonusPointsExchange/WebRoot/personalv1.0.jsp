@@ -94,10 +94,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="span2">
     <div class="mainNav">
       <ul>
-        <li><a href=#> 主页</a></li>
-        <li><a href=#> 参考价</a></li>
+        <li><a href=index.jsp> 主页</a></li>
+        <li><a href="reference.jsp"> 参考价</a></li>
         <li><a href=#>最新交易</a></li>
-        <li><a href=#>发起交易</a></li>
+        <li><a href="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops">发起交易</a></li>
         <li><a href=#><%=session.getAttribute("userName") %></a></li>
       </ul>
     </div>
