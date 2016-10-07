@@ -16,6 +16,11 @@ import com.bit.bonusPointsExchange.manager.BindShopManager;
 import com.bit.bonusPointsExchange.manager.OrderManager;
 import com.bit.bonusPointsExchange.manager.QueryOrderManager;
 
+/**
+ * 订单模块
+ * @author gmx
+ *
+ */
 public class OrderAction extends Action{
 	
 	private int orderStatus_unfinished_valid = 0;//0代表未完成且未超过有效期（有效）
@@ -34,7 +39,7 @@ public class OrderAction extends Action{
 			this.releaseOrder(request,response);
 		}else if(methodCode.equals("findAllOrder")){
 			if(sortMeans.equals("积分优先")){
-				
+				this.findAllOrderPriorityPoint(request, response);
 			}else if(sortMeans.equals("比率优先")){
 				this.findAllOrderByRate(request,response);
 			}else if(sortMeans.equals("时效优先")){
@@ -43,6 +48,7 @@ public class OrderAction extends Action{
 		}
 	}
 	
+	/*发布订单*/
 	public void releaseOrder(HttpServletRequest request, HttpServletResponse response){
 		String shopName = request.getParameter("shopName");
 		int point = Integer.parseInt(request.getParameter("points"));
@@ -50,11 +56,7 @@ public class OrderAction extends Action{
 		int wantedPoint = Integer.parseInt(request.getParameter("wantedPoint"));
 		String userName = (String) request.getSession().getAttribute("userName");
 		String untilDate = request.getParameter("utilDate2");
-		//SimpleDateFormat sdf = new SimpleDateFormat(date);  
-		//Date untilDate;
 		try {
-			
-			///untilDate = sdf.parse(date);
 			OrderManager om = new OrderManager();
 			Order order = new Order();
 			order.setShopName(shopName);
@@ -87,7 +89,32 @@ public class OrderAction extends Action{
 		}
 		
 	}
+	
+	/*积分优先查询所有订单*/
+	public void findAllOrderPriorityPoint(HttpServletRequest request, HttpServletResponse response){//积分优先方式查找所有订单
+		String userName = (String)request.getSession().getAttribute("userName");
+		String shopName = request.getParameter("shop");
+		String wantedShop = request.getParameter("targetShop");
+		OrderManager om = new OrderManager();
+		Order order = new Order();
+		order.setShopName(shopName);
+		order.setWantedShop(wantedShop);
+		List<Order> orders = om.findAllOrderPriorityPoint(userName,order);
+		request.setAttribute("orders", orders);
+		request.setAttribute("index", "3");
+		request.setAttribute("findRes", "true");
+		try {
+			request.getRequestDispatcher("order.jsp").forward(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+	}	
+
 	//比率优先
 	public void	 findAllOrderByRate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String shopName = request.getParameter("shop");
@@ -95,7 +122,6 @@ public class OrderAction extends Action{
 		
 		//System.out.println(shopName);
 		//System.out.println(wantedShop);
-		
 		//查询数据库，调用按比率查询函数
 		QueryOrderManager manager = new QueryOrderManager();
 		List<Order> list = manager.findAllOrderByRate(shopName, wantedShop);

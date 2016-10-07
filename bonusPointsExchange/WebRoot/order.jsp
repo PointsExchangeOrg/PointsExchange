@@ -11,6 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 显示查询到的订单信息 -->
 <% 
 	List<Order> list = (List<Order>)request.getAttribute("orderInfo");//个人订单信息
+	 List<Order> orders = (List<Order>)request.getAttribute("orders");//按积分优先查询到的订单信息
 	List<Order> AllOrderByRateList = (List<Order>)request.getAttribute("AllOrderByRate");//按比率优先查询到的订单信息
 	List<Order> AllOrderByUntilDate = (List<Order>)request.getAttribute("AllOrderByUntilDate");//按时效优先查询到的订单信息
  %>
@@ -23,8 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>	
 <% } else if(releaseOrderRes == "Y") {%>
 	<script type="text/javascript" language="javascript">
-		alert("发布订单 成功！"); 
-		                                  
+		alert("发布订单 成功！"); 		                                  
 	</script>	
 <% }%>
 <!doctype html>
@@ -47,11 +47,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="span2">
     <div class="mainNav">
       <ul>
-        <li><a href=#> 主页</a></li>
-        <li><a href=#> 参考价</a></li>
+        <li><a href="index.jsp"> 主页</a></li>
+        <li><a href="reference.jsp"> 参考价</a></li>
         <li><a href=#>最新交易</a></li>
         <li><a href=#>订单中心</a></li>
-        <li><a href=#><%=session.getAttribute("userName") %></a></li>
+        <li><a href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info"><%=session.getAttribute("userName") %></a></li>
       </ul>
     </div>
   </div>
@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="orderContent">
     <div id="div1">
       <div class="releaseOrder">
-        <p class="title">发布新订单<span class="title1">&nbsp;&nbsp;REALEASE ORDER</span><span class="title1 right"><a href="reference.html">前往参考价</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+        <p class="title">发布新订单<span class="title1">&nbsp;&nbsp;REALEASE ORDER</span><span class="title1 right"><a href="reference.jsp">前往参考价</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
         <form action="/bonusPointsExchange/actionServlet" method="post" onsubmit="return checkShop()&&checkPoint()&&checkNull();">
           <table>
             <tr>
@@ -233,9 +233,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <p>交易有效期：<%=orderInfo.getUntilDate() %></p></td>
       <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
       </tr>
-       <%} %>
+       <%}%>
      <%} %>
-      </table>
+	  <%
+		String findRes = (String)request.getAttribute("findRes");
+      	if(orders!=null&&orders.size()>0){ %>
+      <c:forEach items="${orders}" var="order">
+      <tr>
+  	      <td> <img src="images/1.jpg"/> <p>${order.wantedShop}</p></td>
+    	  <td>${order.wantedPoint} <img src="images/2.png"/>${order.point}</td>
+      	  <td><img src="images/1.jpg"/> <p>${order.shopName}</p></td>
+          <td><p>交易方：${order.userName}</p>
+          <p>交易有效期：${order.untilDate}</p></td>
+          <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
+      </tr>
+       </c:forEach>
+       <%}else if(findRes=="true"){%> 
+     		<br/><br/><br/><p align="center">  搜索结果为0！</p>
+        <%} %>
+		
+      </table>     
+        </form>
       </div>
     </div>
   </div>
@@ -388,17 +406,22 @@ function realSysTime(utilDate){//设置订单有效期
 	utilDate.innerHTML=time;
 	document.getElementById("utilDate2").value=time;
 }
-window.onload=function(){
+window.onload=function(){//页面载入时执行
 	window.setInterval("realSysTime(utilDate)");
+	
 }
 
 function checkNull(){
 	var shopName = document.getElementById("shopName").value;
+	var platPoint =document.getElementById("platPoint").value;
 	var points = document.getElementById("points").value;
 	var wantedShop= document.getElementById("wantedShop").value;
 	var wantedPoint = document.getElementById("wantedPoint").value;
 	if(shopName=="请选择-------"){
 		alert("商家不能为空");
+		return false;
+	}else if(Number(platPoint)==0){
+		alert("您选的商家积分为0，请先将积分转移到平台！");
 		return false;
 	}else if(Number(points)<=0){
 		alert("积分数量必须大于0");

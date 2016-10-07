@@ -10,10 +10,12 @@ import javax.servlet.http.HttpSession;
 import com.bit.bonusPointsExchange.bean.User;
 import com.bit.bonusPointsExchange.manager.LoginManager;
 
+/**
+ * µÇÂ½
+ * @author gmx
+ *
+ */
 public class LoginAction extends Action{
-	/*
-	 * µÇÂ½
-	 * */
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

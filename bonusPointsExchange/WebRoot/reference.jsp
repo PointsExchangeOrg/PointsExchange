@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+=======
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+>>>>>>> develop
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -23,11 +27,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="span2">
     <div class="mainNav">
       <ul>
+<<<<<<< HEAD
         <li><a href=#> 主页</a></li>
         <li><a href=#> 参考价</a></li>
         <li><a href=#>最新交易</a></li>
         <li><a href=#>发起交易</a></li>
         <li><a href=#>我的账户</a></li>
+=======
+        <li><a href="index.jsp"> 主页</a></li>
+        <li><a href="reference.jsp"> 参考价</a></li>
+        <li><a href=#>最新交易</a></li>
+        <li><a href="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops">发起交易</a></li>
+        <li><a href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info"><%=session.getAttribute("userName") %></a></li>
+>>>>>>> develop
       </ul>
     </div>
   </div>
@@ -38,12 +50,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <p class="title">参考价<span class="title1">&nbsp;&nbsp;&nbsp;REFERENCE PRICE</span></p>
   </div>
   <div> &nbsp;	
+<<<<<<< HEAD
  	 <form action="">
       	商家名称：<input name="search1"  type="text" id="search1" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
       	目标商家名称：<input name="search2"  type="text" id="search2" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
       	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="搜索">
       </form>
   </div>
+=======
+      	商家名称：<input name="search1"  type="text" id="search1" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
+      	目标商家名称：<input name="search2"  type="text" id="search2" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
+      	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="搜索">
+      </div>
+>>>>>>> develop
   <div class="referenceInfo">
     <table>
       <tr>

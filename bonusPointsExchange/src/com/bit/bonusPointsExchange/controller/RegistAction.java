@@ -15,11 +15,13 @@ import com.bit.bonusPointsExchange.manager.RegistManager;
 import com.bit.bonusPointsExchange.manager.UserManager;
 import com.bit.bonusPointsExchange.utils.EmailUtils;
 
-
+/**
+ * зЂВс
+ * @author gmx
+ *
+ */
 public class RegistAction extends Action{
-	/*
-	 * зЂВс
-	 */
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
