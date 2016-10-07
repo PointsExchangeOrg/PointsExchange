@@ -10,17 +10,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%List<ShowBindInfo> bindShops = (List<ShowBindInfo>)request.getAttribute("bindShops"); %>
 <!-- 显示查询到的订单信息 -->
 <% 
-<<<<<<< HEAD
 	List<Order> list = (List<Order>)request.getAttribute("orderInfo");//个人订单信息
 	 List<Order> orders = (List<Order>)request.getAttribute("orders");//按积分优先查询到的订单信息
 	List<Order> AllOrderByRateList = (List<Order>)request.getAttribute("AllOrderByRate");//按比率优先查询到的订单信息
 	List<Order> AllOrderByUntilDate = (List<Order>)request.getAttribute("AllOrderByUntilDate");//按时效优先查询到的订单信息
-=======
-  List<Order> list = (List<Order>)request.getAttribute("orderInfo");//个人订单信息
-   List<Order> orders = (List<Order>)request.getAttribute("orders");//按积分优先查询到的订单信息
-  List<Order> AllOrderByRateList = (List<Order>)request.getAttribute("AllOrderByRate");//按比率优先查询到的订单信息
-  List<Order> AllOrderByUntilDate = (List<Order>)request.getAttribute("AllOrderByUntilDate");//按时效优先查询到的订单信息
->>>>>>> develop
  %>
 <%
   String releaseOrderRes = (String)request.getAttribute("releaseOrderResult");  //获取发布订单是否成功
@@ -200,15 +193,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <option>时效优先</option>
      </c:if>
      <c:if test="${selectID=='3'}">    
-<<<<<<< HEAD
     	 <option>积分优先</option>              
      	 <option>比率优先</option>
        	 <option selected="selected">时效优先</option>
-=======
-       <option>积分优先</option>              
-       <option>比率优先</option>
-         <option selected="selected">时效优先</option>
->>>>>>> develop
      </c:if>
       </select>
       <input type="hidden" name="actionCode" value="order"/>
@@ -218,17 +205,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div id="search-result">
       <table>
        <% if(null != AllOrderByRateList) {
-<<<<<<< HEAD
-             	System.out.println(AllOrderByRateList.size());
-        		for(int i = 0; i < AllOrderByRateList.size(); i++) {
-        			Order orderInfo = (Order)AllOrderByRateList.get(i);
-      	%>
-=======
+
               System.out.println(AllOrderByRateList.size());
             for(int i = 0; i < AllOrderByRateList.size(); i++) {
               Order orderInfo = (Order)AllOrderByRateList.get(i);
         %>
->>>>>>> develop
       <tr>
       <!--头像问题待解决，点击兑换之后的操作待解决-->
       <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
@@ -240,15 +221,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </tr>
          <%} %>
       <%} else if(null != AllOrderByUntilDate) {
-<<<<<<< HEAD
              	System.out.println(AllOrderByUntilDate.size());
         		for(int i = 0; i < AllOrderByUntilDate.size(); i++) {
         			Order orderInfo = (Order)AllOrderByUntilDate.get(i);
-=======
-              System.out.println(AllOrderByUntilDate.size());
-            for(int i = 0; i < AllOrderByUntilDate.size(); i++) {
-              Order orderInfo = (Order)AllOrderByUntilDate.get(i);
->>>>>>> develop
+
       %>
       <tr>
       <!--头像问题待解决，点击兑换之后的操作待解决-->
@@ -261,15 +237,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </tr>
        <%}%>
      <%} %>
-<<<<<<< HEAD
 	  <%
 		String findRes = (String)request.getAttribute("findRes");
       	if(orders!=null&&orders.size()>0){ %>
-=======
-    <%
-    String findRes = (String)request.getAttribute("findRes");
-        if(orders!=null&&orders.size()>0){ %>
->>>>>>> develop
+
       <c:forEach items="${orders}" var="order">
       <tr>
           <td> <img src="images/1.jpg"/> <p>${order.wantedShop}</p></td>
@@ -281,15 +252,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </tr>
        </c:forEach>
        <%}else if(findRes=="true"){%> 
-<<<<<<< HEAD
      		<br/><br/><br/><p align="center">  搜索结果为0！</p>
         <%} %>
-		
-=======
-        <br/><br/><br/><p align="center">  搜索结果为0！</p>
-        <%} %>
-    
->>>>>>> develop
       </table>     
         </form>
       </div>

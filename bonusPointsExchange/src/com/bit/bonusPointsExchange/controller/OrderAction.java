@@ -17,15 +17,15 @@ import com.bit.bonusPointsExchange.manager.OrderManager;
 import com.bit.bonusPointsExchange.manager.QueryOrderManager;
 
 /**
- * 订单模块
+ * 璁㈠崟妯″潡
  * @author gmx
  *
  */
 public class OrderAction extends Action{
 	
-	private int orderStatus_unfinished_valid = 0;//0代表未完成且未超过有效期（有效）
-	private int orderStatus_finished = 1;//1代表完成
-	private int orderStatus_cancel_invalid=2;//2代表撤销或超过有效期（无效)
+	private int orderStatus_unfinished_valid = 0;//0浠ｈ〃鏈畬鎴愪笖鏈秴杩囨湁鏁堟湡锛堟湁鏁堬級
+	private int orderStatus_finished = 1;//1浠ｈ〃瀹屾垚
+	private int orderStatus_cancel_invalid=2;//2浠ｈ〃鎾ら攢鎴栬秴杩囨湁鏁堟湡锛堟棤鏁�
 	
 
 	@Override
@@ -38,25 +38,17 @@ public class OrderAction extends Action{
 		if(methodCode.equals("release_order")){
 			this.releaseOrder(request,response);
 		}else if(methodCode.equals("findAllOrder")){
-<<<<<<< HEAD
-			if(sortMeans.equals("��������")){
-				this.findAllOrderPriorityPoint(request, response);
-			}else if(sortMeans.equals("��������")){
-				this.findAllOrderByRate(request,response);
-			}else if(sortMeans.equals("ʱЧ����")){
-=======
 			if(sortMeans.equals("积分优先")){
 				this.findAllOrderPriorityPoint(request, response);
 			}else if(sortMeans.equals("比率优先")){
 				this.findAllOrderByRate(request,response);
-			}else if(sortMeans.equals("时效优先")){
->>>>>>> develop
+			}else if(sortMeans.equals("时效优先")){			
 				this.findAllOrderByUntilDate(request,response);
 			}
 		}
 	}
 	
-	/*发布订单*/
+	/*鍙戝竷璁㈠崟*/
 	public void releaseOrder(HttpServletRequest request, HttpServletResponse response){
 		String shopName = request.getParameter("shopName");
 		int point = Integer.parseInt(request.getParameter("points"));
@@ -72,7 +64,7 @@ public class OrderAction extends Action{
 			order.setWantedShop(wantedShop);
 			order.setWantedPoint(wantedPoint);
 			order.setUserName(userName);
-			order.setOrderStatus(orderStatus_unfinished_valid);//订单未完成且有效
+			order.setOrderStatus(orderStatus_unfinished_valid);//璁㈠崟鏈畬鎴愪笖鏈夋晥
 			order.setUntilDate(untilDate);
 			
 			int result = om.addOrder(order);
@@ -98,13 +90,9 @@ public class OrderAction extends Action{
 		
 	}
 	
-<<<<<<< HEAD
-	/*�������Ȳ�ѯ���ж���*/
-	public void findAllOrderPriorityPoint(HttpServletRequest request, HttpServletResponse response){//�������ȷ�ʽ�������ж���
-=======
+
 	/*积分优先查询所有订单*/
 	public void findAllOrderPriorityPoint(HttpServletRequest request, HttpServletResponse response){//积分优先方式查找所有订单
->>>>>>> develop
 		String userName = (String)request.getSession().getAttribute("userName");
 		String shopName = request.getParameter("shop");
 		String wantedShop = request.getParameter("targetShop");
@@ -128,62 +116,39 @@ public class OrderAction extends Action{
 		
 	}	
 
-<<<<<<< HEAD
-	//��������
-=======
-	//比率优先
->>>>>>> develop
+
 	public void	 findAllOrderByRate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String shopName = request.getParameter("shop");
 		String wantedShop = request.getParameter("targetShop");
-		
-		//System.out.println(shopName);
-		//System.out.println(wantedShop);
-<<<<<<< HEAD
-		//��ѯ���ݿ⣬���ð����ʲ�ѯ����
-=======
+
+
 		//查询数据库，调用按比率查询函数
->>>>>>> develop
+
 		QueryOrderManager manager = new QueryOrderManager();
 		List<Order> list = manager.findAllOrderByRate(shopName, wantedShop);
 		request.setAttribute("AllOrderByRate", list);
 		request.setAttribute("index", "3");
-<<<<<<< HEAD
-		request.setAttribute("selectID", "2");//���ý�������ʾ�ڼ���select
-=======
 		request.setAttribute("selectID", "2");//设置界面上显示第几个select
->>>>>>> develop
+		request.setAttribute("selectID", "2");//璁剧疆鐣岄潰涓婃樉绀虹鍑犱釜select
 		request.setAttribute("shop", shopName);
 		request.setAttribute("wantedShop", wantedShop);
 		request.getRequestDispatcher("order.jsp").forward(request, response);
 	}
 		
-<<<<<<< HEAD
-	//ʱЧ����
-=======
+
 	//时效优先
->>>>>>> develop
 	public void	 findAllOrderByUntilDate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String shopName = request.getParameter("shop");
 		String wantedShop = request.getParameter("targetShop");
-		
-		//System.out.println(shopName);
-		//System.out.println(wantedShop);
-		
-<<<<<<< HEAD
-		//��ѯ���ݿ⣬���ð�ʱЧ���Ȳ�ѯ����
-=======
+
+
 		//查询数据库，调用按时效优先查询函数
->>>>>>> develop
 		QueryOrderManager manager = new QueryOrderManager();
 		List<Order> list = manager.findAllOrderByUntilDate(shopName, wantedShop);
 		request.setAttribute("AllOrderByUntilDate", list);
 		request.setAttribute("index", "3");
-<<<<<<< HEAD
-		request.setAttribute("selectID", "3");//���ý�������ʾ�ڼ���select
-=======
 		request.setAttribute("selectID", "3");//设置界面上显示第几个select
->>>>>>> develop
+		request.setAttribute("selectID", "3");//璁剧疆鐣岄潰涓婃樉绀虹鍑犱釜select
 		request.setAttribute("shop", shopName);
 		request.setAttribute("wantedShop", wantedShop);
 		request.getRequestDispatcher("order.jsp").forward(request, response);
