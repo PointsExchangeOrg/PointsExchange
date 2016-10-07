@@ -10,7 +10,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%List<ShowBindInfo> bindShops = (List<ShowBindInfo>)request.getAttribute("bindShops"); %>
 <!-- 显示查询到的订单信息 -->
 <% 
-	List<Order> list = (List<Order>)request.getAttribute("orderInfo");
+	List<Order> list = (List<Order>)request.getAttribute("orderInfo");//个人订单信息
+	List<Order> AllOrderByRateList = (List<Order>)request.getAttribute("AllOrderByRate");//按比率优先查询到的订单信息
+	List<Order> AllOrderByUntilDate = (List<Order>)request.getAttribute("AllOrderByUntilDate");//按时效优先查询到的订单信息
  %>
 <%
 	String releaseOrderRes = (String)request.getAttribute("releaseOrderResult");  //获取发布订单是否成功
@@ -168,73 +170,74 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="div3">
       <p class="title">查看所有订单<span class="title1">&nbsp;&nbsp;ALL ORDER</span></p>
       <div id="search">
-      <form>
+      <form action="/bonusPointsExchange/actionServlet" method="post">
         <table>
           <tr>
-            <td>商&nbsp;家：&nbsp;</td><td><input name="shop" type="text" id="shop"></td>
+            <td>商&nbsp;家：&nbsp;</td><td><input name="shop" type="text" value="${shop }" id="shop"></td>
           </tr>
           <tr>
-            <td>目标商家：</td><td><input name="targetShop" type="text" id="targetShop"></td>
-            <td colspan="2" ><input name="submit" type="button" class="submitBtn" id="submit" value="搜索"></td>
+            <td>目标商家：</td><td><input name="targetShop" type="text" value="${wantedShop }" id="targetShop"></td>
+            <td colspan="2" ><input name="submit" type="submit" class="submitBtn" id="submit" value="搜索"></td>
           </tr>
         </table>
+             选择排序方式：
+      <select name="selectSort"  id="selectSort">
+    <c:if test="${selectID==null}">  
+       <option selected="selected">积分优先</option>               
+        <option>比率优先</option>
+         <option>时效优先</option>
+     </c:if>
+      <c:if test="${selectID=='2'}">  
+       <option>积分优先</option>               
+        <option selected="selected">比率优先</option>
+         <option>时效优先</option>
+     </c:if>
+     <c:if test="${selectID=='3'}">    
+    	 <option>积分优先</option>              
+     	 <option>比率优先</option>
+       	 <option selected="selected">时效优先</option>
+     </c:if>
+      </select>
+      <input type="hidden" name="actionCode" value="order"/>
+          <input type="hidden" name="methodCode" value="findAllOrder"/>
         </form>
       </div>
       <div id="search-result">
-      选择排序方式：
-      <select>
-        <option>积分优先</option>
-        <option>比率优先</option>
-        <option>时效优先</option>
-      </select>
-      <table><tr>
+      <table>
+       <% if(null != AllOrderByRateList) {
+             	System.out.println(AllOrderByRateList.size());
+        		for(int i = 0; i < AllOrderByRateList.size(); i++) {
+        			Order orderInfo = (Order)AllOrderByRateList.get(i);
+      	%>
+      <tr>
+      <!--头像问题待解决，点击兑换之后的操作待解决-->
       <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
-      <td>100 <img src="images/2.png"/>120</td>
+      <td><%=orderInfo.getPoint() %> <img src="images/2.png"/><%=orderInfo.getWantedPoint() %></td>
       <td><img src="images/1.jpg"/> <p>厦门航空</p></td>
-      <td><p>涉及交易方：2</p>
-      <p>交易有效期：2016.12.30</p></td>
+      <td><p>涉及交易方：<%=orderInfo.getUserName() %></p>
+      <p>交易有效期：<%=orderInfo.getUntilDate() %></p></td>
       <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
-      </tr></table>
-      
-      <table><tr>
+      </tr>
+         <%} %>
+      <%} else if(null != AllOrderByUntilDate) {
+             	System.out.println(AllOrderByUntilDate.size());
+        		for(int i = 0; i < AllOrderByUntilDate.size(); i++) {
+        			Order orderInfo = (Order)AllOrderByUntilDate.get(i);
+      %>
+      <tr>
+      <!--头像问题待解决，点击兑换之后的操作待解决-->
       <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
-      <td>100 <img src="images/2.png"/>120</td>
+      <td><%=orderInfo.getPoint() %> <img src="images/2.png"/><%=orderInfo.getWantedPoint() %></td>
       <td><img src="images/1.jpg"/> <p>厦门航空</p></td>
-      <td><p>涉及交易方：2</p>
-      <p>交易有效期：2016.12.30</p></td>
+      <td><p>涉及交易方：<%=orderInfo.getUserName() %></p>
+      <p>交易有效期：<%=orderInfo.getUntilDate() %></p></td>
       <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
-      </tr></table>
-      
-      <table><tr>
-      <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
-      <td>100 <img src="images/2.png"/>120</td>
-      <td><img src="images/1.jpg"/> <p>厦门航空</p></td>
-      <td><p>涉及交易方：2</p>
-      <p>交易有效期：2016.12.30</p></td>
-      <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
-      </tr></table>
-      
-      <table><tr>
-      <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
-      <td>100 <img src="images/2.png"/>120</td>
-      <td><img src="images/1.jpg"/> <p>厦门航空</p></td>
-      <td><p>涉及交易方：2</p>
-      <p>交易有效期：2016.12.30</p></td>
-      <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
-      </tr></table>
-      
-      <table><tr>
-      <td> <img src="images/1.jpg"/> <p>东方航空</p></td>
-      <td>100 <img src="images/2.png"/>120</td>
-      <td><img src="images/1.jpg"/> <p>厦门航空</p></td>
-      <td><p>涉及交易方：2</p>
-      <p>交易有效期：2016.12.30</p></td>
-      <td><input name="submit" type="button" class="submitBtn" id="submit" value="兑换"></td>
-      </tr></table>
+      </tr>
+       <%} %>
+     <%} %>
+      </table>
       </div>
     </div>
-    
-    <!--------------> 
   </div>
 </div>
 <!--这是bottom-->

@@ -14,6 +14,7 @@ import com.bit.bonusPointsExchange.bean.Order;
 import com.bit.bonusPointsExchange.bean.ShowBindInfo;
 import com.bit.bonusPointsExchange.manager.BindShopManager;
 import com.bit.bonusPointsExchange.manager.OrderManager;
+import com.bit.bonusPointsExchange.manager.QueryOrderManager;
 
 public class OrderAction extends Action{
 	
@@ -28,10 +29,18 @@ public class OrderAction extends Action{
 		// TODO Auto-generated method stub
 		
 		String methodCode = request.getParameter("methodCode");
+		String sortMeans = request.getParameter("selectSort");
 		if(methodCode.equals("release_order")){
 			this.releaseOrder(request,response);
+		}else if(methodCode.equals("findAllOrder")){
+			if(sortMeans.equals("积分优先")){
+				
+			}else if(sortMeans.equals("比率优先")){
+				this.findAllOrderByRate(request,response);
+			}else if(sortMeans.equals("时效优先")){
+				this.findAllOrderByUntilDate(request,response);
+			}
 		}
-		
 	}
 	
 	public void releaseOrder(HttpServletRequest request, HttpServletResponse response){
@@ -79,11 +88,43 @@ public class OrderAction extends Action{
 		
 	}
 		
-	
+	//比率优先
+	public void	 findAllOrderByRate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String shopName = request.getParameter("shop");
+		String wantedShop = request.getParameter("targetShop");
 		
+		//System.out.println(shopName);
+		//System.out.println(wantedShop);
 		
+		//查询数据库，调用按比率查询函数
+		QueryOrderManager manager = new QueryOrderManager();
+		List<Order> list = manager.findAllOrderByRate(shopName, wantedShop);
+		request.setAttribute("AllOrderByRate", list);
+		request.setAttribute("index", "3");
+		request.setAttribute("selectID", "2");//设置界面上显示第几个select
+		request.setAttribute("shop", shopName);
+		request.setAttribute("wantedShop", wantedShop);
+		request.getRequestDispatcher("order.jsp").forward(request, response);
+	}
 		
+	//时效优先
+	public void	 findAllOrderByUntilDate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String shopName = request.getParameter("shop");
+		String wantedShop = request.getParameter("targetShop");
 		
+		//System.out.println(shopName);
+		//System.out.println(wantedShop);
+		
+		//查询数据库，调用按时效优先查询函数
+		QueryOrderManager manager = new QueryOrderManager();
+		List<Order> list = manager.findAllOrderByUntilDate(shopName, wantedShop);
+		request.setAttribute("AllOrderByUntilDate", list);
+		request.setAttribute("index", "3");
+		request.setAttribute("selectID", "3");//设置界面上显示第几个select
+		request.setAttribute("shop", shopName);
+		request.setAttribute("wantedShop", wantedShop);
+		request.getRequestDispatcher("order.jsp").forward(request, response);
+	}
 	
 
 }

@@ -36,7 +36,7 @@ public class ChangeOrderStaServlet extends HttpServlet {
 		//获取用户在平台登录名称
 		String userName =(String)request.getSession().getAttribute("userName");
 		//查询数据库表order
-		List<Order> list = manager.bingShopInfo(userName);
+		List<Order> list = manager.queryOrderInfo(userName);
 		request.setAttribute("orderInfo", list);
 		request.setAttribute("index", "2");
 		request.getRequestDispatcher("order.jsp").forward(request, response);
