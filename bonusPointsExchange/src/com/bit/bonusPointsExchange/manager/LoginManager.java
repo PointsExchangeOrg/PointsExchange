@@ -13,7 +13,7 @@ public class LoginManager {
 	/*
 	 * µÇÂ½
 	 */
-	ResultSet rs = null;
+	private ResultSet rs;
 	
 	public int isValid(User user){ //²éÑ¯ÕËºÅÊÇ·ñ´æÔÚ
 		Connection conn=DBUtils.getConnection();
