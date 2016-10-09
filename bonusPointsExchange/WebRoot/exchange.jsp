@@ -80,9 +80,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!---- 事例1------>
     <div class="order-info clearfix">
      <% if(null != latestOrderInfoList) {
-             System.out.println(latestOrderInfoList.size());
+             //System.out.println(latestOrderInfoList.size());
             for(int i = 0; i < latestOrderInfoList.size(); i++) {
-            Order orderInfo = (Order)latestOrderInfoList.get(i);
+           	 Order orderInfo = (Order)latestOrderInfoList.get(i);
       %>
     <form action= "/bonusPointsExchange/FinishLatestOrder" method="post">
       <ul>
@@ -101,7 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <td>订单发布方：<%=orderInfo.getUserName() %></td>
               <td>截止日期：<%=orderInfo.getUntilDate()%></td>
               <td></td>
-            </tr>
+            </tr> 
           </table>
         </li>
         <li class="operate">
@@ -110,10 +110,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <input type="hidden" name="orderID" value="<%=orderInfo.getOrderID()%>"/>
         <input type="hidden" name="actionCode" value="order"/>
       	<input type="hidden" name="methodCode" value="finsh_order"/>
+      	
       </ul>
      </form>
-     <%} %>
     <%} %>
+  <%} else {%>
+       <br/><br/><br/><p align="center">  搜索结果为0！</p>
+ <%} %>
     </div>
   </div>
 </div>

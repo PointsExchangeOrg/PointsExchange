@@ -3,7 +3,14 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%
+  String newOrder = (String)request.getAttribute("newOrder");  //是否有最新完成的一笔交易
+  if(newOrder == "N") {
+%>
+  <script type="text/javascript" language="javascript">
+    alert("您选择的商家现在没有最新的交易记录！");                            
+  </script> 
+<% }%>
 <!doctype html>
 <html>
 <head>
@@ -39,8 +46,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   <div> &nbsp;	
  	 <form action="/bonusPointsExchange/ReferencePriceServlet" method="post">
-      	商家名称：<input name="search1"  type="text" id="search1" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
-      	目标商家名称：<input name="search2"  type="text" id="search2" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
+      	商家名称：<input name="search1" value="${shopName }" type="text" id="search1" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
+      	目标商家名称：<input name="search2" value="${wantedShop }" type="text" id="search2" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
       	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="搜索">
       </form>
   </div>
