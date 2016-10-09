@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <ul>
         <li><a href="index.jsp"> 主页</a></li>
         <li><a href="reference.jsp"> 参考价</a></li>
-        <li><a href=#>最新交易</a></li>
+        <li><a href="/bonusPointsExchange/QueryLatestOrder">最新发布</a></li>
         <li><a href="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops">发起交易</a></li>
         <li><a href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info"><%=session.getAttribute("userName") %></a></li>
       </ul>
@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <p class="title">参考价<span class="title1">&nbsp;&nbsp;&nbsp;REFERENCE PRICE</span></p>
   </div>
   <div> &nbsp;	
- 	 <form action="">
+ 	 <form action="/bonusPointsExchange/ReferencePriceServlet" method="post">
       	商家名称：<input name="search1"  type="text" id="search1" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
       	目标商家名称：<input name="search2"  type="text" id="search2" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
       	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="搜索">
@@ -47,12 +47,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="referenceInfo">
     <table>
       <tr>
-        <td rowspan="3" class="table-td-img"><img src="images/1.jpg"/><p>东航</p></td>
-        <td>最新比例 3:5</td>
-        <td rowspan="3" class="table-td-img"><img src="images/1.jpg"/><p>东航</p></td>
+        <td rowspan="3" class="table-td-img"><img src="images/1.jpg"/><p>${shopName }</p></td>
+        <td>最新比例 ${latestRate }</td>
+        <td rowspan="3" class="table-td-img"><img src="images/1.jpg"/><p>${wantedShop }</p></td>
       </tr>
-      <tr><td>1500---->2500</td></tr>
-      <tr><td>平均比例 1:2</td></tr>
+      <tr><td> ${point }----> ${wantedPoint }</td></tr>
+      <tr><td>平均比例  ${averageRate }</td></tr>
     </table>
   </div>
   <p>&nbsp;</p>
