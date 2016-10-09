@@ -32,36 +32,40 @@ public class ReferencePriceServlet extends HttpServlet {
 		//查询最新完成的交易
 		QueryOrderManager manager = new QueryOrderManager();
 		List<Order> list = manager.findLatestFinishedOrder(shopName, wantedShop);
-		//计算最新比例
-		Order orderInfo = (Order)list.get(0);//得到最新的一笔交易
-		int point = orderInfo.getPoint();
-		int wantedPoint =orderInfo.getWantedPoint();
-		//最新比例latestRate
-		String latestRate = MinimalistProportionUtils.minimalistProportion(point, wantedPoint);
-		//计算最新十笔交易的平均比例，不足十笔有多少算多少
-		int size = list.size();
-		int poi = 0;//point的和
-		int wanPoi = 0;//wantedPoint的和
-		if(size < 10) {
-			for(int i = 0; i < size; i++) {
-				orderInfo = (Order)list.get(i);
-				poi += orderInfo.getPoint();
-				wanPoi +=orderInfo.getWantedPoint();
+		if(list.size() != 0) {
+			//计算最新比例
+			Order orderInfo = (Order)list.get(0);//得到最新的一笔交易
+			int point = orderInfo.getPoint();
+			int wantedPoint =orderInfo.getWantedPoint();
+			//最新比例latestRate
+			String latestRate = MinimalistProportionUtils.minimalistProportion(point, wantedPoint);
+			//计算最新十笔交易的平均比例，不足十笔有多少算多少
+			int size = list.size();
+			int poi = 0;//point的和
+			int wanPoi = 0;//wantedPoint的和
+			if(size < 10) {
+				for(int i = 0; i < size; i++) {
+					orderInfo = (Order)list.get(i);
+					poi += orderInfo.getPoint();
+					wanPoi +=orderInfo.getWantedPoint();
+				}
+			} else {
+				for(int i = 0; i < 10; i++) {
+					orderInfo = (Order)list.get(i);
+					poi += orderInfo.getPoint();
+					wanPoi +=orderInfo.getWantedPoint();
+				}
 			}
+			//计算平均比例
+			String averageRate = MinimalistProportionUtils.minimalistProportion(poi, wanPoi);
+			//页面显示
+			request.setAttribute("latestRate", latestRate);
+			request.setAttribute("point", point);
+			request.setAttribute("wantedPoint", wantedPoint);
+			request.setAttribute("averageRate", averageRate);	
 		} else {
-			for(int i = 0; i < 10; i++) {
-				orderInfo = (Order)list.get(i);
-				poi += orderInfo.getPoint();
-				wanPoi +=orderInfo.getWantedPoint();
-			}
+			request.setAttribute("newOrder", "N");
 		}
-		//计算平均比例
-		String averageRate = MinimalistProportionUtils.minimalistProportion(poi, wanPoi);
-		//页面显示
-		request.setAttribute("latestRate", latestRate);
-		request.setAttribute("point", point);
-		request.setAttribute("wantedPoint", wantedPoint);
-		request.setAttribute("averageRate", averageRate);
 		request.setAttribute("shopName", shopName);
 		request.setAttribute("wantedShop", wantedShop);
 		request.getRequestDispatcher("reference.jsp").forward(request, response);
