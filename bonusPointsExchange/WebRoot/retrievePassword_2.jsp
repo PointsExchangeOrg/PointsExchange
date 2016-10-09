@@ -3,7 +3,10 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<% String userName =request.getParameter("userName");
+	userName= new String(userName.getBytes("ISO-8859-1"),"utf-8");
 
+	%> 
 <!doctype html>
 <html>
 <head>
@@ -69,7 +72,7 @@ function checkForm() {
       <table>
       	  <tr>
       	    <td>帐&nbsp;号：</td>
-            <td><input name="userName" type="userName" id="userName" value="<%=request.getParameter("userName") %>" maxlength="20"></td>
+            <td><input name="userName" type="userName" id="userName" value="<%=userName %>" maxlength="20"></td>
           </tr>	
           <tr>
             <td>新密码：</td>
@@ -84,6 +87,7 @@ function checkForm() {
           </tr>
         </table>
         <input type="hidden" name="actionCode" value="resetPasswd">
+        <input type="hidden" name="methodCode" value=<%=request.getParameter("method") %>>
         </form>
       </div>
     </div>

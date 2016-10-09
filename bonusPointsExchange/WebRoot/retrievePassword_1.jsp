@@ -3,7 +3,22 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%
+	String errorMsg =  (String)request.getAttribute("errorMsg");//忘记密码
+	if(errorMsg == "您输入的账号或邮箱不存在！") {
+%>
+	<script type="text/javascript" language="javascript">
+		alert("您输入的账号或邮箱不存在！请重新输入");                            
+	</script>	
+<% } %>
+<%
+	String resetPasswdMeg =  (String)request.getAttribute("resetPasswdMeg");//忘记密码重置密码
+	if(resetPasswdMeg == "fail") {
+%>
+	<script type="text/javascript" language="javascript">
+		alert("重置密码失败，请重新操作");                            
+	</script>	
+<% } %>
 <!doctype html>
 <html>
 <head>
@@ -80,12 +95,7 @@ function checkForm() {
           </tr> 
         </table>
         <input type="hidden" name="actionCode" value="forgetPasswd">
-        <%	String name = (String)request.getAttribute("name");
-          	if(name.equals("user")){  %>
-       		 <input type="hidden" name="methodCode" value="forgetPasswd_user">
-        <%}else if(name.equals("shop")){ %>
-        	<input type="hidden" name="methodCode" value="forgetPasswd_shop">
-        <%} %>
+        <input type="hidden" name="methodCode" value=<%=request.getParameter("method") %>>
       </form>
       </div>
       <div id="step2">

@@ -70,7 +70,7 @@ function checkForm() {
       <ul>
         <li><a href=#> 主页</a></li>
         <li><a href=#> 参考价</a></li>
-        <li><a href="/bonusPointsExchange/QueryLatestOrder">最新发布</a></li>
+        <li><a href=#>最新交易</a></li>
         <li><a href=#>发起交易</a></li>
         <li><a href=#>我的账户</a></li>
       </ul>
