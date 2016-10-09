@@ -136,4 +136,75 @@ public class QueryOrderManager {
 		}
 		return list;
 	}
+	
+	//5.查询订单信息，传入的是平台的用户名，根据时间最新排序
+	public List<Order> QueryLatestOrder(String userName){
+		Connection conn=DBUtils.getConnection();
+		List<Order> list = new ArrayList<Order>();
+		Statement stmt=null;
+		ResultSet rs = null;
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("select *from bonusPointsExchange.order where userName!='"+userName+"' and orderStatus=0 order by untilDate desc");                                                 		     
+			while(rs.next()) {
+				Order orderInfo = new Order();
+				orderInfo.setOrderID(rs.getInt("orderID"));
+				orderInfo.setUserName(rs.getString("userName"));
+				orderInfo.setShopName(rs.getString("shopName"));
+				orderInfo.setPoint(rs.getInt("point"));
+				orderInfo.setWantedShop(rs.getString("wantedShop"));
+				orderInfo.setWantedPoint(rs.getInt("wantedPoint"));
+				orderInfo.setExchangeUserName(rs.getString("exchangeUserName"));
+				orderInfo.setUntilDate(rs.getString("untilDate"));
+				orderInfo.setOrderDate(rs.getString("orderDate"));
+				orderInfo.setOrderStatus(rs.getInt("orderStatus"));
+				System.out.println("time");
+				System.out.println(rs.getString("untilDate"));
+				System.out.println("time");
+				list.add(orderInfo);
+			}
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	//6.查询最新完成的交易
+	public List<Order> findLatestFinishedOrder(String shopName,String wantedShop){
+		Connection conn=DBUtils.getConnection();
+		List<Order> list = new ArrayList<Order>();
+		Statement stmt=null;
+		ResultSet rs = null;
+		System.out.println(shopName);
+		System.out.println(wantedShop);
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("select *from bonusPointsExchange.order where shopName='"+shopName+"' and wantedShop='"+wantedShop+"' and orderStatus=2 order by orderDate desc");                                                 		     
+			while(rs.next()) {
+				Order orderInfo = new Order();
+				orderInfo.setOrderID(rs.getInt("orderID"));
+				orderInfo.setUserName(rs.getString("userName"));
+				orderInfo.setShopName(rs.getString("shopName"));
+				orderInfo.setPoint(rs.getInt("point"));
+				orderInfo.setWantedShop(rs.getString("wantedShop"));
+				orderInfo.setWantedPoint(rs.getInt("wantedPoint"));
+				orderInfo.setExchangeUserName(rs.getString("exchangeUserName"));
+				orderInfo.setUntilDate(rs.getString("untilDate"));
+				orderInfo.setOrderDate(rs.getString("orderDate"));
+				orderInfo.setOrderStatus(rs.getInt("orderStatus"));
+				System.out.println("time");
+				System.out.println(rs.getString("untilDate"));
+				System.out.println("time");
+				list.add(orderInfo);
+			}
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
