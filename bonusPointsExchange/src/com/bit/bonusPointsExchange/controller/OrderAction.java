@@ -171,6 +171,7 @@ public class OrderAction extends Action{
 				
 		String exchangeUserName = (String) request.getSession().getAttribute("userName");
 					
+	
 		
 		Point pointsFromRelease = new Point();//订单发布者的积分
 		Point pointsFromReleaseWanted = new Point();//订单发布者想要交换的积分
