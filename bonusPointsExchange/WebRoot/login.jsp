@@ -29,7 +29,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		alert("修改密码成功！请重新登录！");                                    
 	</script>	
 <% } %>
-
+<%
+	String resetPasswdMeg =  (String)request.getAttribute("resetPasswdMeg");//忘记密码重置密码
+	if(resetPasswdMeg == "success") {
+%>
+	<script type="text/javascript" language="javascript">
+		alert("重置密码成功，请重新登录");                            
+	</script>	
+<% } %>
 
 <!doctype html>
 <html>
@@ -69,7 +76,7 @@ function checkForm() {
       <ul>
         <li><a href=#> 主页</a></li>
         <li><a href=#> 参考价</a></li>
-        <li><a href="/bonusPointsExchange/QueryLatestOrder">最新发布</a></li>
+        <li><a href=#>最新交易</a></li>
         <li><a href=#>发起交易</a></li>
         <li><a href=#>我的账户</a></li>
       </ul>
@@ -100,7 +107,7 @@ function checkForm() {
             <td class="mid"><input name="reset" type="reset" class="submitBtn" id="reset" value="重置"></td>
           </tr>
         </table>
-       <div class="mes" ><a href="regist.jsp">免费注册&nbsp;&nbsp; </a><a href="/bonusPointsExchange/retrievePassword_1.jsp?name=user">忘记密码</a></div>
+       <div class="mes" ><a href="regist.jsp">免费注册&nbsp;&nbsp; </a><a href="/bonusPointsExchange/retrievePassword_1.jsp?method=forgetPasswd_user">忘记密码</a></div>
        <input type="hidden" name="actionCode" value="login"/>
       </form>
     </div>
