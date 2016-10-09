@@ -182,7 +182,7 @@ public class QueryOrderManager {
 		System.out.println(wantedShop);
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select *from bonusPointsExchange.order where shopName='"+shopName+"' and wantedShop='"+wantedShop+"' and orderStatus=2 order by orderDate desc");                                                 		     
+			rs = stmt.executeQuery("select *from bonusPointsExchange.order where shopName='"+shopName+"' and wantedShop='"+wantedShop+"' and orderStatus=1 order by orderDate desc");                                                 		     
 			while(rs.next()) {
 				Order orderInfo = new Order();
 				orderInfo.setOrderID(rs.getInt("orderID"));
