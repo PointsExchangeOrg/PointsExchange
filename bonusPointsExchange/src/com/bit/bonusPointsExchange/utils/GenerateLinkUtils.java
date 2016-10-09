@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.ServletRequest;
 
+import com.bit.bonusPointsExchange.bean.Shop;
 import com.bit.bonusPointsExchange.bean.User;
 
 /**
@@ -23,13 +24,23 @@ public class GenerateLinkUtils {
 	    }  
 	       	        
 	    /** 
-	     * 生成重设密码的链接 
+	     * 生成用户重设密码的链接 
 	     */  
 	    public static String generateResetPwdLink(User user) {  
-	        return "http://localhost:8080/bonusPointsExchange/retrievePassword_2.jsp?userName="   
-	                + user.getUserName() + "&" + CHECK_CODE + "=" + generateCheckcode(user);  
+	    	return "http://localhost:8080/bonusPointsExchange/retrievePassword_2.jsp?userName="   
+            + user.getUserName() + "&" + CHECK_CODE + "=" + generateCheckcode(user)+"&method=resetPasswd_user";
 	    }  
-	      
+	     
+	    /** 
+	     * 生成商家重设密码的链接 
+	     */  
+	    public static String generateResetPwdLink(Shop shop) {  
+	    	   System.out.println(shop.getShopName());
+	        return "http://localhost:8080/bonusPointsExchange/retrievePassword_2.jsp?userName="   
+	                + shop.getShopName()+"&method=resetPasswd_shop";  
+	        
+	    	
+	    }  
 	    /** 
 	     * 生成验证帐户的MD5校验码 
 	     * @param user  要激活的帐户 
@@ -40,6 +51,9 @@ public class GenerateLinkUtils {
 	        String randomCode = user.getRandomCode();  
 	        return md5(userName + ":" + randomCode);  
 	    }  
+	    
+
+	      
 	      
 	    /** 
 	     * 验证校验码是否和注册时发送的验证码一致 

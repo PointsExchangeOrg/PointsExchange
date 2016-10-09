@@ -13,6 +13,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.bit.bonusPointsExchange.bean.Shop;
 import com.bit.bonusPointsExchange.bean.User;
 
 /**
@@ -63,7 +64,7 @@ public class EmailUtils {
     }  
       
     /** 
-     * 发送重设密码链接的邮件 
+     * 向用户发送重设密码链接的邮件 
      */  
     public static void sendResetPasswordEmail(User user) {  
         Session session = getSession();  
@@ -80,7 +81,26 @@ public class EmailUtils {
             e.printStackTrace();  
         }  
     }  
-      
+    
+    /** 
+     * 向商家发送重设密码链接的邮件 
+     */  
+    public static void sendResetPasswordEmail(Shop shop) {  
+        Session session = getSession();  
+        MimeMessage message = new MimeMessage(session);  
+        try {  
+            message.setSubject("找回您的帐户与密码");  
+            message.setSentDate(new Date());  
+            message.setFrom(new InternetAddress(emailFrom));  
+            message.setRecipient(RecipientType.TO, new InternetAddress(shop.getEmail()));  
+            message.setContent("要使用新的密码, 请使用以下链接启用密码:<br/><a href='" + GenerateLinkUtils.generateResetPwdLink(shop) +"'>点击重新设置密码</a>","text/html;charset=utf-8");  
+            // 发送邮件  
+            Transport.send(message);  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+    }  
+    
     public static Session getSession() {  
         Properties props = new Properties();  
         props.setProperty("mail.transport.protocol", "smtp");  

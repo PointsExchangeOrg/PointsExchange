@@ -37,7 +37,10 @@ public class ActivateAccountServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
+		
+		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		
 		String userName = request.getParameter("userName");  
         UserManager um = new UserManager();
         //UserDao userDao = UserDaoImpl.getInstance();  

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bit.bonusPointsExchange.bean.Shop;
 import com.bit.bonusPointsExchange.bean.User;
+import com.bit.bonusPointsExchange.manager.ShopManager;
 import com.bit.bonusPointsExchange.manager.UserManager;
 import com.bit.bonusPointsExchange.utils.EmailUtils;
 
@@ -60,53 +61,87 @@ public class ForgetPasswdAction extends Action{
 		
 		String name = (String)request.getParameter("methodCode");
 		if(name.equals("forgetPasswd_user")){
-		//	this.foegetPasswdByUser(request,response);
+			this.forgetPasswdByUser(request,response);
 		}else if(name.equals("forgetPasswd_shop")){
-			this.foegetPasswdByShop(request,response);
+			this.forgetPasswdByShop(request,response);
 		}
 		
     }  
 		
 		
-	public void foegetPasswdByUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		User user =new User();
+	public void forgetPasswdByUser(HttpServletRequest request, HttpServletResponse response) {
+		User user = new User();
 		UserManager um = new UserManager();
 		String userName  = request.getParameter("userName");
 		String email = request.getParameter("email");
 		user.setUserName(userName);
 		user.setEmail(email);
 		int result = um.queryUserByNameAndEmail(user);
+			
 		if(result==0){
-			request.setAttribute("errorMsg", "您输入的账号或邮箱不存在！");  
-			request.getRequestDispatcher("/retrievePassword_1.jsp").forward(request, response);
-
-            return; 
-		}
-		// 发送重新设置密码的链接  
-        EmailUtils.sendResetPasswordEmail(user);  
+			try {
+				request.setAttribute("errorMsg", "您输入的账号或邮箱不存在！");  
+				request.getRequestDispatcher("/retrievePassword_1.jsp").forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+       
+		}else{
+			// 发送重新设置密码的链接  
+			EmailUtils.sendResetPasswordEmail(user);  
           
-        request.setAttribute("sendMailMsg", "您的申请已提交成功，请查看您的"+user.getEmail()+"邮箱。");         
-        request.getRequestDispatcher("forgetPasswdSuccess.jsp").forward(request, response);  
+			request.setAttribute("sendMailMsg", "您的申请已提交成功，请查看您的"+user.getEmail()+"邮箱。");         
+			try {
+				request.getRequestDispatcher("forgetPasswdSuccess.jsp").forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+		}
 	}
-	public void foegetPasswdByShop(HttpServletRequest request, HttpServletResponse response){
-		/*Shop user =new Shop();
-		UserManager um = new UserManager();
-		String userName  = request.getParameter("userName");
+	public void forgetPasswdByShop(HttpServletRequest request, HttpServletResponse response) {
+		Shop shop = new Shop();
+		ShopManager sm = new ShopManager();
+		String shopName  = request.getParameter("userName");
 		String email = request.getParameter("email");
-		user.setUserName(userName);
-		user.setEmail(email);
-		int result = um.queryUserByNameAndEmail(user);
+		shop.setShopName(shopName);
+		shop.setEmail(email);
+		int result = sm.queryShopByNameAndEmail(shop);
+	
 		if(result==0){
 			request.setAttribute("errorMsg", "您输入的账号或邮箱不存在！");  
-			request.getRequestDispatcher("/retrievePassword_1.jsp").forward(request, response);
+			try {
+				request.getRequestDispatcher("/retrievePassword_1.jsp").forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-            return; 
-		}
-		// 发送重新设置密码的链接  
-        EmailUtils.sendResetPasswordEmail(user);  
+       
+		}else{
+			// 发送重新设置密码的链接  
+			EmailUtils.sendResetPasswordEmail(shop);  
           
-        request.setAttribute("sendMailMsg", "您的申请已提交成功，请查看您的"+user.getEmail()+"邮箱。");         
-        request.getRequestDispatcher("forgetPasswdSuccess.jsp").forward(request, response);  
-	*/
+			request.setAttribute("sendMailMsg", "您的申请已提交成功，请查看您的"+shop.getEmail()+"邮箱。");         
+			try {
+				request.getRequestDispatcher("forgetPasswdSuccess.jsp").forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
 	}
 }
