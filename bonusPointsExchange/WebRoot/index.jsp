@@ -20,38 +20,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
-<!--这是top-->
-<div class="header">
-  <div class="span1">
-    <div class="logo"><img src="images/logo.png" alt="积分兑换平台"/></div>
-  </div>
-  <div class="span2">
-    <div class="mainNav">
-      <ul>
-        <li><a href="index.jsp">主页</a></li>
-        <li><a href="reference.jsp">参考价</a></li>
-        <li><a href="/bonusPointsExchange/QueryLatestOrder">最新发布</a></li>
-        <li><a href="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops">发起交易</a></li>
-    <%
-	String isUserLogin = (String)session.getAttribute("userName"); 
-	String isShopLogin = (String)session.getAttribute("shopName"); 
-	if(isUserLogin == null && isShopLogin == null) {
-	%>
-	<li><a href="login.jsp">我的账户</a> </li>
-<% } else if(isUserLogin != null && isShopLogin == null){%>
-	 <li>
-	<a href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info"><%=session.getAttribute("userName") %></a>
-	 </li>	
-	 <% } else if(isShopLogin != null && isUserLogin != null){%>
-	 <li>
-	<a href="/bonusPointsExchange/QueryShopInfoServlet"><%=session.getAttribute("shopName") %></a>
-	 </li>	
-<% }%>
 
-     </ul>
-    </div>
-  </div>
-</div>
+<!--这是top-->
+	<%@ include file="header.jsp" %>
 <!--这是main_page-->
 <div class="index clearfix">
   <div class="index1">
@@ -235,9 +206,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
 </div>
 <!--这是bottom-->
-<div class="footer">
-    <p>Copyright (C) 2015-2016  积分兑换平台</p>
-</div>
-<body>
+	<%@ include file="footer.jsp" %>
 </body>
 </html>

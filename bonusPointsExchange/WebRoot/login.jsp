@@ -67,6 +67,8 @@ function checkForm() {
 </head>
 <body>
 <!--这是top-->
+	<%@ include file="header.jsp" %>
+<!--
 <div class="header">
   <div class="span1">
     <div class="logo"> <img src="images/logo.png" alt="积分兑换平台"/> </div>
@@ -83,6 +85,7 @@ function checkForm() {
     </div>
   </div>
 </div>
+-->
 <!--这是main_page-->
   <div class="login-frame">
     <div>
@@ -113,10 +116,6 @@ function checkForm() {
     </div>
   </div>
 <!--这是bottom-->
-<div class="footer">
-  <div class="footer-content">
-    <p>Copyright (C) 2015-2016  积分兑换平台</p>
-  </div>
-</div>
+	<%@ include file="footer.jsp" %>
 </body>
 </html>

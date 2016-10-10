@@ -15,22 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body>
-<div class="header">
-  <div class="span1">
-    <div class="logo"> <img src="images/logo.png" alt="积分兑换平台"/> </div>
-  </div>
-  <div class="span2">
-    <div class="mainNav">
-      <ul>
-        <li><a href=#> 主页</a></li>
-        <li><a href="reference.jsp"> 参考价</a></li>
-        <li><a href="/bonusPointsExchange/QueryLatestOrder">最新发布</a></li>
-        <li><a href="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops">发起交易</a></li>
-        <li><a href=#>我的账户</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+	<%@ include file="header.jsp" %>
 <!--header -->
 <div class="regist-frame">
 <p class="title">&nbsp;&nbsp;商家注册&nbsp;&nbsp;<span class="title1">USER REGISTER</span><span class="title1 right"><a href="regist.jsp">前往用户注册&nbsp;&nbsp;&nbsp;&nbsp;</a></span></p>
@@ -79,11 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 
 <!--footer -->
-<div class="footer">
-  <div class="footer-content">
-    <p>Copyright (C) 2015-2016  积分兑换平台</p>
-  </div>
-</div>
+	<%@ include file="footer.jsp" %>
 
 <!--js代码====================================================-->
 <script type="text/javascript">

@@ -26,6 +26,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 <!--这是top-->
+	<%@ include file="header.jsp" %>
+<!-- 
 <div class="header">
   <div class="span1">
     <div class="logo"> <img src="images/logo.png" alt="积分兑换平台"/> </div>
@@ -42,6 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
   </div>
 </div>
+-->
 <!--这是main_page-->
 <div class="main">
   <div class="bind-form">
@@ -69,11 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
 </div>
 <!--这是bottom-->
-<div class="footer clear">
-  <div class="footer-content">
-    <p>Copyright (C) 2015-2016  积分兑换平台</p>
-  </div>
-</div>
+	<%@ include file="footer.jsp" %>
 </body>
 
 
