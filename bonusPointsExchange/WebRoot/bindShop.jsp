@@ -33,11 +33,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="span2">
     <div class="mainNav">
       <ul>
-        <li><a href="index.html"> 主页</a></li>
-        <li><a href="reference.html"> 参考价</a></li>
+       <li><a href="index.jsp"> 主页</a></li>
+        <li><a href="reference.jsp"> 参考价</a></li>
         <li><a href="/bonusPointsExchange/QueryLatestOrder">最新发布</a></li>
-        <li><a href="order.html">发起交易</a></li>
-        <li><a href="login.html">我的账户</a></li>
+        <li><a href="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops">发起交易</a></li>
+        <li><a href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info"><%=session.getAttribute("userName") %></a></li>
       </ul>
     </div>
   </div>

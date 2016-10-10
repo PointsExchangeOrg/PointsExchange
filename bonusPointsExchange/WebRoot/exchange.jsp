@@ -73,11 +73,11 @@ if(userName == null) { %>
   <div class="span2">
     <div class="mainNav">
       <ul>
-        <li><a href=#> 主页</a></li>
-        <li><a href=#> 参考价</a></li>
+        <li><a href="index.jsp"> 主页</a></li>
+         <li><a href="reference.jsp"> 参考价</a></li>
         <li><a href="/bonusPointsExchange/QueryLatestOrder">最新发布</a></li>
-        <li><a href=#>发起交易</a></li>
-        <li><a href="regist.jsp">我的账户</a></li>
+        <li><a href="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops">发起交易</a></li>
+        <li><a href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info"><%=session.getAttribute("userName") %></a></li>
       </ul>
     </div>
   </div>
