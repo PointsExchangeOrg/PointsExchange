@@ -51,12 +51,12 @@ if(userName == null && shopName == null) { %>
   <div class="referenceInfo">
     <table>
       <tr>
-        <td rowspan="3" class="table-td-img"><img src="images/1.jpg"/><p>${shopName }</p></td>
-        <td>最新比例 ${latestRate }</td>
-        <td rowspan="3" class="table-td-img"><img src="images/1.jpg"/><p>${wantedShop }</p></td>
+        <td rowspan="3" class="table-td-img"><img src="images/shopLogo/dongfanghangkong.jpg"/><p>${shopName }</p></td>
+        <td>最新比例 ： ${latestRate }</td>
+        <td rowspan="3" class="table-td-img"><img src="images/shopLogo/zhongguoguoji.jpg"/><p>${wantedShop }</p></td>
       </tr>
-      <tr><td> ${point }----> ${wantedPoint }</td></tr>
-      <tr><td>平均比例  ${averageRate }</td></tr>
+      <tr><td>提供积分：  ${point }<img src="images/2.png"/> 兑换积分： ${wantedPoint }</td></tr>
+      <tr><td>平均比例  ： ${averageRate }</td></tr>
     </table>
   </div>
   <p>&nbsp;</p>

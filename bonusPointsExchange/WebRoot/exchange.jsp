@@ -81,7 +81,7 @@ if(userName == null && shopName == null) { %>
       %>
     <form action= "/bonusPointsExchange/FinishLatestOrder" method="post" onsubmit="return checkShop()">
       <ul>
-        <li class="shop-logo"><img src="images/1.jpg"/></li>
+        <li class="shop-logo"><img src="images/shopLogo/dongfanghangkong.jpg"/></li>
         <li class="info">
           <table>
             <tr>

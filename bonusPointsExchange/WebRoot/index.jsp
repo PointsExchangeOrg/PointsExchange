@@ -41,35 +41,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div id="shop-list"  class="clearfix">
       <ul>
-        <li><a><img src="images/1.jpg"/>
-          <p class="shopName">银行1</p>
+        <li><a><img src="images/shopLogo/beifanghangkong.jpg"/>
+          <p class="shopName">北方航空</p>
           </a></li>
-        <li><a><img src="images/1.jpg"/>
-          <p class="shopName">银行2</p>
+        <li><a><img src="images/shopLogo/changanhangkong.jpg"/>
+          <p class="shopName">长安航空</p>
           </a></li>
-        <li><a><img src="images/1.jpg"/>
-          <p class="shopName">银行3</p>
+        <li><a><img src="images/shopLogo/changchenghangkong.jpg"/>
+          <p class="shopName">长城航空</p>
           </a></li>
-        <li><a><img src="images/1.jpg"/>
-          <p class="shopName">银行4</p>
+        <li><a><img src="images/shopLogo/dongfanghangkong.jpg"/>
+          <p class="shopName">东方航空</p>
           </a></li>
-        <li><a><img src="images/1.jpg"/>
-          <p class="shopName">银行5</p>
+        <li><a><img src="images/shopLogo/shanghaihangkong.jpg"/>
+          <p class="shopName">上海航空</p>
           </a></li>
-        <li><a><img src="images/1.jpg"/>
-          <p class="shopName">银行6</p>
+        <li><a><img src="images/shopLogo/shenzhenhangkong.jpg"/>
+          <p class="shopName">深圳航空</p>
           </a></li>
-        <li><a><img src="images/1.jpg"/>
-          <p class="shopName">银行7</p>
+        <li><a><img src="images/shopLogo/sichuanhangkong.jpg"/>
+          <p class="shopName">四川航空</p>
           </a></li>
-        <li><a><img src="images/1.jpg"/>
-          <p class="shopName">银行8</p>
+        <li><a><img src="images/shopLogo/wuhanhangkong.jpg"/>
+          <p class="shopName">武汉航空</p>
           </a></li>
-        <li><a><img src="images/1.jpg"/>
-          <p class="shopName">银行9</p>
+        <li><a><img src="images/shopLogo/xiamenhangkong.jpg"/>
+          <p class="shopName">厦门航空</p>
           </a></li>
-        <li><a><img src="images/1.jpg"/>
-          <p class="shopName">银行10</p>
+        <li><a><img src="images/shopLogo/zhongguoguoji.jpg"/>
+          <p class="shopName">中国国际航空</p>
           </a></li>
       </ul>
     </div>
@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!---- 事例1------>
       <div class="order-info clearfix">
         <ul >
-          <li class="shop-logo"><img src="images/1.jpg"/></li>
+          <li class="shop-logo"><img src="images/shopLogo/dongfanghangkong.jpg"/></li>
           <li class="info">
             <table>
               <tr>
@@ -105,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!-----事例2------>
       <div class="order-info clearfix " >
         <ul>
-          <li class="shop-logo"><img src="images/1.jpg"/></li>
+          <li class="shop-logo"><img src="images/shopLogo/changanhangkong.jpg"/></li>
           <li class="info">
             <table>
               <tr>
@@ -130,7 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!------事例3------->
       <div class="order-info clearfix " >
         <ul>
-          <li class="shop-logo"><img src="#"/></li>
+          <li class="shop-logo"><img src="images/shopLogo/changchenghangkong.jpg"/></li>
           <li class="info">
             <table>
               <tr>
@@ -155,7 +155,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!------事例4------->
       <div class="order-info clearfix " >
         <ul>
-          <li class="shop-logo"><img src="#"/></li>
+          <li class="shop-logo"><img src="images/shopLogo/dongfanghangkong.jpg"/></li>
           <li class="info">
             <table>
               <tr>
@@ -180,7 +180,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!------事例5------->
       <div class="order-info clearfix " >
         <ul>
-          <li class="shop-logo"><img src="#"/></li>
+          <li class="shop-logo"><img src="images/shopLogo/shanghaihangkong.jpg"/></li>
           <li class="info">
             <table>
               <tr>
