@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li><a href="index.jsp"> 主页</a></li>
         <li><a href="reference.jsp"> 参考价</a></li>
         <li><a href="/bonusPointsExchange/QueryLatestOrder">最新发布</a></li>
-        <li><a href=#>订单中心</a></li>
+        <li><a href="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops">订单中心</a></li>
         <li><a href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info"><%=session.getAttribute("userName") %></a></li>
       </ul>
     </div>
