@@ -146,7 +146,7 @@ public class QueryOrderManager {
 		
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select *from bonusPointsExchange.order where userName!='"+userName+"' and orderStatus=0 order by untilDate desc");                                                 		     
+			rs = stmt.executeQuery("select *from bonusPointsExchange.order where orderStatus=0 order by untilDate desc");                                                 		     
 			while(rs.next()) {
 				Order orderInfo = new Order();
 				orderInfo.setOrderID(rs.getInt("orderID"));
