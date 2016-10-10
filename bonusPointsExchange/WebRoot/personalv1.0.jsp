@@ -262,13 +262,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="搜索">
       </div>
       <!------------table 中为查询结果--------每一行是一个商家---------------->
+       <%
+	  String shopName1 = request.getParameter("search");
+	  if(shopName1 != null) {%>
       <table>
-      		<tr><span id="hint" style="color:#FF0000"></span></tr>
+      	<tr><span id="hint" style="color:#FF0000"></span></tr>
           <tr class="normal-font">
             <td><img src="images/shopLogo/dongfanghangkong.jpg" alt="商家商标"/><p>${shopName}</p></td><td>${shopDec}</td>
             <td class="bindBtn"><a href="bindShop.jsp?shopName=${shopName}"><input name="bind" type="button" id="bind" class="buttonStyle1" value="绑定"></a></td>
           </tr>
        </table>
+       <%} %>
       </form>
     </div>
     
