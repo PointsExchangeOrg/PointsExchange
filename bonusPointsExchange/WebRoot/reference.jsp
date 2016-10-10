@@ -11,6 +11,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     alert("您选择的商家现在没有最新的交易记录！");                            
   </script> 
 <% }%>
+
+<%
+//用户需登录之后才能查看参考价
+String userName = (String)request.getSession().getAttribute("userName");	
+if(userName == null) { %>
+	<script type="text/javascript" language="javascript">
+		alert("您还没有登录！请登录！");    // 弹出错误信息
+		window.location.href="/bonusPointsExchange/login.jsp" ;                             
+	</script>	
+<% }%>
+
 <!doctype html>
 <html>
 <head>
