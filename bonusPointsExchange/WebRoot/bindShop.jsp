@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <ul>
         <li><a href="index.html"> 主页</a></li>
         <li><a href="reference.html"> 参考价</a></li>
-        <li><a href="exchange.html">最新交易</a></li>
+        <li><a href="/bonusPointsExchange/QueryLatestOrder">最新发布</a></li>
         <li><a href="order.html">发起交易</a></li>
         <li><a href="login.html">我的账户</a></li>
       </ul>
