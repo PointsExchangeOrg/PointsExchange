@@ -99,22 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 <!--这是top-->
-<div class="header">
-  <div class="span1">
-    <div class="logo"> <img src="images/logo.png" alt="积分兑换平台"/> </div>
-  </div>
-  <div class="span2">
-    <div class="mainNav">
-      <ul>
-        <li><a href=index.jsp> 主页</a></li>
-        <li><a href="reference.jsp"> 参考价</a></li>
-        <li><a href="/bonusPointsExchange/QueryLatestOrder">最新发布</a></li>
-        <li><a href="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops">发起交易</a></li>
-        <li><a href=#><%=session.getAttribute("userName") %></a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+	<%@ include file="header.jsp" %>
 <!--这是main_page-->
 <div class="personal">
   <div class="span7" id="Accordion1">
@@ -263,7 +248,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
           <tr>
             <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
-              <td>zh</td>
+              <td></td>
           </tr>
         </table>
       </form>
@@ -308,11 +293,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
 </div>
 <!--这是bottom-->
-<div class="footer">
-  <div class="footer-content">
-    <p>engCopyright (C) 2015-2016  积分兑换平台</p>
-  </div>
-</div>
+	<%@ include file="footer.jsp" %>
 
 <!-- 根据返回的index显示div -->
 <script type="text/javascript" language="javascript">

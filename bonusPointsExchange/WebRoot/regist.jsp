@@ -61,22 +61,7 @@ function checkForm() {
 </head>
 
 <body>
-<div class="header">
-  <div class="span1">
-    <div class="logo"> <img src="images/logo.png" alt="积分兑换平台"/> </div>
-  </div>
-  <div class="span2">
-    <div class="mainNav">
-      <ul>
-        <li><a href="index.jsp">主页</a></li>
-        <li><a href="reference.jsp"> 参考价</a></li>
-        <li><a href="/bonusPointsExchange/QueryLatestOrder">最新发布</a></li>
-        <li><a href="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops">发起交易</a></li>
-        <li><a href=#>我的账户</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+	<%@ include file="header.jsp" %>
 <!--header -->
 <div class="regist-frame">
   <p class="title">&nbsp;&nbsp;用户注册&nbsp;&nbsp;<span class="title1">USER REGISTER</span><span class="title1 right"><a href="regist_shop.jsp">前往商家注册</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
@@ -129,10 +114,6 @@ function checkForm() {
 </div>
 
 <!--footer -->
-<div class="footer">
-  <div class="footer-content">
-    <p>Copyright (C) 2015-2016  积分兑换平台</p>
-  </div>
-</div>
+	<%@ include file="footer.jsp" %>
 </body>
 </html>
