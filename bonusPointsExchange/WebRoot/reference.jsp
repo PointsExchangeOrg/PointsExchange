@@ -48,7 +48,13 @@ if(userName == null && shopName == null) { %>
       	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="搜索">
       </form>
   </div>
+    <%
+	  String shopName1 = request.getParameter("search1");
+	  String wantedShop1 = request.getParameter("search2");
+	  System.out.println(shopName);
+	  if(shopName1 != null && wantedShop1 !=null) {%>
   <div class="referenceInfo">
+
     <table>
       <tr>
         <td rowspan="3" class="table-td-img"><img src="images/shopLogo/dongfanghangkong.jpg"/><p>${shopName }</p></td>
@@ -58,6 +64,9 @@ if(userName == null && shopName == null) { %>
       <tr><td>提供积分：  ${point }<img src="images/2.png"/> 兑换积分： ${wantedPoint }</td></tr>
       <tr><td>平均比例  ： ${averageRate }</td></tr>
     </table>
+     <%} else {%>
+       <br/><br/><br/><p align="center">  搜索结果为0！</p>
+ <%} %>
   </div>
   <p>&nbsp;</p>
 </div>
