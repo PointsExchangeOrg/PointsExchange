@@ -13,9 +13,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <% }%>
 
 <%
-//用户需登录之后才能查看参考价
-String userName = (String)request.getSession().getAttribute("userName");	
-if(userName == null) { %>
+//用户和商家需登录之后才能查看最新发布
+String userName = (String)request.getSession().getAttribute("userName");
+String shopName = (String)request.getSession().getAttribute("shopName");	
+if(userName == null && shopName == null) { %>
 	<script type="text/javascript" language="javascript">
 		alert("您还没有登录！请登录！");    // 弹出错误信息
 		window.location.href="/bonusPointsExchange/login.jsp" ;                             

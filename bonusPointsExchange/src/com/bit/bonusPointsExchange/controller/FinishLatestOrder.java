@@ -37,7 +37,12 @@ public class FinishLatestOrder extends HttpServlet {
 		UserPointToplatfromManger uptm =new UserPointToplatfromManger();
 		
 		int orderID = Integer.parseInt(request.getParameter("orderID"));
-				
+		/*String shopName = (String) request.getSession().getAttribute("shopName");	
+		if(shopName != null) {
+			
+			request.getRequestDispatcher("exchange.jsp").forward(request, response);
+			return;
+		}*/
 		String exchangeUserName = (String) request.getSession().getAttribute("userName");
 					
 		

@@ -46,14 +46,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <% }%>
 
 <%
-//用户需登录之后才能查看最新发布
-String userName = (String)request.getSession().getAttribute("userName");	
-if(userName == null) { %>
+//用户和商家需登录之后才能查看最新发布
+String userName = (String)request.getSession().getAttribute("userName");
+String shopName = (String)request.getSession().getAttribute("shopName");	
+if(userName == null && shopName == null) { %>
 	<script type="text/javascript" language="javascript">
 		alert("您还没有登录！请登录！");    // 弹出错误信息
 		window.location.href="/bonusPointsExchange/login.jsp" ;                             
 	</script>	
-<% }%>
+<% } %>
 <!doctype html>
 <html>
 <head>
@@ -78,7 +79,7 @@ if(userName == null) { %>
             for(int i = 0; i < latestOrderInfoList.size(); i++) {
            	 Order orderInfo = (Order)latestOrderInfoList.get(i);
       %>
-    <form action= "/bonusPointsExchange/FinishLatestOrder" method="post">
+    <form action= "/bonusPointsExchange/FinishLatestOrder" method="post" onsubmit="return checkShop()">
       <ul>
         <li class="shop-logo"><img src="images/1.jpg"/></li>
         <li class="info">
@@ -98,9 +99,15 @@ if(userName == null) { %>
             </tr> 
           </table>
         </li>
+        <%if(orderInfo.getUserName().equals(isUserLogin)) { %>
         <li class="operate">
+          <input name="exchange" type="button" style="background:#EDEDED;" disabled="disabled" class="submitBtn"  id="exchange" value="交易">
+        </li>
+        <%} else {%>
+         <li class="operate">
           <input name="exchange" type="submit" class="submitBtn"  id="exchange" value="交易">
         </li>
+        <%} %>
         <input type="hidden" name="orderID" value="<%=orderInfo.getOrderID()%>"/>
         <input type="hidden" name="actionCode" value="order"/>
       	<input type="hidden" name="methodCode" value="finsh_order"/>
@@ -117,4 +124,15 @@ if(userName == null) { %>
 <!--这是bottom-->
 	<%@ include file="footer.jsp" %>
 </body>
+
+<script type="text/javascript">
+function checkShop() {
+	var shop='<%=session.getAttribute("shopName") %>';
+	if (shop != null) {
+		alert("商家类型账号不能登录，请更换用户类型账号登录！");
+		return false;
+	}
+}
+</script>
+
 </html>
