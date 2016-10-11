@@ -79,7 +79,7 @@ if(userName == null && shopName == null) { %>
             for(int i = 0; i < latestOrderInfoList.size(); i++) {
            	 Order orderInfo = (Order)latestOrderInfoList.get(i);
       %>
-    <form action= "/bonusPointsExchange/FinishLatestOrder" method="post" onsubmit="return checkShop()">
+    <form action= "/bonusPointsExchange/FinishLatestOrder" method="post" onsubmit="return checkShop();">
       <ul class="clearfix">
         <li class="shop-logo"><img src="images/shopLogo/<%=orderInfo.getShopLogo()%>"/></li>
         <li class="info">
@@ -129,16 +129,16 @@ if(userName == null && shopName == null) { %>
  <%} %>
     </div>
   </div>
+   <input type="hidden" name="session" id="session" value="<%=session.getAttribute("shopName") %>"/>
 </div>
 <!--这是bottom-->
 	<%@ include file="footer.jsp" %>
 </body>
-<!--  
+
 <script type="text/javascript">
 function checkShop() {
-	var shop='<%=session.getAttribute("shopName") %>';
-	//alert(shop);
-	if (shop !== null && shop !== undefined && shop !== '') {
+	var shop = document.getElementById("session").value;
+	if (shop != "null") {
 		alert("商家类型账号不能交易，请更换用户类型账号登录！");
 		return false;
 	}
