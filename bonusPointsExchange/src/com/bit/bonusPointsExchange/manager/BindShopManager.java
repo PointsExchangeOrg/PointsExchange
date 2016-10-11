@@ -96,9 +96,6 @@ public class BindShopManager {
 				bindInfo.setShopName(rs.getString("shopName"));
 				list.add(bindInfo);
 				System.out.println(rs.getString("imageURL"));
-				System.out.println(rs.getString("platformPoint"));
-				System.out.println(rs.getString("shopName"));
-				//System.out.println("502");
 			}
 			return list;
 		} catch (SQLException e) {

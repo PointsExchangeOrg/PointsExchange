@@ -78,16 +78,17 @@ line-height:42px;
 	float: left;
 }
 .shop-logo {
-	width: 20%;
+	width: 15%;
 	text-align: left;
 }
+
 .shop-logo img{
 	width:60px;
 	height:60px;
 	overflow:hidden;
 	}
 .info {
-	width: 60%;
+	width: 25%;
 	align: center;
 }
 .operate{

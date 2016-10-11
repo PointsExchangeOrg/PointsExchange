@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bit.bonusPointsExchange.bean.Order;
+import com.bit.bonusPointsExchange.bean.Shop;
+import com.bit.bonusPointsExchange.manager.LoginShopManger;
 import com.bit.bonusPointsExchange.manager.QueryOrderManager;
 import com.bit.bonusPointsExchange.utils.MinimalistProportionUtils;
 
@@ -29,6 +31,12 @@ public class ReferencePriceServlet extends HttpServlet {
 		//获取用户输入的商家名称
 		String shopName = request.getParameter("search1");
 		String wantedShop = request.getParameter("search2");
+		//查询商家和目标商家的图标
+		LoginShopManger loginShopManger = new LoginShopManger();
+		Shop shop =loginShopManger.getShopInfo(shopName);//商家图标
+		String ShopImgURL = shop.getImgUrl();
+		shop =loginShopManger.getShopInfo(wantedShop);//目标商家图标
+		String wantedShopImgURL = shop.getImgUrl();
 		//查询最新完成的交易
 		QueryOrderManager manager = new QueryOrderManager();
 		List<Order> list = manager.findLatestFinishedOrder(shopName, wantedShop);
@@ -66,6 +74,8 @@ public class ReferencePriceServlet extends HttpServlet {
 		} else {
 			request.setAttribute("newOrder", "N");
 		}
+		request.setAttribute("ShopImgURL", ShopImgURL);
+		request.setAttribute("wantedShopImgURL", wantedShopImgURL);
 		request.setAttribute("shopName", shopName);
 		request.setAttribute("wantedShop", wantedShop);
 		request.getRequestDispatcher("reference.jsp").forward(request, response);

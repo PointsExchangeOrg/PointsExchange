@@ -87,15 +87,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="css/footer.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="css/personal.css">
-<!--   jquery 下拉框样式
-<link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
-<link href="jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
-<link href="jQueryAssets/jquery.ui.accordion.min.css" rel="stylesheet" type="text/css">
-<link href="jQueryAssets/jquery.ui.button.min.css" rel="stylesheet" type="text/css">
-<script src="jQueryAssets/jquery-1.8.3.min.js" type="text/javascript"></script>
-<script src="jQueryAssets/jquery-ui-1.9.2.accordion.custom.min.js" type="text/javascript"></script>
-<script src="jQuer	yAssets/jquery-ui-1.9.2.button.custom.min.js" type="text/javascript"></script>
--->
 </head>
 <body>
 <!--这是top-->
@@ -178,7 +169,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div id="div3">
       <p class="title">积分转移到平台 <span class="title1">POINTS TRANSFER TO PLATFORM</span></p>
-      <form action="/bonusPointsExchange/UserPointToplatformServlet"  method="post">
+      <form action="/bonusPointsExchange/UserPointToplatformServlet"  method="post" onsubmit="return checkForm();">
         <table>
           <tr>
             <td>选择商家：</td>
@@ -218,7 +209,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div id="div4">
       <p class="title">积分转移到商家 <span class="title1">POINTS TRANSFER TO SHOP</span></p>
-      <form action="/bonusPointsExchange/PlatformToUserServlet"  method="post">
+      <form action="/bonusPointsExchange/PlatformToUserServlet"  method="post" onsubmit="return checkForm();">
         <table>
           <tr>
             <td>选择商家：</td>
@@ -255,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div id="div5">
       <p class="title">商家绑定 <span class="title1">SHOP BIND</span></p>
-      <form action="/bonusPointsExchange/BindShopQueryInfoServlet" method="post">
+      <form action="/bonusPointsExchange/BindShopQueryInfoServlet" method="post"  onsubmit="return checkBindForm();">
       <br/>
       <div> &nbsp;<span class="normal-font">商家名称：</span>
       	<input name="search"  type="text" id="search" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
@@ -268,7 +259,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <table>
       	<tr><span id="hint" style="color:#FF0000"></span></tr>
           <tr class="normal-font">
-            <td><img src="images/shopLogo/dongfanghangkong.jpg" alt="商家商标"/><p>${shopName}</p></td><td>${shopDec}</td>
+            <td class="shop-logo"><img src="images/shopLogo/${imgURL }" alt="商家商标"/><p>${shopName}</p></td><td>${shopDec}</td>
             <td class="bindBtn"><a href="bindShop.jsp?shopName=${shopName}"><input name="bind" type="button" id="bind" class="buttonStyle1" value="绑定"></a></td>
           </tr>
        </table>
@@ -285,7 +276,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		ShowBindInfo bindInfo = (ShowBindInfo)list.get(i);
         %>
           <tr>
-            <td><img src="<%=bindInfo.getImgURL() %>" alt="商家商标"/></td><td><%=bindInfo.getShopName() %></td>
+            <td class="shop-logo"><img src="images/shopLogo/<%=bindInfo.getImgURL() %>" alt="商家商标"/></td><td><%=bindInfo.getShopName() %></td>
             <td><input name="points" type="text" class="inputNum" id="points" value="<%=bindInfo.getPlatformPoints() %>" maxlength="20" readonly></td>
           </tr>
          <%}
@@ -415,6 +406,40 @@ function checkInputPasswd(){
 		return false;
 	}else return true;
 	
+}
+
+function checkForm() {
+	
+	var shop = document.getElementById("shop").value;
+	var shop2 = document.getElementById("shop2").value;
+	//alert(shopName);
+	if (shop == "" && shop2 == "") {
+		alert("请选择商家！");
+		return false;
+	}
+	
+	//商家名不能空
+	var userName = document.getElementById("userName").value;
+	//alert(shopName);
+	if (userName == "") {
+		alert("在商家注册的名称不能为空！");
+		return false;
+	}
+	
+	var transfer_points = document.getElementById("transfer_points").value;
+	if (transfer_points == "") {
+		alert("转移积分不能为空！");
+		return false;
+	}
+ }
+ 
+ function checkBindForm() {
+	var shop2 = document.getElementById("search").value;
+	//alert(shopName);
+	if (shop2 == "") {
+		alert("请输入商家名称！");
+		return false;
+	}
 }
 </script>
 </body>

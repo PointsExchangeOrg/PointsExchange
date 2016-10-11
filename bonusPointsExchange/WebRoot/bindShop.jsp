@@ -27,29 +27,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <!--这是top-->
 	<%@ include file="header.jsp" %>
-<!-- 
-<div class="header">
-  <div class="span1">
-    <div class="logo"> <img src="images/logo.png" alt="积分兑换平台"/> </div>
-  </div>
-  <div class="span2">
-    <div class="mainNav">
-      <ul>
-       <li><a href="index.jsp"> 主页</a></li>
-        <li><a href="reference.jsp"> 参考价</a></li>
-        <li><a href="/bonusPointsExchange/QueryLatestOrder">最新发布</a></li>
-        <li><a href="/bonusPointsExchange/actionServlet?actionCode=bindShop&methodCode=find_bindedShops">发起交易</a></li>
-        <li><a href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info"><%=session.getAttribute("userName") %></a></li>
-      </ul>
-    </div>
-  </div>
-</div>
--->
 <!--这是main_page-->
 <div class="main">
   <div class="bind-form">
     <p class="title">绑定商家&nbsp;&nbsp;<span class="title1">BIND SHOP</span></p>
-    <form action="/bonusPointsExchange/BindShopServlet" method="post">
+    <form action="/bonusPointsExchange/BindShopServlet" method="post" onsubmit="return checkForm();">
       <table cellspacing="2">
         <tr>
           <td>商家名：</td>
@@ -64,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td><input name="password" type="password" id="password" maxlength="20"></td>
         </tr>
         <tr>
-          <td class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" onsubmit="checkForm()" value="提交"></td>
+          <td class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
           <td class="mid"><input name="reset" type="reset" class="submitBtn" id="reset" value="重置"></td>
         </tr>
       </table>
@@ -90,7 +72,7 @@ function checkForm() {
 		alert("密码不能为空！");
 		return false;
 	}
-}
+}	
 </script>
 </html>
 

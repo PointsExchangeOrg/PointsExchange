@@ -18,6 +18,7 @@ public class QueryOrderManager {
 	//1.根据用户名查询用户所有的订单信息，传入的是平台注册的用户名
 	public List<Order> queryOrderInfo(String userName){
 		Connection conn=DBUtils.getConnection();
+		LoginShopManger loginShopManger = new LoginShopManger();
 		List<Order> list = new ArrayList<Order>();
 		Statement stmt=null;
 		ResultSet rs = null;
@@ -37,10 +38,13 @@ public class QueryOrderManager {
 				orderInfo.setUntilDate(rs.getString("untilDate"));
 				orderInfo.setOrderDate(rs.getString("orderDate"));
 				orderInfo.setOrderStatus(rs.getInt("orderStatus"));
+				//查询商家图标
+				Shop shop1 = loginShopManger.getShopInfo(rs.getString("shopName"));
+				orderInfo.setShopLogo(shop1.getImgUrl());
+				//查询目标商家图标
+				Shop shop2 = loginShopManger.getShopInfo(rs.getString("wantedShop"));
+				orderInfo.setWantedShopLogo(shop2.getImgUrl());
 				list.add(orderInfo);
-				System.out.println("502");
-				System.out.println(rs.getDate("untilDate"));
-				System.out.println(rs.getDate("orderDate"));
 			}
 			return list;
 		} catch (SQLException e) {
@@ -71,11 +75,10 @@ public class QueryOrderManager {
 	//3.查询订单信息，根据比率由高到低返回记录集合
 	public List<Order> findAllOrderByRate(String shopName,String wantedShop,String userName){
 		Connection conn=DBUtils.getConnection();
+		LoginShopManger loginShopManger = new LoginShopManger();
 		List<Order> list = new ArrayList<Order>();
 		Statement stmt=null;
 		ResultSet rs = null;
-		System.out.println(shopName);
-		System.out.println(wantedShop);
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("select *from bonusPointsExchange.order where shopName='"+wantedShop+"' and wantedShop='"+shopName+"' and orderStatus=0 and userName!='"+userName+"' order by point / wantedPoint desc");                                                 		     
@@ -91,6 +94,12 @@ public class QueryOrderManager {
 				orderInfo.setUntilDate(rs.getString("untilDate"));
 				orderInfo.setOrderDate(rs.getString("orderDate"));
 				orderInfo.setOrderStatus(rs.getInt("orderStatus"));
+				//查询商家图标
+				Shop shop1 = loginShopManger.getShopInfo(rs.getString("shopName"));
+				orderInfo.setShopLogo(shop1.getImgUrl());
+				//查询目标商家图标
+				Shop shop2 = loginShopManger.getShopInfo(rs.getString("wantedShop"));
+				orderInfo.setWantedShopLogo(shop2.getImgUrl());
 				list.add(orderInfo);
 			}
 			return list;
@@ -104,6 +113,7 @@ public class QueryOrderManager {
 	//4.查询订单信息，根据时效优先返回记录集合，时效优先期长的在前，也就是新订单在前
 	public List<Order> findAllOrderByUntilDate(String shopName,String wantedShop,String userName){
 		Connection conn=DBUtils.getConnection();
+		LoginShopManger loginShopManger = new LoginShopManger();
 		List<Order> list = new ArrayList<Order>();
 		Statement stmt=null;
 		ResultSet rs = null;
@@ -124,9 +134,12 @@ public class QueryOrderManager {
 				orderInfo.setUntilDate(rs.getString("untilDate"));
 				orderInfo.setOrderDate(rs.getString("orderDate"));
 				orderInfo.setOrderStatus(rs.getInt("orderStatus"));
-				System.out.println("time");
-				System.out.println(rs.getString("untilDate"));
-				System.out.println("time");
+				//查询商家图标
+				Shop shop1 = loginShopManger.getShopInfo(rs.getString("shopName"));
+				orderInfo.setShopLogo(shop1.getImgUrl());
+				//查询目标商家图标
+				Shop shop2 = loginShopManger.getShopInfo(rs.getString("wantedShop"));
+				orderInfo.setWantedShopLogo(shop2.getImgUrl());
 				list.add(orderInfo);
 			}
 			return list;
@@ -137,13 +150,13 @@ public class QueryOrderManager {
 		return list;
 	}
 	
-	//5.查询订单信息，传入的是平台的用户名，根据时间最新排序
+	//5.查询订单信息，传入的是平台的用户名，根据时间最新排序，同时查询商家的图标
 	public List<Order> QueryLatestOrder(String userName){
+		LoginShopManger loginShopManger = new LoginShopManger();
 		Connection conn=DBUtils.getConnection();
 		List<Order> list = new ArrayList<Order>();
 		Statement stmt=null;
 		ResultSet rs = null;
-		
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("select *from bonusPointsExchange.order where orderStatus=0 order by untilDate desc");                                                 		     
@@ -159,9 +172,12 @@ public class QueryOrderManager {
 				orderInfo.setUntilDate(rs.getString("untilDate"));
 				orderInfo.setOrderDate(rs.getString("orderDate"));
 				orderInfo.setOrderStatus(rs.getInt("orderStatus"));
-				System.out.println("time");
-				System.out.println(rs.getString("untilDate"));
-				System.out.println("time");
+				//查询商家图标
+				Shop shop1 = loginShopManger.getShopInfo(rs.getString("shopName"));
+				orderInfo.setShopLogo(shop1.getImgUrl());
+				//查询目标商家图标
+				Shop shop2 = loginShopManger.getShopInfo(rs.getString("wantedShop"));
+				orderInfo.setWantedShopLogo(shop2.getImgUrl());
 				list.add(orderInfo);
 			}
 			return list;

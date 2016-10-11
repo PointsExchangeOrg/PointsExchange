@@ -1,7 +1,6 @@
 package com.bit.bonusPointsExchange.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +23,6 @@ public class BindShopServlet extends HttpServlet {
 
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();
 		
 		//获取用户填写的他在商家的用户名和密码
 		String userName = (String) request.getParameter("userName");//在商家的用户名

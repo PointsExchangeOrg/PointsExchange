@@ -28,10 +28,8 @@ public class BindShopQueryInfoServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8"); 
 		//1.获取用户输入的要搜索的商家的名称
 		String shopName = request.getParameter("search");
-		System.out.println(shopName);
 		LoginShopManger loginShopManger = new LoginShopManger();
 		//获取商家的详细信息，查询shop表，
-	
 		Shop shop = loginShopManger.getShopInfo(shopName);
 		//设置属性
 		request.setAttribute("shopDec", shop.getShopDec());
