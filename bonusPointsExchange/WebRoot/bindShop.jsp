@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="main">
   <div class="bind-form">
     <p class="title">绑定商家&nbsp;&nbsp;<span class="title1">BIND SHOP</span></p>
-    <form action="/bonusPointsExchange/BindShopServlet" method="post">
+    <form action="/bonusPointsExchange/BindShopServlet" method="post" onsubmit="return checkForm();">
       <table cellspacing="2">
         <tr>
           <td>商家名：</td>
@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td><input name="password" type="password" id="password" maxlength="20"></td>
         </tr>
         <tr>
-          <td class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" onsubmit="checkForm()" value="提交"></td>
+          <td class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
           <td class="mid"><input name="reset" type="reset" class="submitBtn" id="reset" value="重置"></td>
         </tr>
       </table>
@@ -72,7 +72,7 @@ function checkForm() {
 		alert("密码不能为空！");
 		return false;
 	}
-}
+}	
 </script>
 </html>
 
