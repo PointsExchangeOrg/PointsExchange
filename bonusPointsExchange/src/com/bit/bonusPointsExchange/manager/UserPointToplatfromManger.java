@@ -32,6 +32,8 @@ public class UserPointToplatfromManger {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return points;
 	}
@@ -55,6 +57,8 @@ public class UserPointToplatfromManger {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return points;
 	}
@@ -62,10 +66,6 @@ public class UserPointToplatfromManger {
 	public boolean updatePointsPlatform(String userName, String shopName, int wantTransfer_points ){
 		Connection conn=DBUtils.getConnection();
 		Statement stmt=null;
-		/*
-		System.out.println(wantTransfer_points);
-		System.out.println(userName);
-		System.out.println(shopName);*/
 		try {
 			stmt = conn.createStatement();
 			String sql="update point set platformPoint=platformPoint+'"+wantTransfer_points+"' where userName='"+userName+"' and shopName='"+shopName+"'";
@@ -76,16 +76,15 @@ public class UserPointToplatfromManger {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			DBUtils.close(null, stmt, conn);
 		}
 		return false;
 	}
 	//更新商家的数据库（模拟）
 	public boolean updatePointsShop(String userName, String shopName,int wantTransfer_points){
 		Connection conn=DBUtils.getConnection();
-		Statement stmt=null;/*
-		System.out.println(wantTransfer_points);
-		System.out.println(userName);
-		System.out.println(shopName);*/
+		Statement stmt=null;
 		try {
 			stmt = conn.createStatement();
 			String sql="update userpoint set userpoint=userpoint-'"+wantTransfer_points+"' where userName='"+userName+"' and shopName='"+shopName+"'";
@@ -96,6 +95,8 @@ public class UserPointToplatfromManger {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			DBUtils.close(null, stmt, conn);
 		}
 		return false;
 	}
@@ -113,6 +114,8 @@ public class UserPointToplatfromManger {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			DBUtils.close(null, stmt, conn);
 		}
 		return count;		
 	}
@@ -136,6 +139,8 @@ public class UserPointToplatfromManger {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally{
+				DBUtils.close(rs, stmt, conn);
 			}
 			return pointID;
 		}

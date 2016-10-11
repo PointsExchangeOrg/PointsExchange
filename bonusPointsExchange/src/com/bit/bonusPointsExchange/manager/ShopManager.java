@@ -21,12 +21,14 @@ public class ShopManager {
 		try {
 			stmt=conn.createStatement();
 			sql="select * from shop where shopName='"+shop.getShopName()+"' and email='"+shop.getEmail()+"'";
-			ResultSet rs=stmt.executeQuery(sql);
+			rs=stmt.executeQuery(sql);
 			if(rs.next())
 				count = 1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return count;
 		

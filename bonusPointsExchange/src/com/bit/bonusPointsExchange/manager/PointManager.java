@@ -28,6 +28,8 @@ public class PointManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(null, stmt, conn);
 		}
 
 		return result;
@@ -48,11 +50,10 @@ public class PointManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-				
+		}finally{
+			DBUtils.close(rs, stmt, conn);
+		}		
 		return platfromPoint;
-		
 	}
 
 }
