@@ -23,27 +23,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		IpTimeStamp its = new IpTimeStamp(request.getRemoteAddr());//获取请求的主机的ip
 		String ext = smart.getFiles().getFile(0).getFileExt();//取得文件后缀
 		String fileName = its.getIPTimeRand() + "." + ext;//拼凑新的名称
-		String fielPath = this.getServletContext().getRealPath("/");
-		//fielPath.replaceAll("\\\\", "\\\\\\\\");
+		String filePath = this.getServletContext().getRealPath("/");
+		//filePath.replaceAll("\\\\", "\\\\\\\\");
 		//fuck，路径存储到Mysql数据库中，路径中的斜杠消失，不知道为什么replaceAll函数不管用，只有自己拼凑路径了
-		String str =  "WEB-INF\\\\headIcon" + "\\\\" + fileName;
-		String []str1 =  fielPath.split("\\\\");
-		fielPath = str1[0] + "\\\\" + str1[1] + "\\\\" + str1[2] + "\\\\" + str1[3] + "\\\\" + str;
-		//for(int i = 0 ; i < str1.length; i++)
-			//System.out.println(str1[i]);					
-		System.out.println(fielPath);//打印文件存储路径
+		String str =  "images\\\\shopLogo" + "\\\\" + fileName;
+		String []str1 =  filePath.split("\\\\");
+		String str2 = "";
+		for(int i = 0 ; i < str1.length; i++) {
+			str2 += str1[i] + "\\\\";
+		}
+		//System.out.println("str2="+str2);	
+		filePath = str2 + str;//拼凑成的文件路径		
+		//System.out.println("fielPath="+filePath);//打印文件存储路径
 		
 		if (fileName.matches("^\\w+\\.(jpg|gif|png|bmp)$")) { //检查文件类型是否符合要求
 			//上传到文件夹中
 			smart.getFiles()
 					.getFile(0)
-					.saveAs(fielPath);// 文件保存
-					
+					.saveAs(filePath);// 文件保存
+			
 			//若用户已经上传过头像，需要将先前上传的头像删除，防止用户多次上传，占用硬盘资源
 			String shopName = (String)request.getSession().getAttribute("shopName");// 获取登录的商家的名称
 			String imageURL = UploadHeadIconManger.queryImgURL(shopName);//原先数据库中的图片的地址，还要判断其是否和默认地址一样
 			//若一样则不能删除，否则删除,默认图标为defaultIcon.jpg
-			if(!("F:\\apache-tomcat-7.0.70\\webapps\\bonusPointsExchange\\WEB-INF\\headIcon\\defaultIcon.jpg".equals(imageURL))) {
+			String str3 = str2 + "images\\\\shopLogo" + "\\\\" + "defaultIcon.jpg";//默认头像的地址
+			if(!(str3.equals(imageURL))) {
 				// 删除文件夹中的图片
 				File imgFile = new File(imageURL);
 				//System.out.println(path);
@@ -52,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 			}
 			//更新数据库,将文件存储的路径保存到数据库中
-			boolean ret = UploadHeadIconManger.updateImgURL(fielPath, shopName);//更新数据库
+			boolean ret = UploadHeadIconManger.updateImgURL(fileName, shopName);//更新数据库
 			if (ret == false) {
 				out.print("<script language='JavaScript'>alert('上传头像失败');location.href='/bonusPointsExchange/uploadBox.jsp';</script>");
 				return;

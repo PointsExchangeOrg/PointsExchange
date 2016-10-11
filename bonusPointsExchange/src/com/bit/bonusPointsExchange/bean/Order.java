@@ -19,7 +19,21 @@ public class Order {
 	private String exchangeUserName;//积分兑换用户名
 	private String orderDate;//订单完成时间
 	private int orderStatus;//订单状态
-
+	private String shopLogo;//商家图标
+	private String wantedShopLogo;//目标商家图标
+	
+	public String getShopLogo() {
+		return shopLogo;
+	}
+	public void setShopLogo(String shopLogo) {
+		this.shopLogo = shopLogo;
+	}
+	public String getWantedShopLogo() {
+		return wantedShopLogo;
+	}
+	public void setWantedShopLogo(String wantedShopLogo) {
+		this.wantedShopLogo = wantedShopLogo;
+	}
 	public int getOrderID() {
 		return orderID;
 	}

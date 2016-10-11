@@ -137,13 +137,13 @@ public class QueryOrderManager {
 		return list;
 	}
 	
-	//5.查询订单信息，传入的是平台的用户名，根据时间最新排序
+	//5.查询订单信息，传入的是平台的用户名，根据时间最新排序，同时查询商家的图标
 	public List<Order> QueryLatestOrder(String userName){
+		LoginShopManger loginShopManger = new LoginShopManger();
 		Connection conn=DBUtils.getConnection();
 		List<Order> list = new ArrayList<Order>();
 		Statement stmt=null;
 		ResultSet rs = null;
-		
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("select *from bonusPointsExchange.order where orderStatus=0 order by untilDate desc");                                                 		     
@@ -159,9 +159,12 @@ public class QueryOrderManager {
 				orderInfo.setUntilDate(rs.getString("untilDate"));
 				orderInfo.setOrderDate(rs.getString("orderDate"));
 				orderInfo.setOrderStatus(rs.getInt("orderStatus"));
-				System.out.println("time");
-				System.out.println(rs.getString("untilDate"));
-				System.out.println("time");
+				//查询商家图标
+				Shop shop1 = loginShopManger.getShopInfo(rs.getString("shopName"));
+				orderInfo.setShopLogo(shop1.getImgUrl());
+				//查询目标商家图标
+				Shop shop2 = loginShopManger.getShopInfo(rs.getString("wantedShop"));
+				orderInfo.setWantedShopLogo(shop2.getImgUrl());
 				list.add(orderInfo);
 			}
 			return list;
