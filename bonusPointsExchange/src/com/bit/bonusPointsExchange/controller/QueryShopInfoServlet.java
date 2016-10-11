@@ -26,7 +26,6 @@ public class QueryShopInfoServlet extends HttpServlet {
 
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8"); 
-		PrintWriter out = response.getWriter();
 		
 		HttpSession session = request.getSession();
 		String shopName = (String)session.getAttribute("shopName");
@@ -39,7 +38,7 @@ public class QueryShopInfoServlet extends HttpServlet {
 		request.setAttribute("telephone", shop.getTelephone());//传递给personal_shop页面进行显示
 		request.setAttribute("shopDec", shop.getShopDec());//传递给personal_shop页面进行显示
 		request.getRequestDispatcher("personal_shop.jsp").forward(request, response);
-		
+		System.out.println("po="+shop.getImgUrl());
 	}
 
 }

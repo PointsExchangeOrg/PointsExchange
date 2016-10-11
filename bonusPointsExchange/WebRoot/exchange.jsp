@@ -80,25 +80,35 @@ if(userName == null && shopName == null) { %>
            	 Order orderInfo = (Order)latestOrderInfoList.get(i);
       %>
     <form action= "/bonusPointsExchange/FinishLatestOrder" method="post" onsubmit="return checkShop()">
-      <ul>
-        <li class="shop-logo"><img src="images/shopLogo/dongfanghangkong.jpg"/></li>
+      <ul class="clearfix">
+        <li class="shop-logo"><img src="images/shopLogo/<%=orderInfo.getShopLogo()%>"/></li>
         <li class="info">
           <table>
             <tr>
               <td>商家：<%=orderInfo.getShopName()%></td>
-              <td>目标商家：<%=orderInfo.getWantedShop()%></td>
             </tr>
             <tr>
               <td>积分数量：<%=orderInfo.getPoint()%></td>
-              <td>目标积分数量：<%=orderInfo.getWantedPoint()%></td>
             </tr>
             <tr>
              <td>订单发布方：<%=orderInfo.getUserName() %></td>
-              <td>截止日期：<%=orderInfo.getUntilDate()%></td>
-              <td></td>
             </tr> 
           </table>
-        </li>
+        </li>  
+        <li class="shop-logo" rowspan="3"><img src="images/shopLogo/<%=orderInfo.getWantedShopLogo() %>"/></li>
+        <li class="info">
+          <table>
+            <tr>
+              <td>目标商家：<%=orderInfo.getWantedShop()%></td>
+            </tr>
+            <tr>
+              <td>目标积分数量：<%=orderInfo.getWantedPoint()%></td>
+            </tr>
+            <tr>
+              <td>截止日期：<%=orderInfo.getUntilDate()%></td>
+            </tr> 
+          </table>
+        </li>        
         <%if(orderInfo.getUserName().equals(isUserLogin)) { %>
         <li class="operate">
           <input name="exchange" type="button" style="background:#EDEDED;" disabled="disabled" class="submitBtn"  id="exchange" value="交易">
@@ -110,8 +120,7 @@ if(userName == null && shopName == null) { %>
         <%} %>
         <input type="hidden" name="orderID" value="<%=orderInfo.getOrderID()%>"/>
         <input type="hidden" name="actionCode" value="order"/>
-      	<input type="hidden" name="methodCode" value="finsh_order"/>
-      	
+      	<input type="hidden" name="methodCode" value="finsh_order"/>     	
       </ul>
      </form>
     <%} %>
@@ -124,15 +133,16 @@ if(userName == null && shopName == null) { %>
 <!--这是bottom-->
 	<%@ include file="footer.jsp" %>
 </body>
-
+<!--  
 <script type="text/javascript">
 function checkShop() {
 	var shop='<%=session.getAttribute("shopName") %>';
-	if (shop != null) {
-		alert("商家类型账号不能登录，请更换用户类型账号登录！");
+	//alert(shop);
+	if (shop !== null && shop !== undefined && shop !== '') {
+		alert("商家类型账号不能交易，请更换用户类型账号登录！");
 		return false;
 	}
 }
 </script>
-
+-->
 </html>

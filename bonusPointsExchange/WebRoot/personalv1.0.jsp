@@ -87,15 +87,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="css/footer.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="css/personal.css">
-<!--   jquery 下拉框样式
-<link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
-<link href="jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
-<link href="jQueryAssets/jquery.ui.accordion.min.css" rel="stylesheet" type="text/css">
-<link href="jQueryAssets/jquery.ui.button.min.css" rel="stylesheet" type="text/css">
-<script src="jQueryAssets/jquery-1.8.3.min.js" type="text/javascript"></script>
-<script src="jQueryAssets/jquery-ui-1.9.2.accordion.custom.min.js" type="text/javascript"></script>
-<script src="jQuer	yAssets/jquery-ui-1.9.2.button.custom.min.js" type="text/javascript"></script>
--->
 </head>
 <body>
 <!--这是top-->
@@ -268,7 +259,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <table>
       	<tr><span id="hint" style="color:#FF0000"></span></tr>
           <tr class="normal-font">
-            <td><img src="images/shopLogo/dongfanghangkong.jpg" alt="商家商标"/><p>${shopName}</p></td><td>${shopDec}</td>
+            <td class="shop-logo"><img src="images/shopLogo/${imgURL }" alt="商家商标"/><p>${shopName}</p></td><td>${shopDec}</td>
             <td class="bindBtn"><a href="bindShop.jsp?shopName=${shopName}"><input name="bind" type="button" id="bind" class="buttonStyle1" value="绑定"></a></td>
           </tr>
        </table>
@@ -285,7 +276,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		ShowBindInfo bindInfo = (ShowBindInfo)list.get(i);
         %>
           <tr>
-            <td><img src="<%=bindInfo.getImgURL() %>" alt="商家商标"/></td><td><%=bindInfo.getShopName() %></td>
+            <td class="shop-logo"><img src="images/shopLogo/<%=bindInfo.getImgURL() %>" alt="商家商标"/></td><td><%=bindInfo.getShopName() %></td>
             <td><input name="points" type="text" class="inputNum" id="points" value="<%=bindInfo.getPlatformPoints() %>" maxlength="20" readonly></td>
           </tr>
          <%}

@@ -50,8 +50,6 @@ public class LoginShopManger {
 				res.setShopProperty(rs.getString("shopProperty"));
 				res.setShopDec(rs.getString("shopDec"));
 				res.setTelephone(rs.getString("telephone"));
-				System.out.println(rs.getString("imageURL"));
-				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -91,10 +91,9 @@ if(shopChangePwdResult == "N") {%>
            <tr>
             <td>商家图标：</td>
             <td class="mid">
-            <img alt="头像" src="<%=request.getAttribute("imageURL")%>"/>
+            <img alt="头像" src="images/shopLogo/<%=request.getAttribute("imageURL") %>" width="80px" height="60px" />
             <input type="button" value="上传" onclick="openwindow()" class="file" /> 
 			</td>
-			<!--<td> <img alt="头像" src="<%=request.getAttribute("imageURL")%>"/></td>-->
           </tr>
           <tr>
             <td>邮&nbsp;箱：</td>

@@ -37,15 +37,7 @@ public class FinishLatestOrder extends HttpServlet {
 		UserPointToplatfromManger uptm =new UserPointToplatfromManger();
 		
 		int orderID = Integer.parseInt(request.getParameter("orderID"));
-		/*String shopName = (String) request.getSession().getAttribute("shopName");	
-		if(shopName != null) {
-			
-			request.getRequestDispatcher("exchange.jsp").forward(request, response);
-			return;
-		}*/
 		String exchangeUserName = (String) request.getSession().getAttribute("userName");
-					
-		
 		Point pointsFromRelease = new Point();//订单发布者的积分
 		Point pointsFromReleaseWanted = new Point();//订单发布者想要交换的积分
 		Point pointsFromExchange = new Point();//发起交易者的积分
@@ -60,13 +52,13 @@ public class FinishLatestOrder extends HttpServlet {
 		
 		try {
 			if(!isBindWantedShop){
-				//数据库查询最新订单
-				
+				//数据库查询最新订单				
 				request.setAttribute("isBindWantedShop", "false");
 				QueryOrderManager manager = new QueryOrderManager();
 				List<Order> list = manager.QueryLatestOrder(exchangeUserName);
 				request.setAttribute("latestOrderInfo", list);
 				request.getRequestDispatcher("exchange.jsp").forward(request, response);
+				return;
 	
 			}
 			if(!isBindShopName){
@@ -75,7 +67,7 @@ public class FinishLatestOrder extends HttpServlet {
 				List<Order> list = manager.QueryLatestOrder(exchangeUserName);
 				request.setAttribute("latestOrderInfo", list);
 				request.getRequestDispatcher("exchange.jsp").forward(request, response);
-	
+				return;
 			}
 			
 		} catch (ServletException e) {
@@ -94,6 +86,7 @@ public class FinishLatestOrder extends HttpServlet {
 				List<Order> list = manager.QueryLatestOrder(exchangeUserName);
 				request.setAttribute("latestOrderInfo", list);
 				request.getRequestDispatcher("exchange.jsp").forward(request, response);
+				return;
 			} catch (ServletException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -148,6 +141,7 @@ public class FinishLatestOrder extends HttpServlet {
 				List<Order> list = manager.QueryLatestOrder(exchangeUserName);
 				request.setAttribute("latestOrderInfo", list);
 				request.getRequestDispatcher("exchange.jsp").forward(request, response);
+				return;
 			} catch (ServletException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

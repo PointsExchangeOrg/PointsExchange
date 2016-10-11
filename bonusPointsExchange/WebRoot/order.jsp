@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <% 
 
 	List<Order> list = (List<Order>)request.getAttribute("orderInfo");//个人订单信息
-	 List<Order> orders = (List<Order>)request.getAttribute("orders");//按积分优先查询到的订单信息
+	List<Order> orders = (List<Order>)request.getAttribute("orders");//按积分优先查询到的订单信息
 	List<Order> AllOrderByRateList = (List<Order>)request.getAttribute("AllOrderByRate");//按比率优先查询到的订单信息
 	List<Order> AllOrderByUntilDate = (List<Order>)request.getAttribute("AllOrderByUntilDate");//按时效优先查询到的订单信息
  %>

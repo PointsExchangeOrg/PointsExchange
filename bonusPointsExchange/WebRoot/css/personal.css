@@ -13,6 +13,11 @@
 	float: left;
 	overflow: hidden;
 	}
+.shop-logo img{
+	width:60px;
+	height:60px;
+	overflow:hidden;
+	}
 /******* personal.jsp navigation css************/
 .span7{
 	width:25%;
