@@ -13,9 +13,6 @@ public class ShopChangeInfoManger {
 	public boolean updateShopInfo(Shop shop, String oldShopName){
 		Connection conn=DBUtils.getConnection();
 		Statement stmt=null;
-		//System.out.println(wantTransfer_points);
-		//System.out.println(userName);
-		//System.out.println(shopName);
 		try {
 			stmt = conn.createStatement();
 			String sql="update shop set shopName='"+shop.getShopName()+"',imageURL='"+shop.getImgUrl()+"',email='"+shop.getEmail()+"',shopDec='"+shop.getShopDec()+"',telephone='"+shop.getTelephone()+"' where shopName='"+oldShopName+"'";
@@ -26,6 +23,8 @@ public class ShopChangeInfoManger {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(null, stmt, conn);
 		}
 		return false;
 	}

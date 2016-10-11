@@ -127,6 +127,8 @@ public class UserManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			DBUtils.close(null, stmt, conn);
 		}
 		return count;			
 		
@@ -138,12 +140,14 @@ public class UserManager {
 		try {
 			stmt=conn.createStatement();
 			sql="select * from user where userName='"+user.getUserName()+"' and email='"+user.getEmail()+"'";
-			ResultSet rs=stmt.executeQuery(sql);
+			rs=stmt.executeQuery(sql);
 			if(rs.next())
 				count = 1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return count;
 		
@@ -155,7 +159,7 @@ public class UserManager {
 		try {
 			stmt = conn.createStatement();
 			sql="select * from user where userName='"+userName+"'";
-			ResultSet rs=stmt.executeQuery(sql);			
+			rs=stmt.executeQuery(sql);			
 			System.out.println();
 			if(rs.next()){
 				user.setUserName(rs.getString("userName"));
@@ -168,6 +172,8 @@ public class UserManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return user;
 	}

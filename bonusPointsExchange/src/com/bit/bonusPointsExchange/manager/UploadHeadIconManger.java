@@ -29,6 +29,8 @@ public class UploadHeadIconManger {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(null, stmt, conn);
 		}
 		return false;
 	}
@@ -52,6 +54,8 @@ public class UploadHeadIconManger {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return imageURL;
 	}

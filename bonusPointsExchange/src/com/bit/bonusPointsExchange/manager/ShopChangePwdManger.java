@@ -26,6 +26,8 @@ public class ShopChangePwdManger {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally{
+				DBUtils.close(null, stmt, conn);
 			}
 			return false;
 		}
