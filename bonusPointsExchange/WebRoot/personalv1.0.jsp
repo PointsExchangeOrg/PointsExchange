@@ -169,7 +169,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div id="div3">
       <p class="title">积分转移到平台 <span class="title1">POINTS TRANSFER TO PLATFORM</span></p>
-      <form action="/bonusPointsExchange/UserPointToplatformServlet"  method="post">
+      <form action="/bonusPointsExchange/UserPointToplatformServlet"  method="post" onsubmit="return checkForm();">
         <table>
           <tr>
             <td>选择商家：</td>
@@ -209,7 +209,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div id="div4">
       <p class="title">积分转移到商家 <span class="title1">POINTS TRANSFER TO SHOP</span></p>
-      <form action="/bonusPointsExchange/PlatformToUserServlet"  method="post">
+      <form action="/bonusPointsExchange/PlatformToUserServlet"  method="post" onsubmit="return checkForm();">
         <table>
           <tr>
             <td>选择商家：</td>
@@ -246,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div id="div5">
       <p class="title">商家绑定 <span class="title1">SHOP BIND</span></p>
-      <form action="/bonusPointsExchange/BindShopQueryInfoServlet" method="post">
+      <form action="/bonusPointsExchange/BindShopQueryInfoServlet" method="post"  onsubmit="return checkBindForm();">
       <br/>
       <div> &nbsp;<span class="normal-font">商家名称：</span>
       	<input name="search"  type="text" id="search" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
@@ -406,6 +406,40 @@ function checkInputPasswd(){
 		return false;
 	}else return true;
 	
+}
+
+function checkForm() {
+	
+	var shop = document.getElementById("shop").value;
+	var shop2 = document.getElementById("shop2").value;
+	//alert(shopName);
+	if (shop == "" && shop2 == "") {
+		alert("请选择商家！");
+		return false;
+	}
+	
+	//商家名不能空
+	var userName = document.getElementById("userName").value;
+	//alert(shopName);
+	if (userName == "") {
+		alert("在商家注册的名称不能为空！");
+		return false;
+	}
+	
+	var transfer_points = document.getElementById("transfer_points").value;
+	if (transfer_points == "") {
+		alert("转移积分不能为空！");
+		return false;
+	}
+ }
+ 
+ function checkBindForm() {
+	var shop2 = document.getElementById("search").value;
+	//alert(shopName);
+	if (shop2 == "") {
+		alert("请输入商家名称！");
+		return false;
+	}
 }
 </script>
 </body>

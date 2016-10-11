@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bit.bonusPointsExchange.bean.Order;
+import com.bit.bonusPointsExchange.bean.Shop;
 import com.bit.bonusPointsExchange.bean.User;
 import com.bit.bonusPointsExchange.utils.DBUtils;
 
@@ -43,6 +44,7 @@ public class OrderManager {
 	
 	public List<Order> findAllOrderPriorityPoint(String userName,Order order){//积分优先查询所有订单
 		List<Order> orders = new ArrayList<Order>();
+		LoginShopManger loginShopManger = new LoginShopManger();
 		conn = DBUtils.getConnection();
 		try {
 			stmt = conn.createStatement();
@@ -57,6 +59,12 @@ public class OrderManager {
 				ordertmp.setPoint(rs.getInt("point"));
 				ordertmp.setWantedPoint(rs.getInt("wantedPoint"));
 				ordertmp.setUntilDate(rs.getString("untilDate"));
+				//查询商家图标
+				Shop shop1 = loginShopManger.getShopInfo(rs.getString("shopName"));
+				ordertmp.setShopLogo(shop1.getImgUrl());
+				//查询目标商家图标
+				Shop shop2 = loginShopManger.getShopInfo(rs.getString("wantedShop"));
+				ordertmp.setWantedShopLogo(shop2.getImgUrl());
 				orders.add(ordertmp);		
 			}
 			

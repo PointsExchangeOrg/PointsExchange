@@ -46,7 +46,7 @@ public class RegistShopServlet extends HttpServlet {
 		//6.构建Shop对象，插入数据库
 		Shop shop = new Shop();
 		shop.setShopName(shopName);
-		//shop.setImgUrl(imgUrl);//设置图标地址(=============待解决=========)
+		shop.setImgUrl("defaultIcon.jpg");//设置图标地址(给一个默认的图标)
 		shop.setPassword(MD5password);
 		shop.setEmail(email);
 		shop.setNumber(number);
