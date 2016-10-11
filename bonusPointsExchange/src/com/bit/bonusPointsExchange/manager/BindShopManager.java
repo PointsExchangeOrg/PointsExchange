@@ -35,6 +35,8 @@ public class BindShopManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(null, stmt, conn);
 		}
 		//System.out.println(result);
 		return result;
@@ -57,6 +59,8 @@ public class BindShopManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return res;
 	}
@@ -101,7 +105,9 @@ public class BindShopManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally{
+			DBUtils.close(rs, stmt, conn);
+			}
 		return list;
 	}
 

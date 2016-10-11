@@ -37,7 +37,7 @@ public class OrderManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
-			DBUtils.close(rs, stmt, conn);
+			DBUtils.close(null, stmt, conn);
 		}
 		return result;
 	}
@@ -71,8 +71,9 @@ public class OrderManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
 		}
-
 		return orders;
 	}
 	
@@ -86,6 +87,8 @@ public class OrderManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(null, stmt, conn);
 		}
 			
 		return result;
@@ -118,6 +121,8 @@ public class OrderManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return orderInfo;
 	}

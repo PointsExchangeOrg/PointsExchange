@@ -50,6 +50,8 @@ public class QueryOrderManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return list;
 	}
@@ -68,6 +70,8 @@ public class QueryOrderManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(null, stmt, conn);
 		}
 		return false;
 	}
@@ -106,6 +110,8 @@ public class QueryOrderManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return list;
 	}
@@ -146,6 +152,8 @@ public class QueryOrderManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return list;
 	}
@@ -184,6 +192,8 @@ public class QueryOrderManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return list;
 	}
@@ -220,6 +230,8 @@ public class QueryOrderManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return list;
 	}

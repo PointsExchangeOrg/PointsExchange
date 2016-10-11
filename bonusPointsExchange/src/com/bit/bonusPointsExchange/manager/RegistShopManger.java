@@ -29,6 +29,8 @@ public class RegistShopManger {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return true;
 	}
@@ -46,6 +48,8 @@ public class RegistShopManger {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
 		}
 		return count;		
 	}

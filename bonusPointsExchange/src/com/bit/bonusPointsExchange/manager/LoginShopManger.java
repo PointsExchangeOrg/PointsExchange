@@ -28,6 +28,8 @@ public class LoginShopManger {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(null, stmt, conn);
 		}
 		//System.out.println(result);
 		return result;
@@ -54,6 +56,8 @@ public class LoginShopManger {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			DBUtils.close(null, stmt, conn);
 		}
 		return res;
 	}

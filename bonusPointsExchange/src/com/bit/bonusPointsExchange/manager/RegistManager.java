@@ -52,6 +52,8 @@ public class RegistManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			DBUtils.close(null, stmt, conn);
 		}		
 		return result;
 	}
