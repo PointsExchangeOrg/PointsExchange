@@ -174,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <tr>
             <td>选择商家：</td>
             <td><select  class="normal-font" name="shop" id="shop">
-            <option selected="selected"></option>
+            <option selected="selected" ></option>
              <% if(null != list) {
              	System.out.println(list.size());
         		for(int i = 0; i < list.size(); i++) {
@@ -226,7 +226,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
            <tr>
             <td>在商家注册的用户名：</td>
-            <td><input name="userName" type="text" value="" id="userName">
+            <td><input name="userName2" type="text" value="" id="userName2">
             </td>
           </tr>
           <tr>
@@ -420,8 +420,9 @@ function checkForm() {
 	
 	//商家名不能空
 	var userName = document.getElementById("userName").value;
+	var userName2 = document.getElementById("userName2").value;
 	//alert(shopName);
-	if (userName == "") {
+	if (userName == "" && userName2=="" ) {
 		alert("在商家注册的名称不能为空！");
 		return false;
 	}
