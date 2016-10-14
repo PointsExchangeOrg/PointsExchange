@@ -25,7 +25,7 @@
 	min-height: 500px;
 }
 .exchangeOrder{
-	width:1000px;}
+	width:800px;}
 /**** releaseOrder css******/
 .releaseOrder table {
 	font-size: 20px;
@@ -78,22 +78,28 @@ line-height:42px;
 	float: left;
 }
 .shop-logo {
-	width: 15%;
-	text-align: left;
+	width: 80px;
+	text-align:center;
 }
 
-.shop-logo img{
+.shop-logo img, .myOrder-info img{
 	width:60px;
 	height:60px;
 	overflow:hidden;
 	}
-.info {
-	width: 25%;
-	align: center;
+/***
+.order-info table {
+	width: 250px;
+	overflow: hidden;
+}   ****/
+.exchangeOrder-info table{
+	width:200px;
+	overflow: hidden;
 }
 .operate{
-	width:20%;
+	width:100px;
 	min-height:80px;
+	float:right;
 	}
 .submitBtn {
 	text-align:center;
@@ -113,10 +119,7 @@ line-height:42px;
 	border-radius: 10px;
 	border: 1px solid #ffffff;
 }
-.info table {
-	width: 400px;
-	overflow: hidden;
-}
+
 /**** reference order*****/
 .referenceOrder{
 	width:800px;
@@ -176,11 +179,22 @@ line-height:42px;
 .myOrder ul li {
 	float: left;
 	}
+.myOrder-info table {
+	width: 200px;
+	overflow: hidden;
+}
 #search table,#search-result table{
 	width:100%;
 	margin-bottom:10px;
 	margin-top:10px;
 	}
+	
 #search table tr{
 	text-align:left;
 	}
+#search-result table tr{
+	height:80px;
+	}
+#search-result input{
+	vertical-align:middle;
+}
