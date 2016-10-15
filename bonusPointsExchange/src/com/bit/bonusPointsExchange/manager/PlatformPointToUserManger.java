@@ -34,7 +34,7 @@ public class PlatformPointToUserManger {
 		Statement stmt=null;
 		try {
 			stmt = conn.createStatement();
-			String sql="update userpoint set userpoint=userpoint+'"+wantTransfer_points+"' where userName='"+userName+"' and shopName='"+shopName+"'";
+			String sql="update userpoint set userPoint=userPoint+'"+wantTransfer_points+"' where userName='"+userName+"' and shopName='"+shopName+"'";
 			//System.out.println(sql);
 			int res = stmt.executeUpdate(sql);
 			if(res != 0) 
