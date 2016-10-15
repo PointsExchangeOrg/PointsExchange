@@ -72,8 +72,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>发布订单</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/footer.css" >
-<link rel="stylesheet" type="text/css" href="css/order.css">
 <link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="css/order.css">
 </head>
 
 <body>
@@ -151,25 +151,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               System.out.println(list.size());
             for(int i = 0; i < list.size(); i++) {
               Order orderInfo = (Order)list.get(i);
-          %>
-            <li class="shop-logo"><img src="images/shopLogo/<%=orderInfo.getShopLogo() %>"/></li>
-            <li class="info">
+          %>       
+          <li class="shop-logo"><img src="images/shopLogo/<%=orderInfo.getShopLogo() %>"/></li>   
+            <li class="myOrder-info">
               <table>
-            	<tr>
-            		<td>商家：<%=orderInfo.getShopName() %></td>
-                	<td>目标商家：<%=orderInfo.getWantedShop() %></td>
+            	<tr>           	    
+            		<td>商家：<%=orderInfo.getShopName() %></td>             		            		
               	</tr>
                 <tr>
-                  <td>积分数量：<%=orderInfo.getPoint() %></td>
-                  <td>目标积分数量：<%=orderInfo.getWantedPoint() %></td>
+                  <td>积分数量：<%=orderInfo.getPoint() %></td>                
                 </tr>
                 <tr>
-                  <td>截止日期：<%=orderInfo.getUntilDate() %></td>
-                  <td></td>
+                  <td>截止日期：<%=orderInfo.getUntilDate() %></td>                 
                 </tr>       
          	</table>
-            </li>
-            <li class="shop-logo"><img src="images/shopLogo/<%=orderInfo.getWantedShopLogo() %>"/></li>
+            </li>		
+            <li  class="shop-logo"><img src="images/shopLogo/<%=orderInfo.getWantedShopLogo() %>"/></li> 
+            <li class="myOrder-info">
+              <table>
+            	<tr>           	               		
+            		<td>目标商家：<%=orderInfo.getWantedShop() %></td>
+              	</tr>
+                <tr>
+                   <td>目标积分数量：<%=orderInfo.getWantedPoint() %></td>
+                </tr>
+                <tr>
+                  <td></td>                
+                </tr>       
+         	</table>
+            </li>	      			
             <%if(orderInfo.getOrderStatus() == 0) { %>
             <li class="operate">
               <input name="exchange" onclick="changOrderStatus(<%=orderInfo.getOrderID() %>)" type="button" class="submitBtn" id="exchange" value="取消">
@@ -194,9 +204,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <table>
           <tr>
             <td>商&nbsp;家：&nbsp;</td><td><input name="shop" type="text" value="${shop }" id="shop"></td>
+            <td>积&nbsp;分：&nbsp;</td><td><input name="point" type="number" value="${point}" id="point" min="1"></td>
           </tr>
           <tr>
           	<td>目标商家：</td><td><input name="targetShop" type="text" value="${wantedShop }" id="targetShop"></td>
+          	<td>目标积分：</td><td><input name="wantedPoint" type="number" value="${wantedPoint}" id="wantedPoint" min="1"></td>
             <td colspan="2" ><input name="submit" type="submit" class="submitBtn" id="submit" value="搜索"></td> 
           </tr>
         </table>          
@@ -230,11 +242,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr><form action="/bonusPointsExchange/actionServlet" method="post">
       <td><input type="hidden" name="orderID" value="<%=orderInfo.getOrderID()%>"/></td>
       <td class="shop-logo"> <img src="images/shopLogo/<%=orderInfo.getShopLogo()%>"/> <p><%=orderInfo.getWantedShop()%></p></td>
-      <td><%=orderInfo.getWantedPoint() %> <img src="images/2.png"/><%=orderInfo.getPoint() %></td>      
+      <td><%=orderInfo.getWantedPoint() %>积分<img src="images/2.png"/><%=orderInfo.getPoint() %>积分</td>      
       <td class="shop-logo"><img src="images/shopLogo/<%=orderInfo.getWantedShopLogo() %>"/> <p><%=orderInfo.getShopName() %></p></td>      
       <td><p>订单发布方：<%=orderInfo.getUserName() %></p>
       <p>交易有效期：<%=orderInfo.getUntilDate() %></p></td>
-      <td><input name="submit" type="submit" class="submitBtn" id="submit" value="兑换"></td>
+      <td class="operate"><p>&nbsp;</p><input name="submit" type="submit" class="submitBtn" id="submit" value="兑换"></td>
       <input type="hidden" name="actionCode" value="order"/>
       <input type="hidden" name="methodCode" value="finsh_order"/>
       </form>
@@ -249,11 +261,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!--头像问题待解决，点击兑换之后的操作待解决-->
       <td><input type="hidden" name="orderID" value="<%=orderInfo.getOrderID()%>"/></td>
       <td class="shop-logo"> <img src="images/shopLogo/<%=orderInfo.getShopLogo()%>"/> <p><%=orderInfo.getWantedShop() %></p></td>
-      <td><%=orderInfo.getWantedPoint() %> <img src="images/2.png"/><%=orderInfo.getPoint() %></td>
+      <td><%=orderInfo.getWantedPoint() %>积分<img src="images/2.png"/><%=orderInfo.getPoint() %>积分</td>
       <td class="shop-logo"><img src="images/shopLogo/<%=orderInfo.getWantedShopLogo() %>"/> <p><%=orderInfo.getShopName() %></p></td>
       <td><p>订单发布方：<%=orderInfo.getUserName() %></p>
       <p>交易有效期：<%=orderInfo.getUntilDate() %></p></td>
-      <td><input name="submit" type="submit" class="submitBtn" id="submit" value="兑换"></td>
+      <td class="operate"><p>&nbsp;</p><input name="submit" type="submit" class="submitBtn" id="submit" value="兑换"></td>
       <input type="hidden" name="actionCode" value="order"/>
       <input type="hidden" name="methodCode" value="finsh_order"/>
       </form>
@@ -267,12 +279,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <c:forEach items="${orders}" var="order">
       <tr><form action="/bonusPointsExchange/actionServlet" method="post">
       		<td><input type="hidden" name="orderID" value="${order.orderID}"/></td>
-        	<td class="shop-logo"> <img src="images/shopLogo/${order.shopLogo}"/> <p>${order.wantedShop}</p></td>
-        	<td>${order.wantedPoint} <img src="images/2.png"/>${order.point}</td>
+        	<td class="shop-logo"> <img src="images/shopLogo/${order.shopLogo}"/> <p >${order.wantedShop}</p></td>
+        	<td>${order.wantedPoint}积分<img src="images/2.png"/>${order.point}积分</td>
         	<td class="shop-logo"><img src="images/shopLogo/${order.wantedShopLogo}"/> <p>${order.shopName}</p></td>
         	<td><p>订单发布方：${order.userName}</p>
         	<p>交易有效期：${order.untilDate}</p></td>
-        	<td><input name="submit" type="subm it" class="submitBtn" id="submit" value="兑换"></td>
+        	<td class="operate"><p>&nbsp;</p><input name="submit" type="submit" class="submitBtn" id="submit" value="兑换"></td>
 			<input type="hidden" name="actionCode" value="order"/>
          	<input type="hidden" name="methodCode" value="finsh_order"/>
       	</form>
