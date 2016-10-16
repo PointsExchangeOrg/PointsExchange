@@ -149,7 +149,7 @@
     <servlet-name>QueryValidPointSerlvet</servlet-name>
     <servlet-class>com.bit.bonusPointsExchange.controller.QueryValidPointSerlvet</servlet-class>
   </servlet>
-
+  
 
 
  
@@ -262,7 +262,7 @@
     <servlet-name>UploadIconServlet</servlet-name>
     <url-pattern>/UploadIconServlet</url-pattern>
   </servlet-mapping>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>QueryValidPointSerlvet</servlet-name>
     <url-pattern>/QueryValidPointSerlvet</url-pattern>
   </servlet-mapping>
