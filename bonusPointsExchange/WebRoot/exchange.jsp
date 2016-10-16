@@ -86,7 +86,7 @@ if(userName == null && shopName == null) { %>
     <form action= "/bonusPointsExchange/FinishLatestOrder" method="post" onsubmit="return checkShop();">
       <ul class="clearfix">
         <li class="shop-logo"><img src="images/shopLogo/<%=orderInfo.getShopLogo()%>"/></li>
-        <li class="info">
+        <li class="exchangeOrder-info">
           <table>
             <tr>
               <td>商家：<%=orderInfo.getShopName()%></td>
@@ -99,8 +99,10 @@ if(userName == null && shopName == null) { %>
             </tr> 
           </table>
         </li>  
+        <li><img src="images/2.png"/></li>
+        <li>&nbsp;&nbsp;</li>
         <li class="shop-logo" rowspan="3"><img src="images/shopLogo/<%=orderInfo.getWantedShopLogo() %>"/></li>
-        <li class="info">
+        <li class="exchangeOrder-info">
           <table>
             <tr>
               <td>目标商家：<%=orderInfo.getWantedShop()%></td>

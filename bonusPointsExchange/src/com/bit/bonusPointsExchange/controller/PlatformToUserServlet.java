@@ -37,7 +37,7 @@ public class PlatformToUserServlet extends HttpServlet {
 		String transfer_points = (String)request.getParameter("transfer_points");
 		int wantTransfer_points = Integer.parseInt(transfer_points);
 		//获取用户在商家注册的用户名
-		String userNameAtShop = (String)request.getParameter("userName");
+		String userNameAtShop = (String)request.getParameter("userName2");
 		//获取用户所在商家
 		String shopName = request.getParameter("shop2");
 		//更新数据库

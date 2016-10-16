@@ -36,9 +36,41 @@ if(shopChangePwdResult == "N") {%>
 	</script>	
 <% }%>
 
+<%
+	String uploadRes = (String)request.getAttribute("uploadRes");  //获取上传头像是否成功
+	if(uploadRes == "Y") {
+%>
+	<script type="text/javascript" language="javascript">
+		alert("上传头像成功！");                                    // 弹出错误信息
+	</script>	
+<% } else if(uploadRes == "N") {%>
+	<script type="text/javascript" language="javascript">
+		alert("上传头像失败！");                                    
+	</script>	
+<% }%>
+
+<%
+String uploadTypeErr = (String)request.getAttribute("uploadTypeErr");  //上传图像类型错误
+if(uploadTypeErr == "N") {%>
+	<script type="text/javascript" language="javascript">
+		alert("只能上传jpg、png、gif、bmp类型的图片");                                   
+	</script>	
+<% }%>
+
 <!doctype html>
 <html>
 <head>
+<style type="text/css">
+#mask{ 
+	background-color:#ccc;
+	opacity:0.5;
+	filter: alpha(opacity=50); 
+	position:absolute; 
+	left:0;
+	top:0;
+	z-index:1000;
+	}
+</style>
 <meta charset="utf-8">
 <title>商家中心</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -81,19 +113,21 @@ if(shopChangePwdResult == "N") {%>
   <div class="span8">
     <div id="div1">
       <p class="title">商家资料 <span class="title1">USER INFOMATION</span></p>
-      <form onsubmit="return checkForm();" action="/bonusPointsExchange/ShopChangeInfo" method="post">
         <table>
+         <tr>
+            <td>商家图标：</td>
+            <td class="mid">            
+             <form id="icon" enctype="multipart/form-data" method="post" action="/bonusPointsExchange/UploadIconServlet">
+             	<img alt="头像" src="images/shopLogo/<%=request.getAttribute("imageURL") %>" width="80px" height="60px" />                
+                 <input style="display: none;" type="file" title="上传头像" name="fileField" id="fileField" onchange="fileSelected();">
+                 <input type="submit" id="uploadBtn" hidefocus="true" value="上传头像" />
+             </form>                                          
+			</td>
+          </tr>
+         <form onsubmit="return checkForm();" action="/bonusPointsExchange/ShopChangeInfo" method="post">
           <tr>
             <td>商家名称：</td>
-            <td><input name="name" readonly="readonly"  type="text" id="name" value="<%=session.getAttribute("shopName")%>" maxlength="40">
-					</td>
-          </tr>
-           <tr>
-            <td>商家图标：</td>
-            <td class="mid">
-            <img alt="头像" src="images/shopLogo/<%=request.getAttribute("imageURL") %>" width="80px" height="60px" />
-            <input type="button" value="上传" onclick="openwindow()" class="file" /> 
-			</td>
+            <td><input name="name" readonly="readonly"  type="text" id="name" value="<%=session.getAttribute("shopName")%>" maxlength="40"></td>
           </tr>
           <tr>
             <td>邮&nbsp;箱：</td>
@@ -110,8 +144,9 @@ if(shopChangePwdResult == "N") {%>
           <tr>
             <td colspan="2"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td   
           ></tr>
+          </form>
         </table>
-      </form>
+      
     </div>
     <div id="div2">
       <p class="title">修改密码 <span class="title1">SHOP　PASSWORD</span></p>
@@ -291,6 +326,47 @@ function checkForm() {
 function openwindow(){ 
         window.showModalDialog("uploadBox.jsp",window,"dialogWidth:360px;dialogHeight:200px");
       }     
+
+function openNew(){
+	/*//获取页面的高度和宽度
+	var sWidth=document.body.scrollWidth;
+	var sHeight=document.body.scrollHeight;
+	//获取页面的可视区域高度和宽度
+	var wHeight=document.documentElement.clientHeight;
+	//遮罩层
+	var oMask=document.createElement("div");
+		oMask.id="mask";
+		oMask.style.height=sHeight+"px";
+		oMask.style.width=sWidth+"px";
+		document.body.appendChild(oMask);
+	//弹出文件选择对话框
+	document.getElementById("fileField").click();
+	
+	//点击遮罩层，取消遮罩	
+	oMask.onclick=function(){
+		document.body.removeChild(oMask);
+	};
+	//关闭文件对话框关闭遮罩,这里不知道怎么获取文件打开对话框关闭的事件，所以取消了遮罩这部分
+	document.getElementById("fileField").ondestroy=function(){
+		document.body.removeChild(oMask);
+	};*/
+	
+	document.getElementById("fileField").click();
+}
+
+window.onload=function(){
+		var oBtn=document.getElementById("uploadBtn");
+			//点击shangchuan按钮
+			oBtn.onclick=function(){
+				openNew();
+				return false;
+		}
+}
+
+ function fileSelected() {
+  	//var str = document.getElementById("fileField").value;//选择的文件路径
+ 	document.getElementById("icon").submit();
+ }
 </script>
 </body>
 </html>
