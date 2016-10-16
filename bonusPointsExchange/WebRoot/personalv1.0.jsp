@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <% } else if(bindRes == "N") {%>
 	<script type="text/javascript" language="javascript">
 		alert("绑定商家失败，您可能未在该商家注册或您已绑定过该商家！");                                    // 弹出错误信息
-	</script>		
+	</script>
 <% }else if(bindRes == "连接blockchain失败，请检查网络") {%>
 	<script type="text/javascript" language="javascript">
 		alert("连接blockchain失败，请检查网络");                                    // 弹出错误信息
@@ -53,6 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		alert("连接blockchain失败，请检查网络！");                                    
 	</script>	
 <% }%>
+
 
 <%
 	String pointToPshopRes = (String)request.getAttribute("pointToPshopRes"); 
@@ -181,7 +182,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <tr>
             <td>选择商家：</td>
             <td><select  class="normal-font" name="shop" id="shop">
-            <option selected="selected"></option>
+            <option selected="selected" ></option>
              <% if(null != list) {
              	System.out.println(list.size());
         		for(int i = 0; i < list.size(); i++) {
@@ -233,7 +234,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
            <tr>
             <td>在商家注册的用户名：</td>
-            <td><input name="userName" type="text" value="" id="userName2">
+            <td><input name="userName2" type="text" value="" id="userName2">
             </td>
           </tr>
           <tr>
@@ -428,7 +429,8 @@ function checkForm() {
 	//商家名不能空
 	var userName = document.getElementById("userName").value;
 	var userName2 = document.getElementById("userName2").value;
-	if (userName == ""&&userName2 == "") {
+	//alert(shopName);
+	if (userName == "" && userName2=="" ) {
 		alert("在商家注册的名称不能为空！");
 		return false;
 	}
