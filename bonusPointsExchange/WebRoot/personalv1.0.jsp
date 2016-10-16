@@ -17,6 +17,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" language="javascript">
 		alert("绑定商家失败，您可能未在该商家注册或您已绑定过该商家！");                                    // 弹出错误信息
 	</script>		
+<% }else if(bindRes == "连接blockchain失败，请检查网络") {%>
+	<script type="text/javascript" language="javascript">
+		alert("连接blockchain失败，请检查网络");                                    // 弹出错误信息
+	</script>		
 <% }%>
 
 
@@ -44,8 +48,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" language="javascript">
 		alert("转移失败！");                                    
 	</script>	
+<% }else if(pointTranRes == "连接blockchain失败，请检查网络") {%>
+	<script type="text/javascript" language="javascript">
+		alert("连接blockchain失败，请检查网络！");                                    
+	</script>	
 <% }%>
-
 
 <%
 	String pointToPshopRes = (String)request.getAttribute("pointToPshopRes"); 
@@ -226,7 +233,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
            <tr>
             <td>在商家注册的用户名：</td>
-            <td><input name="userName" type="text" value="" id="userName">
+            <td><input name="userName" type="text" value="" id="userName2">
             </td>
           </tr>
           <tr>
@@ -420,8 +427,8 @@ function checkForm() {
 	
 	//商家名不能空
 	var userName = document.getElementById("userName").value;
-	//alert(shopName);
-	if (userName == "") {
+	var userName2 = document.getElementById("userName2").value;
+	if (userName == ""&&userName2 == "") {
 		alert("在商家注册的名称不能为空！");
 		return false;
 	}

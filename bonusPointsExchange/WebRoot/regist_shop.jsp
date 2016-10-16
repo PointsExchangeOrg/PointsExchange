@@ -100,7 +100,7 @@ function checkForm() {
 	//密码需在6位以上，只能为数字和字母的组合
 	var Reg=/^[0-9A-Za-z]{6,}$/;
   	if(password!=""&&!Reg.test(password)){
-     alert("只能输入是字母或者数字,长度6位及以上！");
+     alert("密码只能是字母或者数字,长度6位及以上！");
      return false;
 	}
 	

@@ -40,6 +40,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript" language="javascript">
     alert("积分兑换 成功！");                                      
   </script> 
+<% } else if(exchangeRes == "连接blockchain失败，请检查网络") {%>
+  <script type="text/javascript" language="javascript">
+    alert("连接blockchain失败，请检查网络！");                                      
+  </script> 
 <% }%>
 <%
   String isBindShopName = (String)request.getAttribute("isBindShopName");  //获取商家是否绑定
@@ -95,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <table>
             <tr>
               <td>选择商家：</td>
-              <td><select  class="normal-font" name="shopName" id="shopName" onchange="queryPointsAtPlatform()" >
+              <td><select  class="normal-font" name="shopName" id="shopName" onchange="queryValidPoints()" >
                   <option selected="selected">请选择-------</option>
                   <c:forEach items="${bindShops}" var="bindShops">
                     <option>${bindShops.shopName}</option>               
@@ -103,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </select></td>
             </tr>
              <tr>
-              <td>平台积分数量：</td>
+              <td>有效积分数量：</td>
               <td><input name="platPoint" type="number" readonly id="platPoint"></td>
               <td><label id="tip1"></label></td>        
             </tr>
@@ -272,7 +276,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	<td class="shop-logo"><img src="images/shopLogo/${order.wantedShopLogo}"/> <p>${order.shopName}</p></td>
         	<td><p>订单发布方：${order.userName}</p>
         	<p>交易有效期：${order.untilDate}</p></td>
-        	<td><input name="submit" type="subm it" class="submitBtn" id="submit" value="兑换"></td>
+        	<td><input name="submit" type="submit" class="submitBtn" id="submit" value="兑换"></td>
 			<input type="hidden" name="actionCode" value="order"/>
          	<input type="hidden" name="methodCode" value="finsh_order"/>
       	</form>
@@ -367,18 +371,18 @@ function createXMLHttp() {
     xmlHttp = new ActiveXObject("microsoft.XMLHTTP");
   }
 }
-//查询用户在平台数据库有多少积分
-function queryPointsAtPlatform() {
+//查询用户在平台数据库有多少有效的积分,即用户在平台的积分减去用户发布的未完成订单的积分和
+function queryValidPoints() {
   var shopName = document.getElementById("shopName").value;
   //alert(shopName);//调试代码
-  var url = "/bonusPointsExchange/QueryPointsAtPlatform?shop="+encodeURI(encodeURI(shopName));
+  var url = "/bonusPointsExchange/QueryValidPointSerlvet?shop="+encodeURI(encodeURI(shopName));
   createXMLHttp();
-  xmlHttp.onreadystatechange = queryPointsAtPlatformBack;
+  xmlHttp.onreadystatechange = queryValidPointsBack;
   xmlHttp.open("get", url, true);
   xmlHttp.send(null);
 }
 // 回调函数,处理服务器返回结果
-function queryPointsAtPlatformBack() {
+function queryValidPointsBack() {
   //alert("aaaaaa");
   // 响应已完成
   if (xmlHttp.readyState == 4) {
@@ -397,7 +401,7 @@ function checkPoint(){//判断用户输入积分数是否超过用户在平台�
   var points = document.getElementById("points").value;
   
   if(Number(points)>Number(platPoint)){
-    alert("您输入的积分数量已超出您在平台的积分数量！");
+    alert("您输入的积分数量已超出您在平台的有效积分数量！");
     return false;
   }else return true;
 }

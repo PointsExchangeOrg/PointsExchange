@@ -137,6 +137,14 @@
     <servlet-name>FinishLatestOrder</servlet-name>
     <servlet-class>com.bit.bonusPointsExchange.controller.FinishLatestOrder</servlet-class>
  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QueryValidPointSerlvet</servlet-name>
+    <servlet-class>com.bit.bonusPointsExchange.controller.QueryValidPointSerlvet</servlet-class>
+  </servlet>
+
+ 
 
 
  
@@ -245,6 +253,11 @@
     <servlet-name>FinishLatestOrder</servlet-name>
     <url-pattern>/FinishLatestOrder</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QueryValidPointSerlvet</servlet-name>
+    <url-pattern>/QueryValidPointSerlvet</url-pattern>
+  </servlet-mapping>
+
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

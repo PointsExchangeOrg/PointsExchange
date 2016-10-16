@@ -28,6 +28,13 @@ function checkForm() {
 		return false;
 	}
 	
+	//密码需在6位以上，只能为数字和字母的组合
+	var Reg=/^[0-9A-Za-z]{6,}$/;
+  	if(password!=""&&!Reg.test(password)){
+     alert("密码只能是字母或者数字,长度6位及以上！");
+     return false;
+	}
+	
 	var repassword = document.getElementById("repassword").value;
 	if (repassword == "") {
 		alert("确认密码不能为空！");
@@ -43,6 +50,10 @@ function checkForm() {
 		alert("邮箱不能为空！");
 		return false;
 	}
+	if(!checkEmail(email)) {
+		alert("邮箱格式不正确！");
+		return false;
+	}
 	
 	var fullName = document.getElementById("fullName").value;
 	if (fullName == "") {
@@ -56,6 +67,18 @@ function checkForm() {
 		return false;
 	}
 	
+}
+//邮箱格式校验
+function checkEmail(email) {
+	var str = email;
+	var expression = /^[a-zA-Z0-9_-]+(\.([a-zA-Z0-9_-])+)*@[a-zA-Z0-9_-]+[.][a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*$/;
+	var objExp = new RegExp(expression);
+	if(objExp.test(str)) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 </script>
 </head>
