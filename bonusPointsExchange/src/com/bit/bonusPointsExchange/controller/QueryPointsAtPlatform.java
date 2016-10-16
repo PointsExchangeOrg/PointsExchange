@@ -3,12 +3,16 @@ package com.bit.bonusPointsExchange.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bit.bonusPointsExchange.bean.Order;
+import com.bit.bonusPointsExchange.manager.OrderManager;
 import com.bit.bonusPointsExchange.manager.UserPointToplatfromManger;
 
 public class QueryPointsAtPlatform extends HttpServlet {
@@ -34,8 +38,13 @@ public class QueryPointsAtPlatform extends HttpServlet {
 		//System.out.println(shopName);
 		UserPointToplatfromManger dbManger = new UserPointToplatfromManger();
 		int points = dbManger.ownPointsAtPlatform(userName, shopName);//用户拥有的积分
-		System.out.println("dasdasd");
-		System.out.println(points);
+		OrderManager om = new OrderManager();
+		List<Order> orders = om.findOrderByUserShopName(userName, shopName);//查询用户在某商家发布的所有订单
+		int orderPointSUM=0;
+		for(int i=0;i<orders.size();i++){
+			orderPointSUM+=orders.get(i).getPoint();
+		}
+		points=points-orderPointSUM;
 		out.print(String.valueOf(points));
 		
 	}

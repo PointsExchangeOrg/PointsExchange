@@ -126,5 +126,39 @@ public class OrderManager {
 		}
 		return orderInfo;
 	}
-	 
+	
+	public List<Order> findOrderByUserShopName(String userName,String shopName){//查询用户在某商家发布的所有订单
+		List<Order> orders = new ArrayList<Order>();
+		LoginShopManger loginShopManger = new LoginShopManger();
+		conn = DBUtils.getConnection();
+		try {
+			stmt = conn.createStatement();
+			sql="select * from bonusPointsExchange.order where userName='"+userName+"' and orderStatus=0 and shopName='"+shopName+"'";
+			rs = stmt.executeQuery(sql);
+			while(rs.next()){
+				Order ordertmp = new Order();
+				ordertmp.setOrderID(rs.getInt("orderID"));
+				ordertmp.setUserName(rs.getString("userName"));
+				ordertmp.setShopName(rs.getString("shopName"));
+				ordertmp.setWantedShop(rs.getString("wantedShop"));
+				ordertmp.setPoint(rs.getInt("point"));
+				ordertmp.setWantedPoint(rs.getInt("wantedPoint"));
+				ordertmp.setUntilDate(rs.getString("untilDate"));
+				//查询商家图标
+				Shop shop1 = loginShopManger.getShopInfo(rs.getString("shopName"));
+				ordertmp.setShopLogo(shop1.getImgUrl());
+				//查询目标商家图标
+				Shop shop2 = loginShopManger.getShopInfo(rs.getString("wantedShop"));
+				ordertmp.setWantedShopLogo(shop2.getImgUrl());
+				orders.add(ordertmp);		
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			DBUtils.close(rs, stmt, conn);
+		}
+					 
+		return orders;
+	} 
 }

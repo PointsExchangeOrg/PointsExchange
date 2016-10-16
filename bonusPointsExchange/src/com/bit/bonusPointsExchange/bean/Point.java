@@ -5,6 +5,8 @@ public class Point {
 	private String userName;
 	private String shopName;
 	private int platformPoint;
+	private String bindtime;
+	
 	public int getPointID() {
 		return pointID;
 	}
@@ -28,6 +30,12 @@ public class Point {
 	}
 	public void setPlatformPoint(int platformPoint) {
 		this.platformPoint = platformPoint;
+	}
+	public String getBindtime() {
+		return bindtime;
+	}
+	public void setBindtime(String bindtime) {
+		this.bindtime = bindtime;
 	}
 	
 	

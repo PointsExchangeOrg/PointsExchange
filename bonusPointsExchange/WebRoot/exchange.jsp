@@ -19,6 +19,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript" language="javascript">
     alert("积分兑换 成功！");                                      
   </script> 
+<% }else if(exchangeRes == "连接blockchain失败，请检查网络") {%>
+  <script type="text/javascript" language="javascript">
+    alert("连接blockchain失败，请检查网络！");                                      
+  </script> 
 <% }%>
 <%
   String isBindShopName = (String)request.getAttribute("isBindShopName");  //获取商家是否绑定

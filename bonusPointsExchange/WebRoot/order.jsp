@@ -39,7 +39,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <% } else if(exchangeRes == "true") {%>
   <script type="text/javascript" language="javascript">
     alert("积分兑换 成功！");                                      
-  </script> 
+  </script>
+<% } else if(exchangeRes == "连接blockchain失败，请检查网络") {%>
+  <script type="text/javascript" language="javascript">
+    alert("连接blockchain失败，请检查网络！");                                      
+  </script>   
 <% }%>
 <%
   String isBindShopName = (String)request.getAttribute("isBindShopName");  //获取商家是否绑定
@@ -95,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <table>
             <tr>
               <td>选择商家：</td>
-              <td><select  class="normal-font" name="shopName" id="shopName" onchange="queryPointsAtPlatform()" >
+              <td><select  class="normal-font" name="shopName" id="shopName" onchange="queryValidPoints()" >
                   <option selected="selected">请选择-------</option>
                   <c:forEach items="${bindShops}" var="bindShops">
                     <option>${bindShops.shopName}</option>               
@@ -103,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </select></td>
             </tr>
              <tr>
-              <td>平台积分数量：</td>
+              <td>有效积分数量：</td>
               <td><input name="platPoint" type="number" readonly id="platPoint"></td>
               <td><label id="tip1"></label></td>        
             </tr>
@@ -379,18 +383,18 @@ function createXMLHttp() {
     xmlHttp = new ActiveXObject("microsoft.XMLHTTP");
   }
 }
-//查询用户在平台数据库有多少积分
-function queryPointsAtPlatform() {
+//查询用户在平台数据库有多少有效的积分,即用户在平台的积分减去用户发布的未完成订单的积分和
+function queryValidPoints() {
   var shopName = document.getElementById("shopName").value;
   //alert(shopName);//调试代码
-  var url = "/bonusPointsExchange/QueryPointsAtPlatform?shop="+encodeURI(encodeURI(shopName));
+  var url = "/bonusPointsExchange/QueryValidPointSerlvet?shop="+encodeURI(encodeURI(shopName));
   createXMLHttp();
-  xmlHttp.onreadystatechange = queryPointsAtPlatformBack;
+  xmlHttp.onreadystatechange = queryValidPointsBack;
   xmlHttp.open("get", url, true);
   xmlHttp.send(null);
 }
 // 回调函数,处理服务器返回结果
-function queryPointsAtPlatformBack() {
+function queryValidPointsBack() {
   //alert("aaaaaa");
   // 响应已完成
   if (xmlHttp.readyState == 4) {
