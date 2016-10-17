@@ -46,9 +46,16 @@ public class OrderManager {
 		List<Order> orders = new ArrayList<Order>();
 		LoginShopManger loginShopManger = new LoginShopManger();
 		conn = DBUtils.getConnection();
+		//根据用户选择的商家和用户输入的积分查询积分上下浮动10%的订单
+		int point = order.getPoint();
+		int downPoint = (int)(point - point * 0.1);
+		int upPoint = (int)(point + point * 0.1);
+		int wantedPoint = order.getWantedPoint();
+		int downWantedPoint = (int)(wantedPoint - wantedPoint * 0.1);
+		int upWantedPoint = (int)(wantedPoint + wantedPoint * 0.1);
 		try {
 			stmt = conn.createStatement();
-			sql="select orderID,userName,shopName,wantedShop,point,wantedPoint,untilDate from bonusPointsExchange.order where userName!='"+userName+"' and orderStatus=0 and shopName='"+order.getWantedShop()+"' and wantedShop='"+order.getShopName()+"' order by point desc";
+			sql="select orderID,userName,shopName,wantedShop,point,wantedPoint,untilDate from bonusPointsExchange.order where userName!='"+userName+"' and orderStatus=0 and shopName='"+order.getWantedShop()+"' and wantedShop='"+order.getShopName()+"' and point >= '"+downPoint+"' and point <= '"+upPoint+"' and wantedPoint >= '"+downWantedPoint+"' and wantedPoint <= '"+upWantedPoint+"' order by point desc";
 			rs = stmt.executeQuery(sql);
 			while(rs.next()){
 				Order ordertmp = new Order();
