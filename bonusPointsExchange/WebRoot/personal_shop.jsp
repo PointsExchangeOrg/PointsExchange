@@ -127,7 +127,7 @@ if(uploadTypeErr == "N") {%>
          <form onsubmit="return checkForm();" action="/bonusPointsExchange/ShopChangeInfo" method="post">
           <tr>
             <td>商家名称：</td>
-            <td><input name="name" readonly="readonly"  type="text" id="name" value="<%=session.getAttribute("shopName")%>" maxlength="40"></td>
+            <td><input name="name" readonly="readonly"  type="text" id="name" value="<%=session.getAttribute("shopName")%>" maxlength="40" style="border:none;"></td>
           </tr>
           <tr>
             <td>邮&nbsp;箱：</td>
@@ -139,7 +139,7 @@ if(uploadTypeErr == "N") {%>
           </tr>
           <tr>
             <td>简&nbsp;介：</td>
-            <td><input name="description" type="text" id="description" value="<%=request.getAttribute("shopDec")%>" maxlength="40"></td>
+            <td><input name="description" type="textarea" id="description" value="<%=request.getAttribute("shopDec")%>" maxlength="40"></td>
           </tr>
           <tr>
             <td colspan="2"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td   
@@ -156,10 +156,11 @@ if(uploadTypeErr == "N") {%>
             <td>账&nbsp;号：</td>
             <td><input name="userName" type="text" class="no-border" id="userName" value="<%=session.getAttribute("shopName")%>" maxlength="20" readonly></td>
           </tr>
-          <tr>
+         <!--<tr>
             <td>旧密码：</td>
             <td><input name="oldPassword" type="password" id="oldPassword" maxlength="20"></td>
           </tr>
+          -->
           <tr>
             <td>新密码：</td>
             <td><input name="newPassword" type="password" id="newPassword" maxlength="20"></td>

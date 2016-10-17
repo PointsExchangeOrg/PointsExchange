@@ -20,12 +20,10 @@
 	<li><a href="login.jsp">我的账户</a> </li>
 <% } else if(isUserLogin != null && isShopLogin == null){%>
 	 <li>
-	<a href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info"><%=session.getAttribute("userName") %></a>
-	 </li>	
+	<a href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info"><%=session.getAttribute("userName") %></a><span style="font-size:24px;">&nbsp;注销</span></li>	
 	 <% } else if(isShopLogin != null && isUserLogin == null){%>
 	 <li>
-	<a href="/bonusPointsExchange/QueryShopInfoServlet"><%=session.getAttribute("shopName") %></a>
-	 </li>	
+	<a href="/bonusPointsExchange/QueryShopInfoServlet"><%=session.getAttribute("shopName") %></a><span style="font-size:24px;">&nbsp;&nbsp;注销</span></li>	
 <% }%>
 
      </ul>
