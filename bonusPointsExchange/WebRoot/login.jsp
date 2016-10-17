@@ -8,7 +8,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	if(loginRes == "N") {
 %>
 	<script type="text/javascript" language="javascript">
-		alert("登录失败！请重新登录！您输入的账号或密码错误！");                            
+		alert("登录失败！请重新登录！您输入的账号或密码错误！");  
+		location.href="/bonusPointsExchange/login.jsp";                          
 	</script>	
 <% } %>
 
@@ -43,9 +44,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta charset="utf-8">
 <title>登录</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link href="css/footer.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/login.css">
 <script type="text/javascript">
 
 //表单验证
@@ -98,12 +99,12 @@ function checkForm() {
       <form name="form_login" class="login-form normal-font" action="/bonusPointsExchange/actionServlet" method="post" onsubmit="return checkForm();">
         <table cellspacing="2">
           <tr>
-            <td colspan="2">用户名：
-              <input name="userName" type="text" id="userName" maxlength="20"></td>
+            <td style="text-indent:1em;">用户名：</td>            
+            <td><input name="userName" type="text" id="userName" maxlength="20"></td>
           </tr>
           <tr>
-            <td colspan="2">密&nbsp;码：
-              <input name="passwd" type="password" id="password" maxlength="20"></td>
+             <td style="text-indent:1em;">密码：</td>
+             <td><input name="passwd" type="password" id="password" maxlength="20"></td>
           </tr>
           <tr>
             <td class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
