@@ -25,25 +25,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <table>
           <tr>
             <td>商家名称：</td>
-            <td><input name="shopName" type="text" id="shopName" maxlength="20"  onblur="checkShopName();"><span id="hint"
-							style="color:#FF0000"></span></td>
+            <td><input name="shopName" type="text" id="shopName" maxlength="20"  onblur="checkShopName();"></td>
+            <td><span id="hint" style="color:#FF0000; font-size:12px;" >&nbsp;&nbsp;&nbsp;</span></td>
           </tr>
           <tr>
             <td>密&nbsp;码：</td>
             <td><input name="password" type="password" id="password" maxlength="20"></td>
+            <td>&nbsp;</td>
           </tr>
           <tr>
             <td>确认密码：</td>
             <td><input name="repassword" type="password" id="repassword" maxlength="20"></td>
+            <td>&nbsp;</td>
           </tr>
           <tr>
             <td>邮&nbsp;箱：</td>
-            <td><input name="email" type="text" id="email" maxlength="40"><span id="hint"
-							style="color:#FF0000"></span></td>
+            <td><input name="email" type="text" id="email" maxlength="40"></td>
+            <td><span id="hint" style="color:#FF0000">&nbsp;</span></td>
           </tr>
           <tr>
             <td>商家备案号：</td>
             <td><input name="number" type="text" id="number" maxlength="40"></td>
+            <td>&nbsp;</td>
           </tr>
           <tr>
             <td class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
@@ -100,7 +103,7 @@ function checkForm() {
 	//密码需在6位以上，只能为数字和字母的组合
 	var Reg=/^[0-9A-Za-z]{6,}$/;
   	if(password!=""&&!Reg.test(password)){
-     alert("只能输入是字母或者数字,长度6位及以上！");
+     alert("密码只能是字母或者数字,长度6位及以上！");
      return false;
 	}
 	
@@ -166,7 +169,7 @@ function checkShopNameBack() {
 				document.getElementById("submit").disabled = "";
 			}
 			if(text == "N") {
-				document.getElementById("hint").innerHTML = "用户名不可用";	
+				document.getElementById("hint").innerHTML = "账号已存在";	
 				document.getElementById("submit").disabled = "disabled";
 			}
 		}

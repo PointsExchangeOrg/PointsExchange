@@ -53,11 +53,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <form class="login-form" action="/bonusPointsExchange/ShopLoginServlet" method="post" onsubmit="return checkForm();">
         <table cellspacing="2">
           <tr>
-            <td>商家名：</td>
+            <td style="text-indent:1em;">账号：</td>
             <td><input name="userName" type="text" id="userName" maxlength="20"></td>
           </tr>
           <tr>
-            <td>密&nbsp;码：</td>
+            <td style="text-indent:1em;">密码：</td>
             <td><input name="password" type="password" id="password" maxlength="20"></td>
           </tr>
           <tr>

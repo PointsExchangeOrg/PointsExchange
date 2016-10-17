@@ -16,6 +16,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <% } else if(bindRes == "N") {%>
 	<script type="text/javascript" language="javascript">
 		alert("绑定商家失败，您可能未在该商家注册或您已绑定过该商家！");                                    // 弹出错误信息
+	</script>
+<% }else if(bindRes == "连接blockchain失败，请检查网络") {%>
+	<script type="text/javascript" language="javascript">
+		alert("连接blockchain失败，请检查网络");                                    // 弹出错误信息
 	</script>		
 <% }%>
 
@@ -43,6 +47,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <% } else if(pointTranRes == "N") {%>
 	<script type="text/javascript" language="javascript">
 		alert("转移失败！");                                    
+	</script>	
+<% }else if(pointTranRes == "连接blockchain失败，请检查网络") {%>
+	<script type="text/javascript" language="javascript">
+		alert("连接blockchain失败，请检查网络！");                                    
 	</script>	
 <% }%>
 
@@ -146,6 +154,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <p class="title">修改密码 <span class="title1">USER　PASSWORD</span></p>
       <form action="/bonusPointsExchange/actionServlet" onsubmit="return checkInputPasswd();">
         <table>
+        <tr>
+            <td>用户名：</td>
+            <td><input name="name" readonly="readonly"  type="text" id="name" value="<%=session.getAttribute("userName")%>" maxlength="40" style="border:none;"></td>
+          </tr>
           <tr>
             <td>旧密码：</td>
             <td><input name="oldPassword" type="password" id="oldPassword" maxlength="20"></td>
@@ -192,7 +204,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
           <tr>
             <td>商家积分：</td>
-            <td><input name="points" type="text" value="" readonly id="points"> 
+            <td><input name="points" type="text" value="" readonly id="points" style="border:none;"> 
             </td>
           </tr>
           <tr>
@@ -231,7 +243,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
           <tr>
             <td>平台积分：</td>
-            <td><input name="platformPoints" type="text" value="" readonly id="platformPoints"></td>
+            <td><input name="platformPoints" type="text" value="" readonly id="platformPoints" style="border:none;"></td>
           </tr>
           <tr>
             <td>转移积分：</td>

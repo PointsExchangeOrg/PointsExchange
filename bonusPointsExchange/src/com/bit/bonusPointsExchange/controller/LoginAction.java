@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.bit.bonusPointsExchange.bean.User;
 import com.bit.bonusPointsExchange.manager.LoginManager;
+import com.bit.bonusPointsExchange.utils.Encode;
 
 /**
  * µÇÂ½
@@ -24,20 +25,16 @@ public class LoginAction extends Action{
 		HttpSession session = request.getSession();
 		
 		String userName = request.getParameter("userName");
-		String passwd = request.getParameter("passwd");	
-		System.out.println(userName);
-		System.out.println(passwd);
-		
+		String passwd = request.getParameter("passwd");		
+		String encodePasswordString = Encode.MD5Encode(passwd);
 		LoginManager lm = new LoginManager();
 		User user = new User();
 		user.setUserName(userName);
-		user.setPasswd(passwd);
+		user.setPasswd(encodePasswordString);
 		
 		int result = lm.isValid(user);
 			if(result==1){//success	
-				System.out.println(result);
 				session.setAttribute("userName", user.getUserName());
-				System.out.println(session.getAttribute("userName"));
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			
 			}else{//fail

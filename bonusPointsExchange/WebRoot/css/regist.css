@@ -42,15 +42,16 @@ form {
 	height: inherit;
 	width: 400px;
 }
-table {
+.span5 table, .span6 table {
 	font-size: 24px;
 	margin: 10px 10px;
 	cellspacing: 20px;
 	border-collapse: separate;
-	border-spacing: 10px
+	border-spacing: 10px;
 }
-table td {
+.span5 table td {
 	text-align: right;
+    width:150px;
 }
 /*****
 #submit, #reset {
