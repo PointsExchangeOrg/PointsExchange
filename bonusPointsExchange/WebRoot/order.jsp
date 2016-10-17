@@ -212,7 +212,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
           <tr>
           	<td>目标商家：</td><td><input name="targetShop" type="text" value="${wantedShop }" id="targetShop"></td>
-          	<td>目标积分：</td><td><input name="wantedPoint" type="number" value="${wantedPoint}" id="wantedPoint" min="1"></td>
+          	<td>目标积分：</td><td><input name="wantedPoint2" type="number" value="${wantedPoint}" id="wantedPoint2" min="1"></td>
             <td colspan="2" ><input name="submit" type="submit" class="submitBtn" id="submit" value="搜索"></td> 
           </tr>
         </table>          
@@ -262,7 +262,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             Order orderInfo = (Order)AllOrderByUntilDate.get(i);
       %>
       <tr><form action="/bonusPointsExchange/actionServlet" method="post">
-      <!--头像问题待解决，点击兑换之后的操作待解决-->
       <td><input type="hidden" name="orderID" value="<%=orderInfo.getOrderID()%>"/></td>
       <td class="shop-logo"> <img src="images/shopLogo/<%=orderInfo.getShopLogo()%>"/> <p><%=orderInfo.getWantedShop() %></p></td>
       <td><%=orderInfo.getWantedPoint() %>积分<img src="images/2.png"/><%=orderInfo.getPoint() %>积分</td>
@@ -294,7 +293,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	</form>
       </tr>
        </c:forEach>
-       <%}else if(findRes=="true"){%> 
+       <%}else if(findRes=="true" && null == AllOrderByRateList && null == AllOrderByUntilDate){%> 
      		<br/><br/><br/><p align="center">  搜索结果为0！</p>
         <%} %>		                    
       </table>     
@@ -489,6 +488,20 @@ function checkForm() {
 	var wantedShop = document.getElementById("targetShop").value;
 	if (wantedShop == "") {
 		alert("目标商家名不能为空！");
+		return false;
+	}
+	
+	var point = document.getElementById("point").value;
+	//alert(shopName);
+	if (point == "") {
+		alert("积分数量不能为空！");
+		return false;
+	}
+	
+	var wantedPoint = document.getElementById("wantedPoint2").value;
+	//alert(shopName);
+	if (wantedPoint == "") {
+		alert("目标积分数量不能为空！");
 		return false;
 	}
  }

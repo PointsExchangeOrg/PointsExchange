@@ -103,16 +103,24 @@ public class OrderAction extends Action{
 		String userName = (String)request.getSession().getAttribute("userName");
 		String shopName = request.getParameter("shop");
 		String wantedShop = request.getParameter("targetShop");
+		String point = request.getParameter("point");
+		int points= Integer.parseInt(point);//积分数量
+		String wantedPoint = request.getParameter("wantedPoint2");
+		int wantedPoints = Integer.parseInt(wantedPoint);//目标积分数量
 		OrderManager om = new OrderManager();
 		Order order = new Order();
 		order.setShopName(shopName);
+		order.setPoint(points);
 		order.setWantedShop(wantedShop);
+		order.setWantedPoint(wantedPoints);
 		List<Order> orders = om.findAllOrderPriorityPoint(userName,order);
 		request.setAttribute("orders", orders);
 		request.setAttribute("index", "3");
 		request.setAttribute("findRes", "true");
 		request.setAttribute("shop", shopName);
 		request.setAttribute("wantedShop", wantedShop);
+		request.setAttribute("point", point);
+		request.setAttribute("wantedPoint", wantedPoint);
 		try {
 			request.getRequestDispatcher("order.jsp").forward(request, response);
 		} catch (ServletException e) {
@@ -130,16 +138,20 @@ public class OrderAction extends Action{
 		String shopName = request.getParameter("shop");
 		String wantedShop = request.getParameter("targetShop");
 		String userName = (String)request.getSession().getAttribute("userName");
-		//System.out.println(shopName);
-		//System.out.println(wantedShop);
+		String point = request.getParameter("point");
+		int points= Integer.parseInt(point);//积分数量
+		String wantedPoint = request.getParameter("wantedPoint2");
+		int wantedPoints = Integer.parseInt(wantedPoint);//目标积分数量
 		//查询数据库，调用按比率查询函数
 		QueryOrderManager manager = new QueryOrderManager();
-		List<Order> list = manager.findAllOrderByRate(shopName, wantedShop,userName);
+		List<Order> list = manager.findAllOrderByRate(shopName, wantedShop,userName,points,wantedPoints);
 		request.setAttribute("AllOrderByRate", list);
 		request.setAttribute("index", "3");
 		request.setAttribute("selectID", "2");//设置界面上显示第几个select
 		request.setAttribute("shop", shopName);
 		request.setAttribute("wantedShop", wantedShop);
+		request.setAttribute("point", point);
+		request.setAttribute("wantedPoint", wantedPoint);
 		request.getRequestDispatcher("order.jsp").forward(request, response);
 	}
 		
@@ -148,17 +160,20 @@ public class OrderAction extends Action{
 		String shopName = request.getParameter("shop");
 		String wantedShop = request.getParameter("targetShop");
 		String userName = (String)request.getSession().getAttribute("userName");
-		//System.out.println(shopName);
-		//System.out.println(wantedShop);
-		
+		String point = request.getParameter("point");
+		int points= Integer.parseInt(point);//积分数量
+		String wantedPoint = request.getParameter("wantedPoint2");
+		int wantedPoints = Integer.parseInt(wantedPoint);//目标积分数量
 		//查询数据库，调用按时效优先查询函数
 		QueryOrderManager manager = new QueryOrderManager();
-		List<Order> list = manager.findAllOrderByUntilDate(shopName, wantedShop,userName);
+		List<Order> list = manager.findAllOrderByUntilDate(shopName, wantedShop,userName,points,wantedPoints);
 		request.setAttribute("AllOrderByUntilDate", list);
 		request.setAttribute("index", "3");
 		request.setAttribute("selectID", "3");//设置界面上显示第几个select
 		request.setAttribute("shop", shopName);
 		request.setAttribute("wantedShop", wantedShop);
+		request.setAttribute("point", point);
+		request.setAttribute("wantedPoint", wantedPoint);
 		request.getRequestDispatcher("order.jsp").forward(request, response);
 	}
 	

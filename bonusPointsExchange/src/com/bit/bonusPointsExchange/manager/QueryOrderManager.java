@@ -77,15 +77,19 @@ public class QueryOrderManager {
 	}
 	
 	//3.查询订单信息，根据比率由高到低返回记录集合
-	public List<Order> findAllOrderByRate(String shopName,String wantedShop,String userName){
+	public List<Order> findAllOrderByRate(String shopName,String wantedShop,String userName,int point, int wantedPoint){
 		Connection conn=DBUtils.getConnection();
 		LoginShopManger loginShopManger = new LoginShopManger();
 		List<Order> list = new ArrayList<Order>();
+		int downPoint = (int)(point - point * 0.1);
+		int upPoint = (int)(point + point * 0.1);	
+		int downWantedPoint = (int)(wantedPoint - wantedPoint * 0.1);
+		int upWantedPoint = (int)(wantedPoint + wantedPoint * 0.1);
 		Statement stmt=null;
 		ResultSet rs = null;
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select *from bonusPointsExchange.order where shopName='"+wantedShop+"' and wantedShop='"+shopName+"' and orderStatus=0 and userName!='"+userName+"' order by point / wantedPoint desc");                                                 		     
+			rs = stmt.executeQuery("select *from bonusPointsExchange.order where shopName='"+wantedShop+"' and wantedShop='"+shopName+"' and orderStatus=0 and userName!='"+userName+"' and point >= '"+downPoint+"' and point <= '"+upPoint+"' and wantedPoint >= '"+downWantedPoint+"' and wantedPoint <= '"+upWantedPoint+"' order by point / wantedPoint desc");                                                 		     
 			while(rs.next()) {
 				Order orderInfo = new Order();
 				orderInfo.setOrderID(rs.getInt("orderID"));
@@ -117,17 +121,19 @@ public class QueryOrderManager {
 	}
 	
 	//4.查询订单信息，根据时效优先返回记录集合，时效优先期长的在前，也就是新订单在前
-	public List<Order> findAllOrderByUntilDate(String shopName,String wantedShop,String userName){
+	public List<Order> findAllOrderByUntilDate(String shopName,String wantedShop,String userName,int point, int wantedPoint){
 		Connection conn=DBUtils.getConnection();
 		LoginShopManger loginShopManger = new LoginShopManger();
 		List<Order> list = new ArrayList<Order>();
 		Statement stmt=null;
 		ResultSet rs = null;
-		System.out.println(shopName);
-		System.out.println(wantedShop);
+		int downPoint = (int)(point - point * 0.1);
+		int upPoint = (int)(point + point * 0.1);	
+		int downWantedPoint = (int)(wantedPoint - wantedPoint * 0.1);
+		int upWantedPoint = (int)(wantedPoint + wantedPoint * 0.1);
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select *from bonusPointsExchange.order where shopName='"+wantedShop+"' and wantedShop='"+shopName+"' and userName!='"+userName+"' and orderStatus=0 order by untilDate desc");                                                 		     
+			rs = stmt.executeQuery("select *from bonusPointsExchange.order where shopName='"+wantedShop+"' and wantedShop='"+shopName+"' and userName!='"+userName+"' and point >= '"+downPoint+"' and point <= '"+upPoint+"' and wantedPoint >= '"+downWantedPoint+"' and wantedPoint <= '"+upWantedPoint+"' and orderStatus=0 order by untilDate desc");                                                 		     
 			while(rs.next()) {
 				Order orderInfo = new Order();
 				orderInfo.setOrderID(rs.getInt("orderID"));
