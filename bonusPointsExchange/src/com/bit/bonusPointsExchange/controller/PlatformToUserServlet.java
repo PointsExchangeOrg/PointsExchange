@@ -16,6 +16,7 @@ import com.bit.bonusPointsExchange.manager.BindShopManager;
 import com.bit.bonusPointsExchange.manager.PlatformPointToUserManger;
 import com.bit.bonusPointsExchange.manager.UserPointToplatfromManger;
 import com.bit.bonusPointsExchange.utils.HttpUtils;
+import com.bit.bonusPointsExchange.utils.TimeUtils;
 
 public class PlatformToUserServlet extends HttpServlet {
 
@@ -64,7 +65,8 @@ public class PlatformToUserServlet extends HttpServlet {
 					//查询pointID
 					int pointID = dbManger.queryPointID(userName, shopName);
 					//在transfer表中记录这笔交易
-					Transfer transfer = new Transfer(pointID, 1, wantTransfer_points);
+					String transferTime = TimeUtils.getNowTime();//转移时间
+					Transfer transfer = new Transfer(pointID, 1, wantTransfer_points,transferTime,shopName);
 					int res3 = dbManger.insertTransfer(transfer);
 					if (res1 && res2 && (0 != res3)) ////这里是逻辑有问题的，如果两个数据库更新失败一个，需要将数据库回滚到没有更新的状态，要分别去判断，决定回滚哪个数据库
 					{
