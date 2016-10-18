@@ -16,12 +16,22 @@ import com.bit.bonusPointsExchange.utils.Encode;
  * @author gmx
  *
  */
-public class LoginAction extends Action{
+public class LogAction extends Action{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		String methodCode = (String)request.getParameter("methodCode");
+		if(methodCode.equals("login")){
+			this.login(request, response);
+		}else if(methodCode.equals("logout")){
+			this.logout(request, response);
+		}
+		
+	}
+	
+	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{	
 		HttpSession session = request.getSession();
 		
 		String userName = request.getParameter("userName");
@@ -41,6 +51,18 @@ public class LoginAction extends Action{
 				request.setAttribute("loginRes","N");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
+	}
+	
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String logType = (String)request.getParameter("logType");
+		if(logType.equals("user")){
+			request.getSession().removeAttribute("userName");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}else if(logType.equals("shop")){
+			request.getSession().removeAttribute("shopName");
+			request.getRequestDispatcher("login_shop.jsp").forward(request, response);
+		}
+		
 		
 	}
 

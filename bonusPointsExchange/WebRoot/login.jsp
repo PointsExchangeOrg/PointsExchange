@@ -112,7 +112,8 @@ function checkForm() {
           </tr>
         </table>
        <div class="mes" ><a href="regist.jsp">免费注册&nbsp;&nbsp; </a><a href="/bonusPointsExchange/retrievePassword_1.jsp?method=forgetPasswd_user">忘记密码</a></div>
-       <input type="hidden" name="actionCode" value="login"/>
+       <input type="hidden" name="actionCode" value="log"/>
+       <input type="hidden" name="methodCode" value="login"/>
       </form>
     </div>
   </div>

@@ -27,8 +27,8 @@ public class ActionServlet extends HttpServlet {
 		String actionCode=request.getParameter("actionCode");	
 
 		Action action = null;
-		if(actionCode.equals("login")){//µÇÂ½
-			action = new LoginAction();
+		if(actionCode.equals("log")){//µÇÂ½¡¢×¢Ïú
+			action = new LogAction();
 		}else if(actionCode.equals("regist")){//×¢²á
 			action = new RegistAction();
 		}else if(actionCode.equals("user")){//ÓÃ»§Ä£¿é
