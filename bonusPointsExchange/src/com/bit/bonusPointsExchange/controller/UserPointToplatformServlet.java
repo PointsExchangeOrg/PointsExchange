@@ -15,6 +15,7 @@ import com.bit.bonusPointsExchange.json.GetJsonStr;
 import com.bit.bonusPointsExchange.manager.BindShopManager;
 import com.bit.bonusPointsExchange.manager.UserPointToplatfromManger;
 import com.bit.bonusPointsExchange.utils.HttpUtils;
+import com.bit.bonusPointsExchange.utils.TimeUtils;
 
 public class UserPointToplatformServlet extends HttpServlet {
 
@@ -67,9 +68,10 @@ public class UserPointToplatformServlet extends HttpServlet {
 					//2.商家数据库中减少积分
 					boolean res2 = dbManger.updatePointsShop(userNameAtShop, shopName, wantTransfer_points);
 					//在transfer表中记录这笔交易
-					Transfer transfer = new Transfer(pointID, 0, wantTransfer_points);
+					String transferTime = TimeUtils.getNowTime();//转移时间
+					Transfer transfer = new Transfer(pointID, 0, wantTransfer_points,transferTime,shopName);
 					int res3 = dbManger.insertTransfer(transfer);
-				
+					
 					if (res1 && res2 && (0 != res3)) {//这里是逻辑有问题的，如果两个数据库更新失败一个，需要将数据库回滚到没有更新的状态，暂时不解决
 						int userPoints1 =  dbManger.ownPointsAtPlatform(userName, shopName);//用户在平台的积分
 						int shopPoints1 = dbManger.ownPoints(userNameAtShop, shopName);//用户在商家的积分
