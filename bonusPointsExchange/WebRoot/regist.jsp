@@ -86,6 +86,7 @@ function checkEmail(email) {
 <body>
 	<%@ include file="header.jsp" %>
 <!--header -->
+<div style="min-height:500px;">
 <div class="regist-frame">
   <p class="title">&nbsp;&nbsp;用户注册&nbsp;&nbsp;<span class="title1">USER REGISTER</span><span class="title1 right"><a href="regist_shop.jsp">前往商家注册</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
   <div>
@@ -135,7 +136,7 @@ function checkEmail(email) {
     </div>
   </div>
 </div>
-
+</div>
 <!--footer -->
 	<%@ include file="footer.jsp" %>
 </body>

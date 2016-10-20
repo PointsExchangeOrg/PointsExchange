@@ -243,7 +243,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
           <tr>
             <td>平台积分：</td>
-            <td><input name="platformPoints" type="text" value="" readonly id="platformPoints" style="border:none;"></td>
+            <td><input name="platformPoints" type="text" value="" readonly id="platformPoints" style="border:none; "></td>
           </tr>
           <tr>
             <td>转移积分：</td>
@@ -267,15 +267,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <!------------table 中为查询结果--------每一行是一个商家---------------->
        <%
 	  String shopName1 = request.getParameter("search");
-	  if(shopName1 != null) {%>
+	  String shop = (String)request.getAttribute("shopName");
+	  if(shopName1 != null && shop != null)  {%>
       <table>
       	<tr><span id="hint" style="color:#FF0000"></span></tr>
+      	<tr>
+            <th>商家</th><th>详细信息</th>
+            <th>操作</th>
+          </tr>
           <tr class="normal-font">
             <td class="shop-logo"><img src="images/shopLogo/${imgURL }" alt="商家商标"/><p>${shopName}</p></td><td>${shopDec}</td>
-            <td class="bindBtn"><a href="bindShop.jsp?shopName=${shopName}"><input name="bind" type="button" id="bind" class="buttonStyle1" value="绑定"></a></td>
+            <td><a href="bindShop.jsp?shopName=${shopName}"><input name="bind" type="button" id="bind" class="buttonStyle1" value="绑定"></a></td>
           </tr>
        </table>
-       <%} %>
+         <%} else if(shopName1 != null && shop == null){%>
+       <p>不存在该商家</p>
+    <% }%>
       </form>
     </div>
     
@@ -283,13 +290,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <p class="title">查看商家 <span class="title1">BOUND　SHOP</span></p>
       <form>
         <table>
+        <tr>
+            <th>商家商标</th><th>商家名</th>
+            <th>商家积分</th>
+          </tr>
         <% 	if(null != list) {
         	for(int i = 0; i < list.size(); i++) {
         		ShowBindInfo bindInfo = (ShowBindInfo)list.get(i);
         %>
           <tr>
             <td class="shop-logo"><img src="images/shopLogo/<%=bindInfo.getImgURL() %>" alt="商家商标"/></td><td><%=bindInfo.getShopName() %></td>
-            <td><input name="points" type="text" class="inputNum" id="points" value="<%=bindInfo.getPlatformPoints() %>" maxlength="20" readonly></td>
+            <td><%=bindInfo.getPlatformPoints() %></td>
           </tr>
          <%}
           }%>

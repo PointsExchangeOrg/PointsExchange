@@ -5,18 +5,18 @@ body, h1, h2, h3, h4, h5, div, p, img, form, span, ul, li, table, tr, td,input{
 	border: 0;
 }
 body {
-	margin: 5px 5px;
+	margin: 0px auto 5px;
 }
 .header, .main, .footer {
 	display:block;
 	margin: 10px auto 0;
 	width: 1000px;
 }
-.main{min-height:500px;}
+.main{min-height:600px;}
 .header {
 	width:1000px;
 	height: 80px;
-	margin:5px auto;
+	margin:auto ;
 }
 a {
 	color: #000;
@@ -24,7 +24,7 @@ a {
 }
 a:hover {
 	color: red;
-	text-decoration: none;
+	text-decoration: underline;
 }
 .clear {
 	clear: both;
@@ -100,7 +100,7 @@ h2 {
 	font-weight: normal;
 	text-align: left;
 	margin: 5px 0;
-	border-bottom: grey 1px dotted;
+	border-bottom: #D6D6D8 1px solid;
 }
 .title1 {
 	color: #d8d8d8;
@@ -123,7 +123,7 @@ h2 {
 	/*****
 	background: -moz-linear-gradient(  top,  #ff9c9c 0%,  #ff0000);
 	background: -webkit-gradient(  linear, left top, left bottom,  from(#ff9c9c),  to(#ff0000));  *****/
-	background:#FF4646;
+	background:#3385FF;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
