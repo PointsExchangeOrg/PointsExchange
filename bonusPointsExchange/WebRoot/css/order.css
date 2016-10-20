@@ -60,7 +60,7 @@ line-height:42px;
 		linear, left top, left bottom,
 		from(#ff9c9c),
 		to(#ff0000));  ****/
-    background:#FF4646;
+    background:#3385FF;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
@@ -106,14 +106,15 @@ line-height:42px;
 	font-size: 18px;
 	color: #000000;
 	padding: 3px 10px;
+
 	background: -moz-linear-gradient(
 		top,
-		#ff9c9c 0%,
-		#ff0000);
+		#3385FF 0%,
+		#0555D3);
 	background: -webkit-gradient(
 		linear, left top, left bottom,
-		from(#ff9c9c),
-		to(#ff0000));
+		from(#3385FF),
+		to(#0555D3));
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;

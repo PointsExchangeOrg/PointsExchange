@@ -17,8 +17,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<%@ include file="header.jsp" %>
 <!--header -->
+<div style="min-height:500px;">
 <div class="regist-frame">
-<p class="title">&nbsp;&nbsp;商家注册&nbsp;&nbsp;<span class="title1">USER REGISTER</span><span class="title1 right"><a href="regist.jsp">前往用户注册&nbsp;&nbsp;&nbsp;&nbsp;</a></span></p>
+<p class="title">&nbsp;&nbsp;商家注册&nbsp;&nbsp;<span class="title1">USER REGISTER</span><span class="title1 right"><a href="regist.jsp">前往用户注册</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
   <div>
     <div class="span5">
       <form onsubmit="return checkForm();" method="post" action="/bonusPointsExchange/RegistShopServlet">
@@ -65,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
   </div>
 </div>
-
+</div>
 <!--footer -->
 	<%@ include file="footer.jsp" %>
 

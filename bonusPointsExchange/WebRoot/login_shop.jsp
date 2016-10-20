@@ -42,12 +42,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--这是top-->
 	<%@ include file="header.jsp" %>
 <!--这是main_page-->
+<div style="min-height:500px;">
   <div class="login-frame">
     <div>
       <p class="title">&nbsp;&nbsp;商家登录&nbsp;&nbsp;<span class="title1">SHOP LOGIN</span><span class="title1 right"><a href="login.jsp">前往用户登录</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
     </div>
     <div class="span3">
-      <div class="ad"> <img src="images/ad3.jpg" alt="广告"/> </div>
+      <div class="ad"> <img src="images/point.jpg" alt="广告"/> </div>
     </div>
     <div class="span4">
       <form class="login-form" action="/bonusPointsExchange/ShopLoginServlet" method="post" onsubmit="return checkForm();">
@@ -65,11 +66,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td class="mid"><input name="reset" type="reset" class="submitBtn" id="reset" value="重置"></td>
           </tr>
         </table>
-        <div class="mes"><a href="regist_shop.jsp">免费注册&nbsp;&nbsp; </a><a href="/bonusPointsExchange/retrievePassword_1.jsp?method=forgetPasswd_shop">忘记密码</a></div>
+        <div class="mes"><a href="regist_shop.jsp">免费注册 </a>&nbsp;&nbsp;<a href="/bonusPointsExchange/retrievePassword_1.jsp?method=forgetPasswd_shop">忘记密码</a></div>
       </form>
     </div>
   </div>
-
+</div>
 <!--这是bottom-->
 	<%@ include file="footer.jsp" %>
 

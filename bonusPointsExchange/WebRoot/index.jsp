@@ -41,36 +41,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div id="shop-list"  class="clearfix">
       <ul>
-        <li><a><img src="images/shopLogo/beifanghangkong.jpg"/>
+        <li><img src="images/shopLogo/beifanghangkong.jpg"/>
           <p class="shopName">北方航空</p>
-          </a></li>
-        <li><a><img src="images/shopLogo/changanhangkong.jpg"/>
+          </li>
+        <li><img src="images/shopLogo/changanhangkong.jpg"/>
           <p class="shopName">长安航空</p>
-          </a></li>
-        <li><a><img src="images/shopLogo/changchenghangkong.jpg"/>
+          </li>
+        <li><img src="images/shopLogo/changchenghangkong.jpg"/>
           <p class="shopName">长城航空</p>
-          </a></li>
-        <li><a><img src="images/shopLogo/dongfanghangkong.jpg"/>
+          </li>
+        <li><img src="images/shopLogo/dongfanghangkong.jpg"/>
           <p class="shopName">东方航空</p>
-          </a></li>
-        <li><a><img src="images/shopLogo/shanghaihangkong.jpg"/>
+          </li>
+        <li><img src="images/shopLogo/shanghaihangkong.jpg"/>
           <p class="shopName">上海航空</p>
-          </a></li>
-        <li><a><img src="images/shopLogo/shenzhenhangkong.jpg"/>
+          </li>
+        <li><img src="images/shopLogo/shenzhenhangkong.jpg"/>
           <p class="shopName">深圳航空</p>
-          </a></li>
-        <li><a><img src="images/shopLogo/sichuanhangkong.jpg"/>
+          </li>
+        <li><img src="images/shopLogo/sichuanhangkong.jpg"/>
           <p class="shopName">四川航空</p>
-          </a></li>
-        <li><a><img src="images/shopLogo/wuhanhangkong.jpg"/>
+          </li>
+        <li><img src="images/shopLogo/wuhanhangkong.jpg"/>
           <p class="shopName">武汉航空</p>
-          </a></li>
-        <li><a><img src="images/shopLogo/xiamenhangkong.jpg"/>
+          </li>
+        <li><img src="images/shopLogo/xiamenhangkong.jpg"/>
           <p class="shopName">厦门航空</p>
-          </a></li>
-        <li><a><img src="images/shopLogo/zhongguoguoji.jpg"/>
+          </li>
+        <li><img src="images/shopLogo/zhongguoguoji.jpg"/>
           <p class="shopName">中国国际航空</p>
-          </a></li>
+          </li>
       </ul>
     </div>
     <div>
