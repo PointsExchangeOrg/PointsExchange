@@ -36,7 +36,8 @@ public class QueryBindedShopNameServlet extends HttpServlet {
 			request.setAttribute("index", "3");
 		if (index.equals("4"))
 			request.setAttribute("index", "4");
-		
+		if (index.equals("5"))
+			request.setAttribute("index", "5");
 		request.getRequestDispatcher("personalv1.0.jsp").forward(request, response);
 		
 	}

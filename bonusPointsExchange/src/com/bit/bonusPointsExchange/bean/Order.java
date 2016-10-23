@@ -1,6 +1,8 @@
 package com.bit.bonusPointsExchange.bean;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Vector;
 
 /**
  * 订单
@@ -21,6 +23,8 @@ public class Order {
 	private int orderStatus;//订单状态
 	private String shopLogo;//商家图标
 	private String wantedShopLogo;//目标商家图标
+	
+
 	
 	public String getShopLogo() {
 		return shopLogo;
@@ -95,6 +99,7 @@ public class Order {
 		this.shopName = shopName;
 	}
 	
+
 	
 	
 }
