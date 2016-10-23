@@ -25,7 +25,6 @@ public class ActionServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");	
 		
 		String actionCode=request.getParameter("actionCode");	
-
 		Action action = null;
 		if(actionCode.equals("log")){//登陆、注销
 			action = new LogAction();
@@ -41,6 +40,8 @@ public class ActionServlet extends HttpServlet {
 			action = new BindShopAction();
 		}else if(actionCode.equals("order")){//订单模块
 			action = new OrderAction();
+		}else if("recommend".equals(actionCode)){//智能推荐
+			action = new RecommendAction();
 		}
 		
 		action.execute(request, response);

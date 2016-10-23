@@ -1,64 +1,62 @@
+<%@page import="com.bit.bonusPointsExchange.bean.Shop"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
 <%@page import="com.bit.bonusPointsExchange.bean.Order"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%
-	List<Order> latestOrderInfoList = (List<Order>)request.getAttribute("latestOrderInfo");//最新发布的订单
+	Vector<Vector<Integer>> recOrderIdList = (Vector<Vector<Integer>>)request.getAttribute("recOrderIdList");//智能推荐的所有可能路径的所有orderId
+//	String shopName = (String)request.getAttribute("shopName");
+//	String wantedShop = (String)request.getAttribute("wantedShop");
+	List<Integer> recPoints =(List<Integer>)request.getAttribute("recPoints");
+	List<Integer> recWantedPoints =(List<Integer>)request.getAttribute("recWantedPoints");	
+	Shop recShop = (Shop)request.getAttribute("recShop");
+	Shop recWantShop = (Shop)request.getAttribute("recWantShop");
 %>
-
 <%
-  String exchangeRes = (String)request.getAttribute("exchangeRes");  //获取积分兑换是否成功
-  if(exchangeRes == "false") {
+	String finishOrderRes = (String)request.getAttribute("finishOrderRes"); //兑换积分的返回信息
+	if(finishOrderRes=="您未绑定目标商家！"){
 %>
   <script type="text/javascript" language="javascript">
+    alert("您未绑定目标商家！请绑定目标商家！"); 
+	location.href="/bonusPointsExchange/QueryBindedShopNameServlet?index="+5;  
+  </script> 
+<%}else if(finishOrderRes=="您未绑定商家！") {%>
+ <script type="text/javascript" language="javascript">
+    alert("您未绑定商家！请绑定商家！");     
+   location.href="/bonusPointsExchange/QueryBindedShopNameServlet?index="+5;                      
+  </script> 
+<%}else if(finishOrderRes=="您在商家的积分不够！"){ %>
+ <script type="text/javascript" language="javascript">
+    alert("您在商家的积分不够！请转移积分到平台！");          
+    location.href="/bonusPointsExchange/QueryBindedShopNameServlet?index="+3;    
+  </script>   
+<%}else if(finishOrderRes=="积分兑换成功！"){ %>
+ <script type="text/javascript" language="javascript">
+    alert("积分兑换成功!");                            
+    location.href="/bonusPointsExchange/actionServlet?actionCode=order&methodCode=findAllOrder&selectSort=null";
+  </script>     
+<%}else if(finishOrderRes=="积分兑换失败！"){ %>
+ <script type="text/javascript" language="javascript">
     alert("积分兑换失败！");                            
-  </script> 
-<% } else if(exchangeRes == "true") {%>
-  <script type="text/javascript" language="javascript">
-    alert("积分兑换 成功！");                                      
-  </script> 
-<% }else if(exchangeRes == "连接blockchain失败，请检查网络") {%>
-  <script type="text/javascript" language="javascript">
-    alert("连接blockchain失败，请检查网络！");                                      
-  </script> 
-<% }%>
-<%
-  String isBindShopName = (String)request.getAttribute("isBindShopName");  //获取商家是否绑定
-  if(isBindShopName == "false") {
-%>
-  <script type="text/javascript" language="javascript">
-    alert("您未绑定商家！");                            
-  </script> 
-<% }%>
-<%
-  String isBindWantedShop = (String)request.getAttribute("isBindWantedShop");  //获取目标商家是否绑定
-  if(isBindWantedShop == "false") {
-%>
-  <script type="text/javascript" language="javascript">
-    alert("您未绑定目标商家！");                            
-  </script> 
-<% }%>
-<%
-  String isPointEnough = (String)request.getAttribute("isPointEnough");  //获取商家积分是否足够用来交易
-  if(isPointEnough == "no") {
-%>
-  <script type="text/javascript" language="javascript">
-    alert("您在商家的积分不够！");                            
-  </script> 
-<% }%>
-
-<%
-//用户和商家需登录之后才能查看最新发布
-String userName = (String)request.getSession().getAttribute("userName");
-String shopName = (String)request.getSession().getAttribute("shopName");	
-if(userName == null && shopName == null) { %>
-	<script type="text/javascript" language="javascript">
-		alert("您还没有登录！请登录！");    // 弹出错误信息
-		window.location.href="/bonusPointsExchange/login.jsp" ;                             
-	</script>	
-<% } %>
+    location.href="/bonusPointsExchange/actionServlet?actionCode=order&methodCode=findAllOrder&selectSort=null";
+  </script>    
+ <%}else if(finishOrderRes=="连接blockchain失败，请检查网络！"){ %>
+ <script type="text/javascript" language="javascript">
+    alert("连接blockchain失败，请检查网络！");            
+    location.href="/bonusPointsExchange/actionServlet?actionCode=order&methodCode=findAllOrder&selectSort=null";
+  </script>   
+<%} else if(finishOrderRes=="需要绑定中间商家"){
+		String recBindShops = (String)request.getAttribute("recBindShops");
+		System.out.println("jsp"+recBindShops);%>
+ <script type="text/javascript" language="javascript">
+ var recBindShops1= "<%=recBindShops%>";
+    alert("推荐您绑定"+recBindShops1+"才能完成此交易！");            
+    location.href="/bonusPointsExchange/QueryBindedShopNameServlet?index="+5;
+  </script>   
+<%} %>
 <!doctype html>
 <html>
 <head>
@@ -79,59 +77,53 @@ if(userName == null && shopName == null) { %>
     <!---- 事例1------>
     <div class="order-info clearfix">
     <!-- 每次需要获得两个订单的详细信息-->
-     <% if(null != latestOrderInfoList) {
+     <% if(null != recOrderIdList) {
              //System.out.println(latestOrderInfoList.size());
-            for(int i = 0; i < latestOrderInfoList.size(); i++) {
-           	 Order orderInfo = (Order)latestOrderInfoList.get(i);
+            for(int i = 0; i < recOrderIdList.size(); i++) {
+           	 Vector<Integer> recOrderIds = (Vector<Integer>)recOrderIdList.get(i);
       %>
       <!-- 以上需要修改 -->
-    <form action= "/bonusPointsExchange/FinishLatestOrder" method="post" onsubmit="return checkShop();">
+    <form action= "/bonusPointsExchange/actionServlet" method="post" onsubmit="return checkShop();">
       <ul class="clearfix">
-        <li class="shop-logo"><img src="images/shopLogo/<%=orderInfo1.getShopLogo()%>"/></li>
+        <li class="shop-logo"><img src="images/shopLogo/<%=recShop.getImgUrl()%>"/></li>
         <li class="exchangeOrder-info">
         <!-- table 中是用户最终交易需要的积分-->
           <table>
             <tr>
-              <td>商家：<%=orderInfo1.getShopName()%></td>
+              <td>商家：<%=recShop.getShopName() %></td>
             </tr>
             <tr>
-              <td>积分数量：<%=orderInfo1.getPoint()%></td>
+              <td>积分数量：<%=recPoints.get(i) %></td>
             </tr>
             <tr>
-             <td>订单交易方：3方</td>
+             <td>订单交易方：<%=recOrderIds.size()+1 %>方</td>
             </tr> 
           </table>
         </li>  
         <li><img src="images/2.png"/></li>
         <li>&nbsp;&nbsp;</li>
-        <li class="shop-logo" rowspan="3"><img src="images/shopLogo/<%=orderInfo2.getWantedShopLogo() %>"/></li>
+        <li class="shop-logo" rowspan="3"><img src="images/shopLogo/<%=recWantShop.getImgUrl()%>"/></li>
         <li class="exchangeOrder-info">
         <!-- table 中是用户最终交易获得的积分-->
           <table>
             <tr>
-              <td>目标商家：<%=orderInfo2.getWantedShop()%></td>
+              <td>目标商家：<%=recWantShop.getShopName() %></td>
             </tr>
             <tr>
-              <td>目标积分数量：<%=orderInfo2.getWantedPoint()%></td>
+              <td>目标积分数量：<%=recWantedPoints.get(i) %></td>
             </tr>
             <tr>
-              <td>截止日期：<%=orderInfo2.getUntilDate()%></td>
+              <td></td>
             </tr> 
           </table>
-        </li>        
-        <%if(orderInfo.getUserName().equals(isUserLogin)) { %>
-        <li class="operate">
-          <input name="exchange" type="button" style="background:#EDEDED;" disabled="disabled" class="submitBtn"  id="exchange" value="交易">
-        </li>
-        <%} else {%>
+        </li>          
          <li class="operate">
           <input name="exchange" type="submit" class="submitBtn"  id="exchange" value="交易">
         </li>
-        <%} %>
-        <input type="hidden" name="orderID1" value="<%=orderInfo1.getOrderID()%>"/>
-        <input type="hidden" name="orderID2" value="<%=orderInfo2.getOrderID()%>"/>
+    
+        <input type="hidden" name="recOrderIds" value="<%=recOrderIds%>"/>
         <input type="hidden" name="actionCode" value="order"/>
-      	<input type="hidden" name="methodCode" value="finsh_order"/>     	
+      	<input type="hidden" name="methodCode" value="finsh_order_muliti"/>     	
       </ul>
      </form>
     <%} %>
@@ -140,7 +132,7 @@ if(userName == null && shopName == null) { %>
  <%} %>
     </div>
   </div>
-   <input type="hidden" name="session" id="session" value="<%=session.getAttribute("shopName") %>"/>
+  
 </div>
 <!--这是bottom-->
 	<%@ include file="footer.jsp" %>
@@ -154,6 +146,8 @@ function checkShop() {
 		return false;
 	}
 }
+
+function getJson()
 </script>
 -->
 </html>

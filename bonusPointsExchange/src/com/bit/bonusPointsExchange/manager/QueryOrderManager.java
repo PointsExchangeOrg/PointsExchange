@@ -89,7 +89,7 @@ public class QueryOrderManager {
 		ResultSet rs = null;
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select *from bonusPointsExchange.order where shopName='"+wantedShop+"' and wantedShop='"+shopName+"' and orderStatus=0 and userName!='"+userName+"' and point >= '"+downPoint+"' and point <= '"+upPoint+"' and wantedPoint >= '"+downWantedPoint+"' and wantedPoint <= '"+upWantedPoint+"' order by point / wantedPoint desc");                                                 		     
+			rs = stmt.executeQuery("select *from bonusPointsExchange.order where shopName='"+wantedShop+"' and wantedShop='"+shopName+"' and orderStatus=0 and userName!='"+userName+"' and wantedPoint >= '"+downPoint+"' and wantedPoint <= '"+upPoint+"' and point >= '"+downWantedPoint+"' and point <= '"+upWantedPoint+"' order by point / wantedPoint desc");                                                 		     
 			while(rs.next()) {
 				Order orderInfo = new Order();
 				orderInfo.setOrderID(rs.getInt("orderID"));
@@ -133,7 +133,7 @@ public class QueryOrderManager {
 		int upWantedPoint = (int)(wantedPoint + wantedPoint * 0.1);
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select *from bonusPointsExchange.order where shopName='"+wantedShop+"' and wantedShop='"+shopName+"' and userName!='"+userName+"' and point >= '"+downPoint+"' and point <= '"+upPoint+"' and wantedPoint >= '"+downWantedPoint+"' and wantedPoint <= '"+upWantedPoint+"' and orderStatus=0 order by untilDate desc");                                                 		     
+			rs = stmt.executeQuery("select *from bonusPointsExchange.order where shopName='"+wantedShop+"' and wantedShop='"+shopName+"' and userName!='"+userName+"' and wantedPoint >= '"+downPoint+"' and wantedPoint <= '"+upPoint+"' and point >= '"+downWantedPoint+"' and point <= '"+upWantedPoint+"' and orderStatus=0 order by untilDate desc");                                                 		     
 			while(rs.next()) {
 				Order orderInfo = new Order();
 				orderInfo.setOrderID(rs.getInt("orderID"));

@@ -30,45 +30,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <% }%>
 
 <%
-  String exchangeRes = (String)request.getAttribute("exchangeRes");  //获取积分兑换是否成功
-  if(exchangeRes == "false") {
-%>
-  <script type="text/javascript" language="javascript">
-    alert("积分兑换失败！");                            
-  </script> 
-<% } else if(exchangeRes == "true") {%>
-  <script type="text/javascript" language="javascript">
-    alert("积分兑换 成功！");                                      
-  </script>
-<% } else if(exchangeRes == "连接blockchain失败，请检查网络") {%>
-  <script type="text/javascript" language="javascript">
-    alert("连接blockchain失败，请检查网络！");                                      
-  </script>   
-<% }%>
-<%
-  String isBindShopName = (String)request.getAttribute("isBindShopName");  //获取商家是否绑定
-  if(isBindShopName == "false") {
-%>
-  <script type="text/javascript" language="javascript">
-    alert("您未绑定商家！");                            
-  </script> 
-<% }%>
-<%
-  String isBindWantedShop = (String)request.getAttribute("isBindWantedShop");  //获取目标商家是否绑定
-  if(isBindWantedShop == "false") {
+	String finishOrderRes = (String)request.getAttribute("finishOrderRes"); //兑换积分的返回信息
+	if(finishOrderRes=="您未绑定目标商家！"){
 %>
   <script type="text/javascript" language="javascript">
     alert("您未绑定目标商家！");                            
   </script> 
-<% }%>
-<%
-  String isPointEnough = (String)request.getAttribute("isPointEnough");  //获取商家积分是否足够用来交易
-  if(isPointEnough == "no") {
-%>
-  <script type="text/javascript" language="javascript">
-    alert("您在商家的积分不够！");                            
+<%}else if(finishOrderRes=="您未绑定商家！") {%>
+ <script type="text/javascript" language="javascript">
+    alert("您未绑定商家！");                            
   </script> 
-<% }%>
+<%}else if(finishOrderRes=="您在商家的积分不够！"){ %>
+ <script type="text/javascript" language="javascript">
+    alert("您在商家的积分不够！");                            
+  </script>   
+<%}else if(finishOrderRes=="积分兑换成功！"){ 
+ System.out.print(finishOrderRes);
+%>
+ <script type="text/javascript" language="javascript">
+    alert("积分兑换成功!");                            
+  </script>     
+<%}else if(finishOrderRes=="积分兑换失败！"){ %>
+ <script type="text/javascript" language="javascript">
+    alert("积分兑换失败！");                            
+  </script>    
+ <%}else if(finishOrderRes=="连接blockchain失败，请检查网络！"){ %>
+ <script type="text/javascript" language="javascript">
+    alert("连接blockchain失败，请检查网络！");                            
+  </script>   
+<%} %>
 <!doctype html>
 <html>
 <head>
@@ -96,6 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="releaseOrder">
         <p class="title">发布新订单<span class="title1">&nbsp;&nbsp;REALEASE ORDER</span><span class="title1 right"><a href="reference.jsp">前往参考价</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
         <form action="/bonusPointsExchange/actionServlet" method="post" onsubmit="return checkShop()&&checkPoint()&&checkNull();">
+       
           <table>
             <tr>
               <td>选择商家：</td>
@@ -200,7 +191,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </ul>
         </div>
       </div>   
-   </div>   
+   </div>
     <!----------- 搜索订单------------------------------>
     <div id="div3">      <p class="title">查看所有订单<span class="title1">&nbsp;&nbsp;ALL ORDER</span></p>
       <div id="search">
@@ -294,7 +285,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </tr>
        </c:forEach>
        <%}else if(findRes=="true" && null == AllOrderByRateList && null == AllOrderByUntilDate){%> 
-     		<br/><br/><br/><p align="center">  搜索结果为0！</p>
+     		<br/><br/><br/><p align="center"><a href="javascript:recommend();">搜索结果为0！可以使用智能推荐功能来匹配您的需求</a></p>   
         <%} %>		                    
       </table>     
         </form>
@@ -307,14 +298,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- 根据返回的index显示div -->
 <script type="text/javascript" language="javascript">
+  //alert("asdas");
   var index = ${index};
-  //alert(index);
+ // var index1 =  document.getElementById("index1111").value;
+ // alert(index1);
   var show=parseInt(index);
   //alert(show);
   for(i=1;i<=3;i++){
     document.getElementById('div'+i).style.display = "none";
   }
   document.getElementById('div'+index).style.display = "block";
+  //document.getElementById('div'+index1).style.display = "block";
 </script>
 
 
@@ -506,6 +500,16 @@ function checkForm() {
 	}
  }
 
+//智能推荐
+function recommend() {
+  	var shopName = document.getElementById("shop").value;
+	var point = document.getElementById("point").value;
+	var targetShop = document.getElementById("targetShop").value;
+	var wantedPoint = document.getElementById("wantedPoint2").value;
+  	window.location = "/bonusPointsExchange/actionServlet?actionCode=recommend&shopName="+encodeURI(encodeURI(shopName))+"&point="+point+"&targetShop="+encodeURI(encodeURI(targetShop))+"&wantedPoint="+wantedPoint;
+ 	
+ 	
+}
 </script>
 
 <body></body>

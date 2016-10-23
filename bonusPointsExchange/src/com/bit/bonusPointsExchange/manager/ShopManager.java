@@ -49,4 +49,22 @@ public class ShopManager {
 		}
 		return result;
 	}
+	public String[] findAllShop(){
+		conn=DBUtils.getConnection();
+		String[] s = new String[1000];
+		int i=0;
+		try {
+			stmt=conn.createStatement();
+			sql="select shopName from shop";
+			rs = stmt.executeQuery(sql);
+			while(rs.next()){
+				s[i]=rs.getString("shopName");
+				i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return s;
+	}
 }

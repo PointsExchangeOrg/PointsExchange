@@ -55,7 +55,7 @@ public class OrderManager {
 		int upWantedPoint = (int)(wantedPoint + wantedPoint * 0.1);
 		try {
 			stmt = conn.createStatement();
-			sql="select orderID,userName,shopName,wantedShop,point,wantedPoint,untilDate from bonusPointsExchange.order where userName!='"+userName+"' and orderStatus=0 and shopName='"+order.getWantedShop()+"' and wantedShop='"+order.getShopName()+"' and point >= '"+downPoint+"' and point <= '"+upPoint+"' and wantedPoint >= '"+downWantedPoint+"' and wantedPoint <= '"+upWantedPoint+"' order by point desc";
+			sql="select orderID,userName,shopName,wantedShop,point,wantedPoint,untilDate from bonusPointsExchange.order where userName!='"+userName+"' and orderStatus=0 and shopName='"+order.getWantedShop()+"' and wantedShop='"+order.getShopName()+"' and wantedPoint >= '"+downPoint+"' and wantedPoint <= '"+upPoint+"' and point >= '"+downWantedPoint+"' and point <= '"+upWantedPoint+"' order by point desc";
 			rs = stmt.executeQuery(sql);
 			while(rs.next()){
 				Order ordertmp = new Order();
@@ -168,4 +168,35 @@ public class OrderManager {
 					 
 		return orders;
 	} 
+	
+	public List<Order> findAllOrder(String userName){//查询所有发布的未完成订单，且发布者不能为登陆用户
+		List<Order> orders = new ArrayList<Order>();
+		conn=DBUtils.getConnection();
+		
+		try {
+			stmt=conn.createStatement();
+			sql="select * from bonusPointsExchange.order where orderStatus=0 and userName!='"+userName+"'";
+			rs=stmt.executeQuery(sql);
+			while(rs.next()){
+				Order order = new Order();
+				System.out.println(rs.getInt("orderID"));
+				order.setOrderID(rs.getInt("orderID"));
+				order.setUserName(rs.getString("userName"));
+				order.setShopName(rs.getString("shopName"));
+				order.setWantedShop(rs.getString("wantedShop"));
+				order.setPoint(rs.getInt("point"));
+				order.setWantedPoint(rs.getInt("wantedPoint"));
+				order.setUntilDate(rs.getString("untilDate"));
+				orders.add(order);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(int i = 0;i < orders.size();i++) {
+			
+			System.out.println("test="+orders.get(i).getOrderID());
+		}
+		return orders;
+	}
 }
