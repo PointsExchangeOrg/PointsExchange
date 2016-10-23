@@ -9,13 +9,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'forPasswdSuccess.jsp' starting page</title>
+    <title>忘记密码</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
+	<link rel="Shortcut Icon" href="images/bonus.jpg">
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->

@@ -67,6 +67,7 @@ if(userName == null && shopName == null) { %>
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/footer.css" >
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/order.css">
+<link rel="Shortcut Icon" href="images/bonus.jpg">
 </head>
 
 <body>

@@ -9,9 +9,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta charset="utf-8">
 <title>商家注册</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link href="css/footer.css" rel="stylesheet" type="text/css">
-<link href="css/regist.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=basePath%>css/regist.css" rel="stylesheet" type="text/css">
+<link rel="Shortcut Icon" href="images/bonus.jpg">
 </head>
 
 <body>

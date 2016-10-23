@@ -28,9 +28,10 @@ if(userName == null && shopName == null) { %>
 <head>
 <meta charset="utf-8">
 <title>参考价</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link rel="stylesheet" type="text/css" href="css/footer.css" >
-<link rel="stylesheet" type="text/css" href="css/order.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/footer.css" >
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/order.css">
+<link rel="Shortcut Icon" href="images/bonus.jpg">
 </head>
 
 <body>

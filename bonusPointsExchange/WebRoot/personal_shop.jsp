@@ -84,6 +84,7 @@ if(uploadTypeErr == "N") {%>
 <script src="jQueryAssets/jquery-ui-1.9.2.accordion.custom.min.js" type="text/javascript"></script>
 <script src="jQueryAssets/jquery-ui-1.9.2.button.custom.min.js" type="text/javascript"></script>
 <script src="Echarts/echarts.common.min.js"></script>
+<link rel="Shortcut Icon" href="images/bonus.jpg">
 </head>
 <body>
 <!--这是top-->

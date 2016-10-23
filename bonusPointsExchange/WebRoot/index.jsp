@@ -18,6 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
 <link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/index.css">
+<link rel="Shortcut Icon" href="images/bonus.jpg">
 </head>
 <body>
 
