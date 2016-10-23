@@ -3,7 +3,7 @@
 	width: 1000px;
 	height: 350px;
 	margin: auto auto;
-	border:grey 1px solid;
+	border: #d8d8d8 1px solid;
 }
 .title {
 	height: 30px;
@@ -20,18 +20,19 @@
 .span3, .span4 {
 	_display: inline;
 	float: left;
-	overflow: hidden;
+	overflow: hidden; 
 }
 .ad {
 	height: 300px;
 	width: 650px;
-	margin: 5px 10px;
+	margin: 12px 10px;
 }
 .login-form {
 	min-height: 280px;
 	margin: 10px auto;
 	font-size: 24px;
 	background:white;
+	border: #d8d8d8 1px solid;
 }
 .login-form table{
 	margin:15px 10px;

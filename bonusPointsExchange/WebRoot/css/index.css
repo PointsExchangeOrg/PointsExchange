@@ -2,7 +2,7 @@
 .index {
 	margin: 10px auto;
 	width: 1000px;
-	min-height: 500px;
+    height: 720px; 
 }
 .index1, .index2 {
 	float: left;
@@ -83,6 +83,7 @@
 	font-size: 18px;
 	color: #000000;
 	padding: 3px 10px;
+/*****
 	background: -moz-linear-gradient(
 		top,
 		#ff9c9c 0%,
@@ -91,6 +92,8 @@
 		linear, left top, left bottom,
 		from(#ff9c9c),
 		to(#ff0000));
+*****/
+    background:#3385FF;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;

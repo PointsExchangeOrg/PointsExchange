@@ -109,7 +109,7 @@ public class UserPointToplatfromManger {
 		conn=DBUtils.getConnection();
 		try {
 			stmt=conn.createStatement();
-			String sql="insert into transfer(pointID,status,point) values('"+transfer.getPointID()+"','"+transfer.getStatus()+"','"+transfer.getPoint()+"')";
+			String sql="insert into transfer(pointID,status,point,transferTime) values('"+transfer.getPointID()+"','"+transfer.getStatus()+"','"+transfer.getPoint()+"','"+transfer.getTransferTime()+"')";
 			count=stmt.executeUpdate(sql);//执行插入语句，并返回插入数据的个数	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

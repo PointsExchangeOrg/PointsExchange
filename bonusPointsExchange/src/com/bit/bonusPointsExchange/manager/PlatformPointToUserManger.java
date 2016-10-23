@@ -56,7 +56,7 @@ public class PlatformPointToUserManger {
 		conn=DBUtils.getConnection();
 		try {
 			stmt=conn.createStatement();
-			String sql="insert into transfer(pointID,status,point) values('"+transfer.getPointID()+"','"+transfer.getStatus()+"','"+transfer.getPoint()+"')";
+			String sql="insert into transfer(pointID,status,point,transferTime,shopName) values('"+transfer.getPointID()+"','"+transfer.getStatus()+"','"+transfer.getPoint()+"','"+transfer.getTransferTime()+"','"+transfer.getShopName()+"')";
 			count=stmt.executeUpdate(sql);//执行插入语句，并返回插入数据的个数	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

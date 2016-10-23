@@ -83,6 +83,7 @@ if(uploadTypeErr == "N") {%>
 <script src="jQueryAssets/jquery-1.8.3.min.js" type="text/javascript"></script>
 <script src="jQueryAssets/jquery-ui-1.9.2.accordion.custom.min.js" type="text/javascript"></script>
 <script src="jQueryAssets/jquery-ui-1.9.2.button.custom.min.js" type="text/javascript"></script>
+<script src="Echarts/echarts.common.min.js"></script>
 </head>
 <body>
 <!--这是top-->
@@ -215,7 +216,7 @@ if(uploadTypeErr == "N") {%>
     <div id="div3">
       <p class="title">用户量分析<span class="title1">USER AMOUNT ANALYSIS</span></p>
       <h3 style="text-align: center">一星期用户变化折线图</h3>
-
+      <div id="mainDiv" style="width: 700px;height:400px;"></div>
     </div>
     <div id="div4">
       <p class="title">积分变化分析<span class="title1">POINTS ANALYSIS</span></p>
@@ -229,6 +230,7 @@ if(uploadTypeErr == "N") {%>
         </tr>
       </table>
       <h3 style="text-align: center">积分变化表</h3>
+      <div id="mainDiv2" style="width: 700px;height:400px;"></div>
     </div>
   </div>
 </div>
@@ -236,21 +238,164 @@ if(uploadTypeErr == "N") {%>
 	<%@ include file="footer.jsp" %>
 
 
-
+<script type="text/javascript">
+	
+</script>
 
 <script type="text/javascript">
-/****
-$(function() {
-	$( "#Accordion1" ).accordion(); 
-});
-***/
 function showDiv(index){   
 var show=parseInt(index);
 for(i=1;i<=4;i++){
 	document.getElementById('div'+i).style.display = "none";}
 	document.getElementById('div'+index).style.display = "block";
-} 
+	if(show == 3) {
+		loadDataAndShow();
+	}
+	if(show == 4) {
+		loadDataAndShow2();
+	}
 
+} 
+//积分变化量分析
+function loadDataAndShow2(){
+	// 基于准备好的dom，初始化echarts实例
+	var myChart = echarts.init(document.getElementById('mainDiv2'));
+	myChart.showLoading({text : '正在努力为您加载中...',});
+	// 指定图表的配置项和数据
+	var option = {
+		  tooltip: {//不显示待解决
+        		trigger: 'axis',
+        		axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            	type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            	}
+    		},
+    		legend: {
+       			 data:['入积分','出积分'],
+   		 	},
+   		 	
+          xAxis : [
+              {
+              	type:'category',  
+       	 		axisLabel:{ interval: 0 }  
+              }
+          ],
+          yAxis : [
+              {
+                  type : 'value',
+              }
+          ],
+          series : [
+              {
+              		name:'入积分',
+              		type:'bar',
+              },
+              {
+              		name:'出积分',
+              		type:'bar',
+              }
+          ]
+      };
+	
+	 $.ajax({
+	       type : "post",
+	       async : false, //同步执行
+	       url : "/bonusPointsExchange/QueryShopPointInOutNumServ",
+	       data : {},
+	       dataType : "json", //返回数据形式为json
+	       success : function(result) {
+	       //alert(result[0].time);
+	                  if (result) {
+	                         //初始化option.xAxis[0]中的data
+	                          option.xAxis[0].data=[];
+	                          for(var i = 0;i < result.length;i++){
+	                            option.xAxis[0].data.push(result[i].time);
+	                          }
+	                          //初始化option.series[0]中的data
+	                          option.series[0].data=[];
+	                          option.series[1].data=[];
+	                          for(var i = 0;i < result.length;i++){
+	                            option.series[0].data.push(result[i].inNum);//入积分
+	                            option.series[1].data.push(result[i].outNum);//出积分
+	                          }
+				                var d = new Date();
+								var nowTime = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+				                //alert(nowTime);
+				                result[result.length - 1].inNum;
+				                var time = result[result.length - 1].time;
+				                var inNum = result[result.length - 1].inNum;
+				                var outNum = result[result.length - 1].outNum;
+				                if(nowTime == time) {
+				                	//alert("aa");
+				                	document.getElementById('inPoint').value=inNum;
+				                	document.getElementById('outPoint').value=outNum;
+	              				}                          
+	                   }
+	                }
+	    });       
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.hideLoading();//取消loading
+	myChart.setOption(option);
+}
+//用户量分析
+function loadDataAndShow(){
+	// 基于准备好的dom，初始化echarts实例
+	var myChart = echarts.init(document.getElementById('mainDiv'));
+	myChart.showLoading({text : '正在努力为您加载中...',});
+	// 指定图表的配置项和数据
+	var option = {
+		  tooltip: {//不显示待解决
+        		trigger: 'axis',
+    		},
+    		legend: {
+       			 data:['每日绑定用户量'],
+   		 	},
+          xAxis : [
+              {
+              	type:'category',  
+              	boundaryGap: false,
+       	 		axisLabel:{ interval: 0 }  
+              }
+          ],
+          yAxis : [
+              {
+                  type : 'value',
+                  boundaryGap: false,
+              }
+          ],
+          series : [
+              {
+              		name:'每日绑定用户量',
+              		type:'line',
+              }
+          ]
+      };
+	
+	 $.ajax({
+	       type : "post",
+	       async : false, //同步执行
+	       url : "/bonusPointsExchange/QueryUserAmountChangeAweekServ",
+	       data : {},
+	       dataType : "json", //返回数据形式为json
+	       success : function(result) {
+	       //alert(result[0].time);
+	                  if (result) {
+	                         //初始化option.xAxis[0]中的data
+	                          option.xAxis[0].data=[];
+	                          for(var i = 0;i < result.length;i++){
+	                            option.xAxis[0].data.push(result[i].time);
+	                          }
+	                          //初始化option.series[0]中的data
+	                          option.series[0].data=[];
+	                          for(var i = 0;i < result.length;i++){
+	                            option.series[0].data.push(result[i].num);
+	                          }
+	                   }
+	                }
+	    });       
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.hideLoading();//取消loading
+	myChart.setOption(option);
+}
 //修改密码的表单验证
 function changePawcheckFrom() {
 	
@@ -322,11 +467,7 @@ function checkForm() {
  		return false;
 	}
 	return true;
-}
-//弹出一个网页，以对话框的形式弹出
-function openwindow(){ 
-        window.showModalDialog("uploadBox.jsp",window,"dialogWidth:360px;dialogHeight:200px");
-      }     
+} 
 
 function openNew(){
 	/*//获取页面的高度和宽度
