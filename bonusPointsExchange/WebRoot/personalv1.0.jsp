@@ -92,9 +92,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta charset="utf-8">
 <title>个人中心</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link href="css/footer.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="css/personal.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/personal.css">
 </head>
 <body>
 <!--这是top-->
@@ -151,7 +151,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </form>
     </div>
     <div id="div2">
-      <p class="title">修改密码 <span class="title1">USER　PASSWORD</span></p>
+      <p class="title">修改密码 <span class="title1">USER PASSWORD</span></p>
       <form action="/bonusPointsExchange/actionServlet" onsubmit="return checkInputPasswd();">
         <table>
         <tr>
@@ -281,13 +281,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
        </table>
          <%} else if(shopName1 != null && shop == null){%>
-       <p>不存在该商家</p>
+         <br/><br/><br/>
+       <p class="mid">不存在该商家! 请重新搜索</p>
     <% }%>
       </form>
     </div>
     
     <div id="div6">
-      <p class="title">查看商家 <span class="title1">BOUND　SHOP</span></p>
+      <p class="title">查看商家 <span class="title1">BOUND SHOP</span></p>
       <form>
         <table>
         <tr>

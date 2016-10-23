@@ -34,9 +34,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta charset="utf-8">
 <title>登录</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link href="css/footer.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/login.css">
 </head>
 <body>
 <!--这是top-->

@@ -64,9 +64,9 @@ if(userName == null && shopName == null) { %>
 <head>
 <meta charset="utf-8">
 <title>最新交易</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link rel="stylesheet" type="text/css" href="css/footer.css" >
-<link rel="stylesheet" type="text/css" href="css/order.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/footer.css" >
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/order.css">
 </head>
 
 <body>
@@ -150,5 +150,4 @@ function checkShop() {
 	}
 }
 </script>
--->
 </html>

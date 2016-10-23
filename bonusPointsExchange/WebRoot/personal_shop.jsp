@@ -73,9 +73,9 @@ if(uploadTypeErr == "N") {%>
 </style>
 <meta charset="utf-8">
 <title>商家中心</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link href="css/footer.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="css/personal.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/personal.css">
 <link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
 <link href="jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
 <link href="jQueryAssets/jquery.ui.accordion.min.css" rel="stylesheet" type="text/css">
