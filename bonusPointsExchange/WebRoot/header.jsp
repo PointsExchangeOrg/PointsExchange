@@ -18,7 +18,7 @@
 	String isShopLogin = (String)session.getAttribute("shopName"); 
 	if(isUserLogin == null && isShopLogin == null) {
 	%>
-	<li><a href="login.jsp">我的账户</a> </li>
+	<li><a href="login.jsp">登录</a> </li>
 <% } else if(isUserLogin != null && isShopLogin == null){%>
 	 <li  style="font-size:30px;">
 	<a href="/bonusPointsExchange/actionServlet?actionCode=user&methodCode=query_user_info"><%=session.getAttribute("userName") %></a>|<a href="/bonusPointsExchange/actionServlet?actionCode=log&methodCode=logout&logType=user"><span style="font-size:18px;">注销</span></a></li>	

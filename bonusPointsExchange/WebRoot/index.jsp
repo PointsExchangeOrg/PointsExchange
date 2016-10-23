@@ -15,9 +15,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta charset="utf-8">
 <title>主页</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link href="css/footer.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/index.css">
 </head>
 <body>
 
@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   <div class="index2">
     <div>
-      <p class="title">商家<span class="more title1"><a href="#">更多</a></span></p>
+      <p class="title">商家<span class="more title1"></span></p>
     </div>
     <div id="shop-list"  class="clearfix">
       <ul>
@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </ul>
     </div>
     <div>
-      <p class="title">最新发布<span class="more title1"><a href="#">更多</a></span></p>
+      <p class="title">最新发布<span class="more title1"><a href="/bonusPointsExchange/QueryLatestOrder">更多</a></span></p>
     </div>
     <div id="order-list" class="clearfix"> 
       <!---- 事例1------>

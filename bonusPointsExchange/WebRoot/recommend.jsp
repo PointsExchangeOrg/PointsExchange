@@ -62,9 +62,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta charset="utf-8">
 <title>智能推荐</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link rel="stylesheet" type="text/css" href="css/footer.css" >
-<link rel="stylesheet" type="text/css" href="css/order.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/footer.css" >
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/order.css">
 </head>
 
 <body>

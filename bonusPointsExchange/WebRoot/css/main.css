@@ -7,6 +7,9 @@ body, h1, h2, h3, h4, h5, div, p, img, form, span, ul, li, table, tr, td,input{
 body {
 	margin: 0px auto 5px;
 }
+input{
+	border: #d8d8d8 1px solid;
+}
 .header, .main, .footer {
 	display:block;
 	margin: 10px auto 0;
