@@ -4,6 +4,6 @@
 <div style="background-color:#F0F1F2; margin-top:0px;">
 <hr  style="background-color:#3385FF; height:1px;"/>
 <div class="footer">
-    <p>Copyright (C) 2015-2016  积分兑换平台</p>
+    <p>Copyright (C) 2015-2017   Based Consumption credit points exchange system</p>
 </div>
 </div>

@@ -63,7 +63,7 @@ if(userName == null && shopName == null) { %>
 <html>
 <head>
 <meta charset="utf-8">
-<title>最新交易</title>
+<title>Latest release</title>
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/footer.css" >
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/order.css">
@@ -74,7 +74,7 @@ if(userName == null && shopName == null) { %>
 	<%@ include file="header.jsp" %>
 <!--这是main_page-->
 <div class="exchangeOrder">
-    <p class="title">最新发布<span class="title1">&nbsp;&nbsp;&nbsp;REALEASE RECENTLY</span></p>
+    <p class="title">REALEASE RECENTLY</p>
   <div id="order-list" class="clearfix"> 
     <!---- 事例1------>
     <div class="order-info clearfix">
@@ -89,13 +89,13 @@ if(userName == null && shopName == null) { %>
         <li class="exchangeOrder-info">
           <table>
             <tr>
-              <td>商家：<%=orderInfo.getShopName()%></td>
+              <td>Shop：<%=orderInfo.getShopName()%></td>
             </tr>
             <tr>
-              <td>积分数量：<%=orderInfo.getPoint()%></td>
+              <td>Points：<%=orderInfo.getPoint()%></td>
             </tr>
             <tr>
-             <td>订单发布方：<%=orderInfo.getUserName() %></td>
+             <td>Username：<%=orderInfo.getUserName() %></td>
             </tr> 
           </table>
         </li>  
@@ -105,23 +105,23 @@ if(userName == null && shopName == null) { %>
         <li class="exchangeOrder-info">
           <table>
             <tr>
-              <td>目标商家：<%=orderInfo.getWantedShop()%></td>
+              <td>Wanted shop：<%=orderInfo.getWantedShop()%></td>
             </tr>
             <tr>
-              <td>目标积分数量：<%=orderInfo.getWantedPoint()%></td>
+              <td>Wanted point：<%=orderInfo.getWantedPoint()%></td>
             </tr>
             <tr>
-              <td>截止日期：<%=orderInfo.getUntilDate()%></td>
+              <td>Deadline：<%=orderInfo.getUntilDate()%></td>
             </tr> 
           </table>
         </li>        
         <%if(orderInfo.getUserName().equals(isUserLogin)) { %>
         <li class="operate">
-          <input name="exchange" type="button" style="background:#EDEDED;" disabled="disabled" class="submitBtn"  id="exchange" value="交易">
+          <input name="exchange" type="button" style="background:#EDEDED;" disabled="disabled" class="submitBtn"  id="exchange" value="Submit">
         </li>
         <%} else {%>
          <li class="operate">
-          <input name="exchange" type="submit" class="submitBtn"  id="exchange" value="交易">
+          <input name="exchange" type="submit" class="submitBtn"  id="exchange" value="Submit">
         </li>
         <%} %>
         <input type="hidden" name="orderID" value="<%=orderInfo.getOrderID()%>"/>
@@ -131,7 +131,7 @@ if(userName == null && shopName == null) { %>
      </form>
     <%} %>
   <%} else {%>
-       <br/><br/><br/><p align="center">  搜索结果为0！</p>
+       <br/><br/><br/><p align="center">  No order！</p>
  <%} %>
     </div>
   </div>

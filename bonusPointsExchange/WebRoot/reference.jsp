@@ -27,7 +27,7 @@ if(userName == null && shopName == null) { %>
 <html>
 <head>
 <meta charset="utf-8">
-<title>参考价</title>
+<title>Reference price</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/footer.css" >
 <link rel="stylesheet" type="text/css" href="css/order.css">
@@ -39,22 +39,22 @@ if(userName == null && shopName == null) { %>
 <!--这是main_page-->
 <div class="referenceOrder">
   <div>
-    <p class="title">参考价<span class="title1">&nbsp;&nbsp;&nbsp;REFERENCE PRICE</span></p>
+    <p class="title">REFERENCE PRICE</p>
   </div>
   <%if(request.getAttribute("shopName") == null) { %>
   <div> &nbsp;	
  	 <form action="/bonusPointsExchange/ReferencePriceServlet" method="post" onsubmit="return checkForm();">
-      	商家名称：<input name="search1" value="" type="text" id="search1" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
-      	目标商家名称：<input name="search2" value="${wantedShop }" type="text" id="search2" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
-      	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="搜索">
+      	Shop name：<input name="search1" value="" type="text" id="search1" placeholder="Please enter shop name"> &nbsp;&nbsp;&nbsp;
+      	Wanted shop：<input name="search2" value="${wantedShop }" type="text" id="search2" placeholder="Please enter shop name"> &nbsp;&nbsp;&nbsp;
+      	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="Search">
       </form>
   </div>
   <% } else {%>
   <div> &nbsp;	
  	 <form action="/bonusPointsExchange/ReferencePriceServlet" method="post">
-      	商家名称：<input name="search1" value="${shopName }" type="text" id="search1" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
-      	目标商家名称：<input name="search2" value="${wantedShop }" type="text" id="search2" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
-      	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="搜索">
+      	Shop name：<input name="search1" value="${shopName }" type="text" id="search1" placeholder="Please enter shop name"> &nbsp;&nbsp;&nbsp;
+      	Wanted shop：<input name="search2" value="${wantedShop }" type="text" id="search2" placeholder="Please enter shop name"> &nbsp;&nbsp;&nbsp;
+      	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="Search">
       </form>
   </div>
   <%} %>
@@ -67,11 +67,11 @@ if(userName == null && shopName == null) { %>
     <table>
       <tr>
         <td rowspan="3" class="table-td-img"><img src="images/shopLogo/${ShopImgURL }"/><p>${shopName }</p></td>
-        <td>最新比例 ： ${latestRate }</td>
+        <td>newest ratio ： ${latestRate }</td>
         <td rowspan="3" class="table-td-img"><img src="images/shopLogo/${wantedShopImgURL }"/><p>${wantedShop }</p></td>
       </tr>
-      <tr><td>提供积分：  ${point }<img src="images/2.png"/> 兑换积分： ${wantedPoint }</td></tr>
-      <tr><td>平均比例  ： ${averageRate }</td></tr>
+      <tr><td>Provided points：  ${point }<img src="images/2.png"/> transfer points： ${wantedPoint }</td></tr>
+      <tr><td>Average proportion： ${averageRate }</td></tr>
     </table>
      <%}%>
   </div>

@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta charset="utf-8">
-<title>绑定商家</title>
+<title>Bind shop</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/personal.css">
 <link href="css/footer.css" rel="stylesheet" type="text/css">
@@ -30,24 +30,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--这是main_page-->
 <div class="main">
   <div class="bind-form">
-    <p class="title">绑定商家&nbsp;&nbsp;<span class="title1">BIND SHOP</span></p>
+    <p class="title">BIND SHOP</p>
     <form action="/bonusPointsExchange/BindShopServlet" method="post" onsubmit="return checkForm();">
       <table cellspacing="2">
         <tr>
-          <td>商家名：</td>
+          <td>Shop name：</td>
           <td><input name="ShopName" type="text" id="ShopName" class="no-border" value="<%=shopName %>" maxlength="20" readonly ></td>
         </tr>
         <tr>
-          <td>用户名：</td>
+          <td>Username：</td>
           <td><input name="userName" type="text" id="userName" maxlength="20"></td>
         </tr>
         <tr>
-          <td>密&nbsp;码：</td>
+          <td>Password：</td>
           <td><input name="password" type="password" id="password" maxlength="20"></td>
         </tr>
         <tr>
-          <td class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
-          <td class="mid"><input name="reset" type="reset" class="submitBtn" id="reset" value="重置"></td>
+          <td class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="Submit"></td>
+          <td class="mid"><input name="reset" type="reset" class="submitBtn" id="reset" value="Reset"></td>
         </tr>
       </table>
     </form>

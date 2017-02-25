@@ -76,59 +76,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--这是main_page-->
 <div class="main">
   <div id="orderNav">
-    <h3>订单中心</h3>
-    <p><a href="javascript:showDiv(1)">发布新订单</a> </p>
-    <p><a href="javascript:showDiv(2)">查看个人订单</a></p>
-    <p><a href="javascript:showDiv(3)">搜索所有订单</a></p>
+    <h3>Order center</h3>
+    <p><a href="javascript:showDiv(1)">Release order</a> </p>
+    <p><a href="javascript:showDiv(2)">View order</a></p>
+    <p><a href="javascript:showDiv(3)">Search order</a></p>
   </div>
   <div id="orderContent">
     <div id="div1">
       <div class="releaseOrder">
-        <p class="title">发布新订单<span class="title1">&nbsp;&nbsp;REALEASE ORDER</span><span class="title1 right"><a href="reference.jsp">前往参考价</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+        <p class="title">RELEASE ORDER<span class="title1 right"><a href="reference.jsp">To reference price</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
         <form action="/bonusPointsExchange/actionServlet" method="post" onsubmit="return checkShop()&&checkPoint()&&checkNull();">
        
           <table>
             <tr>
-              <td>选择商家：</td>
+              <td>Select shop：</td>
               <td><select  class="normal-font" name="shopName" id="shopName" onchange="queryValidPoints()" >
-                  <option selected="selected">请选择-------</option>
+                  <option selected="selected">Please select-------</option>
                   <c:forEach items="${bindShops}" var="bindShops">
                     <option>${bindShops.shopName}</option>               
                   </c:forEach>
                 </select></td>
             </tr>
              <tr>
-              <td>有效积分数量：</td>
+              <td>Points belong to shop：</td>
               <td><input name="platPoint" type="number" readonly id="platPoint"></td>
               <td><label id="tip1"></label></td>        
             </tr>
             <tr>
-              <td>积分数量：</td>
+              <td>Points：</td>
               <td><input name="points" type="number"  id="points" min="0" value="0" onblur="checkPoint()"></td>
             </tr>
             <tr>
-              <td>选择目标商家：</td>
+              <td>Select wanted shop：</td>
               <td><select name="wantedShop"  class="normal-font" id="wantedShop" >
-                  <option selected="selected">请选择-------</option>
+                  <option selected="selected">Please select-------</option>
                    <c:forEach items="${bindShops}" var="bindShops">
                     <option>${bindShops.shopName}</option>               
                   </c:forEach>
                 </select></td>
             </tr>
             <tr>
-              <td>目标积分数量：</td>
+              <td>Wanted points：</td>
               <td><input name="wantedPoint" type="number"  id="wantedPoint" min="0" value="0"></td>
             </tr>
             <tr>
-              <td>截止日期：</td>
+              <td>Valid date：</td>
               <td><div id="utilDate" name="utilDate" runat="server"></td>
               <input id="utilDate2" name="utilDate2" type="hidden">
              <!--  <div id="utilDate" name="utilDate" RUNAT=SERVER>
               <input name="utilDate" id="utilDate" type="text"> -->
             </tr>
             <tr class="mid">
-              <td><input name="submit" type="submit" id="submit" value="提交" ></td>
-              <td><input name="reset" type="reset" id="reset" value="重置"></td>
+              <td><input name="submit" type="submit" id="submit" value="Submit" ></td>
+              <td><input name="reset" type="reset" id="reset" value="Reset"></td>
             </tr>
           </table>
           <input type="hidden" name="actionCode" value="order"/>
@@ -151,13 +151,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="myOrder-info">
               <table>
             	<tr>           	    
-            		<td>商家：<%=orderInfo.getShopName() %></td>             		            		
+            		<td>Shop name：<%=orderInfo.getShopName() %></td>             		            		
               	</tr>
                 <tr>
-                  <td>积分数量：<%=orderInfo.getPoint() %></td>                
+                  <td>Points：<%=orderInfo.getPoint() %></td>                
                 </tr>
                 <tr>
-                  <td>截止日期：<%=orderInfo.getUntilDate() %></td>                 
+                  <td>Valid date：<%=orderInfo.getUntilDate() %></td>                 
                 </tr>       
          	</table>
             </li>		
@@ -165,10 +165,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="myOrder-info">
               <table>
             	<tr>           	               		
-            		<td>目标商家：<%=orderInfo.getWantedShop() %></td>
+            		<td>Wanted shop：<%=orderInfo.getWantedShop() %></td>
               	</tr>
                 <tr>
-                   <td>目标积分数量：<%=orderInfo.getWantedPoint() %></td>
+                   <td>Wanted points：<%=orderInfo.getWantedPoint() %></td>
                 </tr>
                 <tr>
                   <td></td>                
@@ -177,14 +177,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>	      			
             <%if(orderInfo.getOrderStatus() == 0) { %>
             <li class="operate">
-              <input name="exchange" onclick="changOrderStatus(<%=orderInfo.getOrderID() %>)" type="button" class="submitBtn" id="exchange" value="取消">
+              <input name="exchange" onclick="changOrderStatus(<%=orderInfo.getOrderID() %>)" type="button" class="submitBtn" id="exchange" value="Cancel">
             </li>
             <%} else if(orderInfo.getOrderStatus() == 1) {%>
              <li class="operate">
-              <input name="exchange" type="button" class="submitBtn"  style="background:#EDEDED;" disabled="disabled" id="exchange" value="已完成">
+              <input name="exchange" type="button" class="submitBtn"  style="background:#EDEDED;" disabled="disabled" id="exchange" value="Finished">
             </li>
             <%} else if(orderInfo.getOrderStatus() == 2) {%>             <li class="operate" >
-              <input name="exchange" type="button" class="submitBtn" style="background:#EDEDED;" disabled="disabled" id="exchange" value="已失效">
+              <input name="exchange" type="button" class="submitBtn" style="background:#EDEDED;" disabled="disabled" id="exchange" value="Disable">
             </li>
             <%} %>         <%}
        }%>
@@ -193,35 +193,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>   
    </div>
     <!----------- 搜索订单------------------------------>
-    <div id="div3">      <p class="title">查看所有订单<span class="title1">&nbsp;&nbsp;ALL ORDER</span></p>
+    <div id="div3">      <p class="title">View order</p>
       <div id="search">
       <form action="/bonusPointsExchange/actionServlet" method="post" onsubmit="return checkForm();">
         <table>
           <tr>
-            <td>商&nbsp;家：&nbsp;</td><td><input name="shop" type="text" value="${shop }" id="shop"></td>
-            <td>积&nbsp;分：&nbsp;</td><td><input name="point" type="number" value="${point}" id="point" min="1"></td>
+            <td>Shop name：&nbsp;</td><td><input name="shop" type="text" value="${shop }" id="shop"></td>
+            <td>Points：&nbsp;</td><td><input name="point" type="number" value="${point}" id="point" min="1"></td>
           </tr>
           <tr>
-          	<td>目标商家：</td><td><input name="targetShop" type="text" value="${wantedShop }" id="targetShop"></td>
-          	<td>目标积分：</td><td><input name="wantedPoint2" type="number" value="${wantedPoint}" id="wantedPoint2" min="1"></td>
-            <td colspan="2" ><input name="submit" type="submit" class="submitBtn" id="submit" value="搜索"></td> 
+          	<td>Wanted shop：</td><td><input name="targetShop" type="text" value="${wantedShop }" id="targetShop"></td>
+          	<td>Wanted points：</td><td><input name="wantedPoint2" type="number" value="${wantedPoint}" id="wantedPoint2" min="1"></td>
+            <td colspan="2" ><input name="submit" type="submit" class="submitBtn" id="submit" value="Search"></td> 
           </tr>
         </table>          
-           选择排序方式：
+           Sort method：
       <select name="selectSort"  id="selectSort">
     <c:if test="${selectID==null}">  
-       <option selected="selected">积分优先</option>               
-        <option>比率优先</option>
-         <option>时效优先</option>
+       <option selected="selected">Points priority</option>               
+        <option>Rate priority</option>
+         <option>Time priority</option>
      </c:if>
       <c:if test="${selectID=='2'}">  
-       <option>积分优先</option>               
-        <option selected="selected">比率优先</option>
-         <option>时效优先</option>     </c:if>
+       <option>Points priority</option>               
+        <option selected="selected">Rate priority</option>
+         <option>Time priority</option>     </c:if>
      <c:if test="${selectID=='3'}">    
-    	 <option>积分优先</option>              
-     	 <option>比率优先</option>
-       	 <option selected="selected">时效优先</option>
+    	 <option>Points priority</option>              
+     	 <option>Rate priority</option>
+       	 <option selected="selected">Time priority</option>
      </c:if>
       </select>
       <input type="hidden" name="actionCode" value="order"/>
@@ -237,11 +237,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr><form action="/bonusPointsExchange/actionServlet" method="post">
       <td><input type="hidden" name="orderID" value="<%=orderInfo.getOrderID()%>"/></td>
       <td class="shop-logo"> <img src="images/shopLogo/<%=orderInfo.getShopLogo()%>"/> <p><%=orderInfo.getWantedShop()%></p></td>
-      <td><%=orderInfo.getWantedPoint() %>积分<img src="images/2.png"/><%=orderInfo.getPoint() %>积分</td>      
+      <td><%=orderInfo.getWantedPoint() %>Points<img src="images/2.png"/><%=orderInfo.getPoint() %>Points</td>      
       <td class="shop-logo"><img src="images/shopLogo/<%=orderInfo.getWantedShopLogo() %>"/> <p><%=orderInfo.getShopName() %></p></td>      
-      <td><p>订单发布方：<%=orderInfo.getUserName() %></p>
-      <p>交易有效期：<%=orderInfo.getUntilDate() %></p></td>
-      <td class="operate"><p>&nbsp;</p><input name="submit" type="submit" class="submitBtn" id="submit" value="兑换"></td>
+      <td><p>Username：<%=orderInfo.getUserName() %></p>
+      <p>Valid date：<%=orderInfo.getUntilDate() %></p></td>
+      <td class="operate"><p>&nbsp;</p><input name="submit" type="submit" class="submitBtn" id="submit" value="Submit"></td>
       <input type="hidden" name="actionCode" value="order"/>
       <input type="hidden" name="methodCode" value="finsh_order"/>
       </form>
@@ -255,11 +255,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr><form action="/bonusPointsExchange/actionServlet" method="post">
       <td><input type="hidden" name="orderID" value="<%=orderInfo.getOrderID()%>"/></td>
       <td class="shop-logo"> <img src="images/shopLogo/<%=orderInfo.getShopLogo()%>"/> <p><%=orderInfo.getWantedShop() %></p></td>
-      <td><%=orderInfo.getWantedPoint() %>积分<img src="images/2.png"/><%=orderInfo.getPoint() %>积分</td>
+      <td><%=orderInfo.getWantedPoint() %>Points<img src="images/2.png"/><%=orderInfo.getPoint() %>Points</td>
       <td class="shop-logo"><img src="images/shopLogo/<%=orderInfo.getWantedShopLogo() %>"/> <p><%=orderInfo.getShopName() %></p></td>
-      <td><p>订单发布方：<%=orderInfo.getUserName() %></p>
-      <p>交易有效期：<%=orderInfo.getUntilDate() %></p></td>
-      <td class="operate"><p>&nbsp;</p><input name="submit" type="submit" class="submitBtn" id="submit" value="兑换"></td>
+      <td><p>Username：<%=orderInfo.getUserName() %></p>
+      <p>Valid date：<%=orderInfo.getUntilDate() %></p></td>
+      <td class="operate"><p>&nbsp;</p><input name="submit" type="submit" class="submitBtn" id="submit" value="Submit"></td>
       <input type="hidden" name="actionCode" value="order"/>
       <input type="hidden" name="methodCode" value="finsh_order"/>
       </form>
@@ -274,18 +274,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr><form action="/bonusPointsExchange/actionServlet" method="post">
       		<td><input type="hidden" name="orderID" value="${order.orderID}"/></td>
         	<td class="shop-logo"> <img src="images/shopLogo/${order.shopLogo}"/> <p >${order.wantedShop}</p></td>
-        	<td>${order.wantedPoint}积分<img src="images/2.png"/>${order.point}积分</td>
+        	<td>${order.wantedPoint}Points<img src="images/2.png"/>${order.point}Points</td>
         	<td class="shop-logo"><img src="images/shopLogo/${order.wantedShopLogo}"/> <p>${order.shopName}</p></td>
-        	<td><p>订单发布方：${order.userName}</p>
-        	<p>交易有效期：${order.untilDate}</p></td>
-        	<td class="operate"><p>&nbsp;</p><input name="submit" type="submit" class="submitBtn" id="submit" value="兑换"></td>
+        	<td><p>Username：${order.userName}</p>
+        	<p>Valid date：${order.untilDate}</p></td>
+        	<td class="operate"><p>&nbsp;</p><input name="submit" type="submit" class="submitBtn" id="submit" value="Submit"></td>
 			<input type="hidden" name="actionCode" value="order"/>
          	<input type="hidden" name="methodCode" value="finsh_order"/>
       	</form>
       </tr>
        </c:forEach>
        <%}else if(findRes=="true" && null == AllOrderByRateList && null == AllOrderByUntilDate){%> 
-     		<br/><br/><br/><p align="center"><a href="javascript:recommend();">搜索结果为0！可以使用智能推荐功能来匹配您的需求</a></p>   
+     		<br/><br/><br/><p align="center"><a href="javascript:recommend();">Sorry, no search result. Please use Intelligent recommendation</a></p>   
         <%} %>		                    
       </table>     
         </form>

@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta charset="utf-8">
-<title>智能推荐</title>
+<title>Intelligent recommendation</title>
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/footer.css" >
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/order.css">
@@ -72,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<%@ include file="header.jsp" %>
 <!--这是main_page-->
 <div class="exchangeOrder">
-    <p class="title">系统推荐订单<span class="title1">&nbsp;&nbsp;&nbsp;RECOMMEND ORDER</span><span class="title1 right"><a href="order.jsp">返回订单中心</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+    <p class="title">RECOMMEND ORDER<span class="title1 right"><a href="order.jsp">To order center</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
   <div id="order-list" class="clearfix"> 
     <!---- 事例1------>
     <div class="order-info clearfix">
@@ -90,13 +90,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- table 中是用户最终交易需要的积分-->
           <table>
             <tr>
-              <td>商家：<%=recShop.getShopName() %></td>
+              <td>Shop name：<%=recShop.getShopName() %></td>
             </tr>
             <tr>
-              <td>积分数量：<%=recPoints.get(i) %></td>
+              <td>Points：<%=recPoints.get(i) %></td>
             </tr>
             <tr>
-             <td>订单交易方：<%=recOrderIds.size()+1 %>方</td>
+             <td>Username：<%=recOrderIds.size()+1 %>方</td>
             </tr> 
           </table>
         </li>  
@@ -107,10 +107,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- table 中是用户最终交易获得的积分-->
           <table>
             <tr>
-              <td>目标商家：<%=recWantShop.getShopName() %></td>
+              <td>Wanted shop：<%=recWantShop.getShopName() %></td>
             </tr>
             <tr>
-              <td>目标积分数量：<%=recWantedPoints.get(i) %></td>
+              <td>Points：<%=recWantedPoints.get(i) %></td>
             </tr>
             <tr>
               <td></td>
@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </table>
         </li>          
          <li class="operate">
-          <input name="exchange" type="submit" class="submitBtn"  id="exchange" value="交易">
+          <input name="exchange" type="submit" class="submitBtn"  id="exchange" value="Submit">
         </li>
     
         <input type="hidden" name="recOrderIds" value="<%=recOrderIds%>"/>
@@ -128,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </form>
     <%} %>
   <%} else {%>
-       <br/><br/><br/><p align="center">  搜索结果为0！</p>
+       <br/><br/><br/><p align="center">  No result!</p>
  <%} %>
     </div>
   </div>

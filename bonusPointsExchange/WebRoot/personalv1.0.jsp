@@ -103,26 +103,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="personal">
   <div class="span7" id="Accordion1">
     <div  class="nav">
-      <h3>个人信息</h3>
+      <h3>Personal information</h3>
       <div class="index">
-        <p><a href="javascript:showDiv(1)">修改信息</a></p>
-        <p><a href="javascript:showDiv(2)">修改密码</a></p>
+        <p><a href="javascript:showDiv(1)">Change inforamtion</a></p>
+        <p><a href="javascript:showDiv(2)">Change password</a></p>
       </div>
-      <h3>积分转移</h3>
+      <h3>Points transfer</h3>
       <div class="index">
-        <p><a href="javascript:showDiv(3)">积分转移到平台</a></p>
-        <p><a href="javascript:showDiv(4)">积分转移到商家</a></p>
+        <p><a href="javascript:showDiv(3)">Points transfer to plantform</a></p>
+        <p><a href="javascript:showDiv(4)">Points transfer to shop</a></p>
       </div>
-      <h3>绑定商家</h3>
+      <h3>Bind shop</h3>
       <div class="index">
-        <p><a href="javascript:showDiv(5)">绑定新商家</a></p>
-        <p><a href="javascript:showDiv(6)">显示已绑定商家</a></p>
+        <p><a href="javascript:showDiv(5)">Bind new shop</a></p>
+        <p><a href="javascript:showDiv(6)">Display binding shop</a></p>
       </div>
     </div>
   </div>
   <div class="span8">
     <div id="div1">
-      <p class="title">个人资料 <span class="title1">USER INFOMATION</span></p>
+      <p class="title">USER INFOMATION</p>
       <form action="/bonusPointsExchange/actionServlet" method="post">
         <table>
         <!--  <tr>
@@ -130,19 +130,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td><input name="userName" type="text" id="userName" maxlength="40"></td>
           </tr>  -->
           <tr>
-            <td>邮&nbsp;箱：</td>
+            <td>Email：</td>
             <td><input name="email" type="text" id="email" maxlength="40" value=<%=request.getAttribute("email") %> readonly></td>
           </tr>
           <tr>
-            <td>姓&nbsp;名：</td>
+            <td>Name：</td>
             <td><input name="fullName" type="text" id="name" maxlength="40" value=<%=request.getAttribute("fullName") %>></td>
           </tr>
           <tr>
-            <td>电&nbsp;话：</td>
+            <td>Phone number：</td>
             <td><input name="phone" type="text" id="phone" maxlength="40" value=<%=request.getAttribute("phone") %>></td>
           </tr>
           <tr>
-            <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
+            <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="Submit"></td>
               </td>
           </tr>
         </table>
@@ -151,27 +151,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </form>
     </div>
     <div id="div2">
-      <p class="title">修改密码 <span class="title1">USER PASSWORD</span></p>
+      <p class="title">Change passwprd <span class="title1">USER PASSWORD</span></p>
       <form action="/bonusPointsExchange/actionServlet" onsubmit="return checkInputPasswd();">
         <table>
         <tr>
-            <td>用户名：</td>
+            <td>Username：</td>
             <td><input name="name" readonly="readonly"  type="text" id="name" value="<%=session.getAttribute("userName")%>" maxlength="40" style="border:none;"></td>
           </tr>
           <tr>
-            <td>旧密码：</td>
+            <td>Original password：</td>
             <td><input name="oldPassword" type="password" id="oldPassword" maxlength="20"></td>
           </tr>
           <tr>
-            <td>新密码：</td>
+            <td>New password：</td>
             <td><input name="newPassword" type="password" id="newPassword" maxlength="20"></td>
           </tr>
           <tr>
-            <td>再次输入新密码：</td>
+            <td>Re-enter new password：</td>
             <td><input name="reNewPassword" type="password" id="reNewPassword" maxlength="20" onblur="checkInputPasswd()"></td>
           </tr>
           <tr>
-            <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
+            <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="Submit"></td>
               </td>
           </tr>
         </table>
@@ -180,11 +180,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </form>
     </div>
     <div id="div3">
-      <p class="title">积分转移到平台 <span class="title1">POINTS TRANSFER TO PLATFORM</span></p>
+      <p class="title">POINTS TRANSFER TO PLATFORM</p>
       <form action="/bonusPointsExchange/UserPointToplatformServlet"  method="post" onsubmit="return checkForm();">
         <table>
           <tr>
-            <td>选择商家：</td>
+            <td>Select shop：</td>
             <td><select  class="normal-font" name="shop" id="shop">
             <option selected="selected" ></option>
              <% if(null != list) {
@@ -198,33 +198,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </select></td>
           </tr>
            <tr>
-            <td>在商家注册的用户名：</td>
+            <td>Username attach to shop：</td>
             <td><input name="userName" onblur="queryUserPoints()" type="text" value="" id="userName">
             </td>
           </tr>
           <tr>
-            <td>商家积分：</td>
+            <td>Points belong to shop：</td>
             <td><input name="points" type="text" value="" readonly id="points" style="border:none;"> 
             </td>
           </tr>
           <tr>
-            <td>转移积分：</td>
+            <td>Number of transfer points：</td>
             <td><input name="transfer_points"  type="number" value="0" id="transfer_points">
             </td>
           </tr>
           <tr>
-            <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
+            <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="Submit"></td>
               </td>
           </tr>
         </table>
       </form>
     </div>
     <div id="div4">
-      <p class="title">积分转移到商家 <span class="title1">POINTS TRANSFER TO SHOP</span></p>
+      <p class="title">POINTS TRANSFER TO SHOP</p>
       <form action="/bonusPointsExchange/PlatformToUserServlet"  method="post" onsubmit="return checkForm();">
         <table>
           <tr>
-            <td>选择商家：</td>
+            <td>Select shop：</td>
             <td><select  class="normal-font" onchange="queryPointsAtPlatform()" name="shop2" id="shop2">
             <option selected="selected"></option>
               <% if(null != list) {
@@ -237,32 +237,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </select></td>
           </tr>
            <tr>
-            <td>在商家注册的用户名：</td>
+            <td>Username attach to shop：</td>
             <td><input name="userName2" type="text" value="" id="userName2">
             </td>
           </tr>
           <tr>
-            <td>平台积分：</td>
+            <td>Points belong to plantforn：</td>
             <td><input name="platformPoints" type="text" value="" readonly id="platformPoints" style="border:none; "></td>
           </tr>
           <tr>
-            <td>转移积分：</td>
+            <td>Number of transfer points：</td>
             <td><input name="transfer_points" type="number" value="0" id="transfer_points"></td>
           </tr>
           <tr>
-            <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
+            <td colspan="2" class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="Submit"></td>
               <td></td>
           </tr>
         </table>
       </form>
     </div>
     <div id="div5">
-      <p class="title">商家绑定 <span class="title1">SHOP BIND</span></p>
+      <p class="title">SHOP BIND</p>
       <form action="/bonusPointsExchange/BindShopQueryInfoServlet" method="post"  onsubmit="return checkBindForm();">
       <br/>
-      <div> &nbsp;<span class="normal-font">商家名称：</span>
-      	<input name="search"  type="text" id="search" placeholder="请输入商家名称"> &nbsp;&nbsp;&nbsp;
-      	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="搜索">
+      <div> &nbsp;<span class="normal-font">Shop name：</span>
+      	<input name="search"  type="text" id="search" placeholder="Enter shop name"> &nbsp;&nbsp;&nbsp;
+      	<input name="submit2" type="submit" class="submitBtn" id="submit2" value="Search">
       </div>
       <!------------table 中为查询结果--------每一行是一个商家---------------->
        <%
@@ -272,35 +272,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <table>
       	<tr><span id="hint" style="color:#FF0000"></span></tr>
       	<tr>
-            <th>商家</th><th>详细信息</th>
-            <th>操作</th>
+            <th>Shop</th><th>Details</th>
+            <th>Operation</th>
           </tr>
           <tr class="normal-font">
-            <td class="shop-logo"><img src="images/shopLogo/${imgURL }" alt="商家商标"/><p>${shopName}</p></td><td>${shopDec}</td>
-            <td><a href="bindShop.jsp?shopName=${shopName}"><input name="bind" type="button" id="bind" class="buttonStyle1" value="绑定"></a></td>
+            <td class="shop-logo"><img src="images/shopLogo/${imgURL }" alt="brand of shop"/><p>${shopName}</p></td><td>${shopDec}</td>
+            <td><a href="bindShop.jsp?shopName=${shopName}"><input name="bind" type="button" id="bind" class="buttonStyle1" value="Bind"></a></td>
           </tr>
        </table>
          <%} else if(shopName1 != null && shop == null){%>
          <br/><br/><br/>
-       <p class="mid">不存在该商家! 请重新搜索</p>
+       <p class="mid">FIND NO SHOP.Pleas search again!</p>
     <% }%>
       </form>
     </div>
     
     <div id="div6">
-      <p class="title">查看商家 <span class="title1">BOUND SHOP</span></p>
+      <p class="title">BOUND SHOP</p>
       <form>
         <table>
         <tr>
-            <th>商家商标</th><th>商家名</th>
-            <th>商家积分</th>
+            <th>Shop brand</th><th>Shop name</th>
+            <th>Shop points</th>
           </tr>
         <% 	if(null != list) {
         	for(int i = 0; i < list.size(); i++) {
         		ShowBindInfo bindInfo = (ShowBindInfo)list.get(i);
         %>
           <tr>
-            <td class="shop-logo"><img src="images/shopLogo/<%=bindInfo.getImgURL() %>" alt="商家商标"/></td><td><%=bindInfo.getShopName() %></td>
+            <td class="shop-logo"><img src="images/shopLogo/<%=bindInfo.getImgURL() %>" alt="Shop brand"/></td><td><%=bindInfo.getShopName() %></td>
             <td><%=bindInfo.getPlatformPoints() %></td>
           </tr>
          <%}
