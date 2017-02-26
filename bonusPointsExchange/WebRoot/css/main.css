@@ -3,6 +3,7 @@ body, h1, h2, h3, h4, h5, div, p, img, form, span, ul, li, table, tr, td,input{
 	margin: 0;
 	padding: 0;
 	border: 0;
+	font-family:"Arial","Microsoft YaHei","黑体","宋体",sans-serif;
 }
 body {
 	margin: 0px auto 5px;
@@ -18,7 +19,7 @@ input{
 .main{min-height:600px;}
 .header {
 	width:1000px;
-	height: 80px;
+	height: 75px;
 	margin:auto ;
 }
 a {
@@ -61,8 +62,8 @@ a:hover {
 	float: left;
 }
 .logo img {
-	width: 180px;
-	height: 80px;
+	width: 210px;
+	height: 70px;
 	overflow: hidden;
 }
 h2 {
@@ -80,10 +81,10 @@ h2 {
 	float: left
 }
 .mainNav ul li {
-	font-size: 30px;
-	text-height: 36px;
+	font-size: 20px;
+	text-height: 20px;
 	text-align: center;
-	margin: 0 20px;
+	margin: 10px 14px;
 }
 /***header css end***/
 .mid {
@@ -121,19 +122,19 @@ h2 {
 	min-width:120px;
 	text-align: center;
 	font-size: 18px;
-	color: #000000;
+	color: #ffffff;
 	padding: 3px 10px;
 	/*****
 	background: -moz-linear-gradient(  top,  #ff9c9c 0%,  #ff0000);
 	background: -webkit-gradient(  linear, left top, left bottom,  from(#ff9c9c),  to(#ff0000));  *****/
-	background:#3385FF;
+	background:#DE4949;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
 	border: 1px solid #ffffff;
 }
 .normal-font {
-	font-size: 24px;
+	font-size: 18px;
 }
 .no-border {
 	border: none;
@@ -143,5 +144,5 @@ h2 {
 	}
 input{
 	border:1px solid grey;
-	height:28px;		
+	height:24px;		
 }

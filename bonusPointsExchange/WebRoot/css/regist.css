@@ -43,7 +43,7 @@ form {
 	width: 400px;
 }
 .span5 table, .span6 table {
-	font-size: 24px;
+	font-size: 16px;
 	margin: 10px 10px;
 	cellspacing: 20px;
 	border-collapse: separate;
@@ -65,11 +65,11 @@ form {
 	float: right;
 	margin-top:30px;
 	margin-right:5px;
-	font-size:18px;
+	font-size:15px;
 	background-color:#64A2FC;
 }
 .tips-font1{
-	font-size: 24px;
+	font-size: 18px;
 	color:#ffffff;
 	}
 .tips-font1 a:hover{

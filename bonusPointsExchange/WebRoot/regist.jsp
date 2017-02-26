@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta charset="utf-8">
-<title>用户注册</title>
+<title>User register</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="css/footer.css" rel="stylesheet" type="text/css">
 <link href="css/regist.css" rel="stylesheet" type="text/css">
@@ -88,38 +88,38 @@ function checkEmail(email) {
 <!--header -->
 <div style="min-height:500px;">
 <div class="regist-frame">
-  <p class="title">&nbsp;&nbsp;用户注册&nbsp;&nbsp;<span class="title1">USER REGISTER</span><span class="title1 right"><a href="regist_shop.jsp">前往商家注册</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+  <p class="title">USER REGISTER<span class="title1 right"><a href="regist_shop.jsp">Go to shop register</a>&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
   <div>
     <div class="span5">
       <form name="form_regist" action="/bonusPointsExchange/actionServlet" method="post" onsubmit="return checkForm();">
         <table>
           <tr>
-            <td>账&nbsp;号：</td>
+            <td>Username：</td>
             <td><input name="userName" type="text" id="userName" maxlength="20"></td>
           </tr>
           <tr>
-            <td>密&nbsp;码：</td>
+            <td>Password：</td>
             <td><input name="passwd" type="password" id="password" maxlength="20"></td>
           </tr>
           <tr>
-            <td>确认密码：</td>
+            <td>Confirm password：</td>
             <td><input name="repassword" type="password" id="repassword" maxlength="20"></td>
           </tr>
           <tr>
-            <td>邮&nbsp;箱：</td>
+            <td>Email：</td>
             <td><input name="email" type="text" id="email" maxlength="40"></td>
           </tr>
           <tr>
-            <td>姓&nbsp;名：</td>
+            <td>Real name：</td>
             <td><input name="fullName" type="text" id="fullName" maxlength="20"></td>
           </tr>
           <tr>
-            <td>电&nbsp;话：</td>
+            <td>Phone number：</td>
             <td><input name="phone" type="text" id="phone" maxlength="20"></td>
           </tr>
           <tr>
-            <td class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
-            <td class="mid"><input name="reset" type="reset" class="submitBtn" id="reset" value="重置"></td>
+            <td class="mid"><input name="submit" type="submit" class="submitBtn" id="submit" value="Submit"></td>
+            <td class="mid"><input name="reset" type="reset" class="submitBtn" id="reset" value="Reset"></td>
           </tr>
         </table>
         <input type="hidden" name="actionCode" value="regist">
@@ -128,11 +128,9 @@ function checkEmail(email) {
     </div>
     <div class="span6">
       <div class="tips">
-        <p class="tips-font1">注册即享受</p>
-        积分自由兑换
+        <p class="tips-font1">Register to exchange points!</p>
         <br/><br/>
-        <p class="tips-font1">已经拥有账号了？</p>
-        立即登录即可体验积分交易！ <a href="login.jsp"> 立即登录 </a></div>
+        <p class="tips-font1">Already have username？&nbsp;&nbsp;<span  style="font-color:#000"><a href="login.jsp"> Sign in now </a></span></p></div>
     </div>
   </div>
 </div>

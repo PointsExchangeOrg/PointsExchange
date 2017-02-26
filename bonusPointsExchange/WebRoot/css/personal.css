@@ -2,7 +2,7 @@
 .personal{
 	margin: 10px auto;
 	width: 1000px;
-	min-height: 500px;
+	min-height: 560px;
 	clear: both;
 	}
 .personal table tr{
@@ -20,14 +20,14 @@
 	}
 /******* personal.jsp navigation css************/
 .span7{
-	width:25%;
+	width:35%;
 	}
 .span8{
 	margin-left:50px;
-	width:70%;
+	width:60%;
 	}
 #Accordion1{
-	width:180px;
+	width:250px;
 	border:1px solid grey;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
@@ -35,7 +35,7 @@
 }
 .nav{
 	margin-top:10px;
-	height:260px;
+	height:280px;
 	list-style-type: none;
 	}
 .nav li{
@@ -80,7 +80,7 @@
 	margin-left:30px;
 	}
 #div1 table,#div2 table,#div3 table,#div4 table,#div5 table,#div6 table{
-	font-size: 20px;
+	font-size: 16px;
 	margin-top: 10px;
 	margin-left:0px;
 	cellspacing: 40px;

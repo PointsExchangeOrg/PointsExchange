@@ -2,7 +2,7 @@
 .index {
 	margin: 10px auto;
 	width: 1000px;
-    height: 720px; 
+    height: 500px; 
 }
 .index1, .index2 {
 	float: left;
@@ -38,6 +38,10 @@
 /***index1 end ***/
 .more{
 	float:right;
+	margin-right:5px;
+	margin-bottom:2px;
+	font-size:15px;
+	font-color:grey; 
 }
 /*** shop list***/
 #shop-list{
@@ -48,21 +52,25 @@
 	float: left;
 }
 #shop-list img{
-	width:100px;
-	height:100px;
+	margin:10px auto;
+	width:80px;
+	height:80px;
 	overflow:hidden;
 	}
 .shopName{
-	margin-left:10px;
-	font-size:18px;
+	margin-left:0px;
+	font-size:15px;
 	color:black;
 	}
 /*** order list***/
+.order-info{
+	block:block;
+}
 .order-info ul li {
 	float: left;
 }
 .shop-logo {
-	width: 100PX;
+	width: 70PX;
 	text-align: left;
 }
 .shop-logo img{
@@ -71,17 +79,17 @@
 	overflow:hidden;
 	}
 .info {
-	width: 60%;
+	width: 500px;
 	align: center;
 }
 .operate{
-	width:20%;
+	width:150px;
 	min-height:80px;
 	}
 .submitBtn {
 	text-align:center;
 	font-size: 18px;
-	color: #000000;
+	color: #ffffff;
 	padding: 3px 10px;
 /*****
 	background: -moz-linear-gradient(
@@ -93,7 +101,7 @@
 		from(#ff9c9c),
 		to(#ff0000));
 *****/
-    background:#3385FF;
+    background:#DE4949;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;

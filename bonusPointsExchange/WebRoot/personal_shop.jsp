@@ -72,7 +72,7 @@ if(uploadTypeErr == "N") {%>
 	}
 </style>
 <meta charset="utf-8">
-<title>商家中心</title>
+<title>Shop center</title>
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
 <link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/personal.css">
@@ -92,10 +92,10 @@ if(uploadTypeErr == "N") {%>
 <div class="personal">
   <div class="span7">
     <div id="Accordion1" class="nav" style="height:200px;">
-      <h3><a href="#">商家信息</a></h3>
+      <h3><a href="#">Shop information</a></h3>
       <div class="index">
-        <p><a href="javascript:showDiv(1)">修改信息</a></p>
-        <p><a href="javascript:showDiv(2)">修改密码</a></p>
+        <p><a href="javascript:showDiv(1)">Change information</a></p>
+        <p><a href="javascript:showDiv(2)">Change password</a></p>
       </div>
  <!--
       <h3><a href="#">商业化</a></h3>
@@ -104,19 +104,19 @@ if(uploadTypeErr == "N") {%>
         <p><a href="javascript:showDiv(4)">积分商城</a></p>
       </div>
 -->
-      <h3><a href="#">智能分析</a></h3>
+      <h3><a href="#">Intelligent analysis</a></h3>
       <div class="index">
-        <p><a href="javascript:showDiv(3)">用户量分析</a></p>
-        <p><a href="javascript:showDiv(4)">积分变化分析</a></p>
+        <p><a href="javascript:showDiv(3)">Users analysis</a></p>
+        <p><a href="javascript:showDiv(4)">Points change analysis</a></p>
       </div>
     </div>
   </div>
   <div class="span8">
     <div id="div1">
-      <p class="title">商家资料 <span class="title1">USER INFOMATION</span></p>
+      <p class="title">USER INFOMATION</p>
         <table>
          <tr>
-            <td>商家图标：</td>
+            <td>Shop brand：</td>
             <td class="mid">            
              <form id="icon" enctype="multipart/form-data" method="post" action="/bonusPointsExchange/UploadIconServlet">
              	<img alt="头像" src="images/shopLogo/<%=request.getAttribute("imageURL") %>" width="80px" height="60px" />                
@@ -127,34 +127,34 @@ if(uploadTypeErr == "N") {%>
           </tr>
          <form onsubmit="return checkForm();" action="/bonusPointsExchange/ShopChangeInfo" method="post">
           <tr>
-            <td>商家名称：</td>
+            <td>Shop name：</td>
             <td><input name="name" readonly="readonly"  type="text" id="name" value="<%=session.getAttribute("shopName")%>" maxlength="40" style="border:none;"></td>
           </tr>
           <tr>
-            <td>邮&nbsp;箱：</td>
+            <td>Email：</td>
             <td><input name="email" type="text" id="email" value="<%=request.getAttribute("email")%>" maxlength="40"></td>
           </tr>
           <tr>
-            <td>电&nbsp;话：</td>
+            <td>Phone number：</td>
             <td><input name="phone" type="text" id="phone" value="<%=request.getAttribute("telephone")%>" maxlength="40"></td>
           </tr>
           <tr>
-            <td>简&nbsp;介：</td>
+            <td>Introduction：</td>
             <td><input name="description" type="textarea" id="description" value="<%=request.getAttribute("shopDec")%>" maxlength="40"></td>
           </tr>
           <tr>
-            <td colspan="2"><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td   
+            <td colspan="2"><input name="submit" type="submit" class="submitBtn" id="submit" value="Submit"></td   
           ></tr>
           </form>
         </table>
       
     </div>
     <div id="div2">
-      <p class="title">修改密码 <span class="title1">SHOP　PASSWORD</span></p>
+      <p class="title">Change password <span class="title1">SHOP　PASSWORD</span></p>
       <form onsubmit="return changePawcheckFrom();" method="post" action="/bonusPointsExchange/ShopChangePwdServlet">
         <table>
           <tr>
-            <td>账&nbsp;号：</td>
+            <td>Username：</td>
             <td><input name="userName" type="text" class="no-border" id="userName" value="<%=session.getAttribute("shopName")%>" maxlength="20" readonly></td>
           </tr>
          <!--<tr>
@@ -163,15 +163,15 @@ if(uploadTypeErr == "N") {%>
           </tr>
           -->
           <tr>
-            <td>新密码：</td>
+            <td>New password：</td>
             <td><input name="newPassword" type="password" id="newPassword" maxlength="20"></td>
           </tr>
           <tr>
-            <td>再次输入新密码：</td>
+            <td>Re-enter new password：</td>
             <td><input name="reNewPassword" type="password" id="reNewPassword" maxlength="20"></td>
           </tr>
           <tr>
-            <td colspan="2" ><input name="submit" type="submit" class="submitBtn" id="submit" value="提交"></td>
+            <td colspan="2" ><input name="submit" type="submit" class="submitBtn" id="submit" value="SUbmit"></td>
               </td>
           </tr>
         </table>
@@ -214,22 +214,22 @@ if(uploadTypeErr == "N") {%>
     </div>
 -->
     <div id="div3">
-      <p class="title">用户量分析<span class="title1">USER AMOUNT ANALYSIS</span></p>
-      <h3 style="text-align: center">一星期用户变化折线图</h3>
+      <p class="title">USER AMOUNT ANALYSIS</p>
+      <h3 style="text-align: center">Users to change line chart in a week</h3>
       <div id="mainDiv" style="width: 700px;height:400px;"></div>
     </div>
     <div id="div4">
-      <p class="title">积分变化分析<span class="title1">POINTS ANALYSIS</span></p>
+      <p class="title">POINTS ANALYSIS</p>
       <table>
-          <td>今日入积分：</td>
+          <td>Input points today：</td>
           <td><input name="inPoint" type="text" id="inPoint" class="no-border" value="0" maxlength="40" readonly></td>
         </tr>
         <tr>
-          <td>今日出积分：</td>
+          <td>Output p[oints today：</td>
           <td><input name="outPoint" type="text" id="outPoint" class="no-border" value="0" maxlength="40" readonly></td>
         </tr>
       </table>
-      <h3 style="text-align: center">积分变化表</h3>
+      <h3 style="text-align: center">Points change table</h3>
       <div id="mainDiv2" style="width: 700px;height:400px;"></div>
     </div>
   </div>

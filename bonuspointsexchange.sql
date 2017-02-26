@@ -11,6 +11,9 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for order
 -- ----------------------------
+drop database bonuspointsexchange;
+create database bonuspointsexchange;
+use bonuspointsexchange;
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `orderID` int(11) NOT NULL AUTO_INCREMENT,
